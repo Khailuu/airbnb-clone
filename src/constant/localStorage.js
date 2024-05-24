@@ -1,0 +1,1 @@
+export const LOCAL_USER_LOGIN_KEY = 'USER'
