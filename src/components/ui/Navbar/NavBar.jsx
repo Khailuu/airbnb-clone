@@ -10,7 +10,6 @@ import { PATH } from "../../../constant";
 export const NavBar = () => {
   const { data: listViTri } = useGetViTri();
   const navigate = useNavigate();
-  console.log(listViTri);
 
   const formik = useFormik({
     initialValues: {

@@ -6,12 +6,16 @@ import "slick-carousel/slick/slick-theme.css";
 import { Card, Tabs } from "antd";
 import { useGetPhongTheoMaViTri } from "../../../hooks/useGetPhongTheoViTri";
 import Meta from "antd/es/card/Meta";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../../constant";
 
 const { TabPane } = Tabs;
 
 export const HomeCarousel = () => {
+  const navigate = useNavigate()
   const { data: listViTriPhanTrang } = useGetViTriPhanTran();
   const [maViTri, setMaViTri] = useState(1);
+  console.log(maViTri)
   const { data: phongByViTri, refetch } = useGetPhongTheoMaViTri(maViTri);
 
   useEffect(() => {
@@ -129,10 +133,12 @@ export const HomeCarousel = () => {
       <Tabs
         onChange={(key) => {
           setMaViTri(key);
+          console.log("key", key)
         }}
       >
         {listViTriPhanTrang?.map((viTri) => (
           <TabPane
+
             key={viTri.id}
             tab={
               <div
@@ -158,6 +164,9 @@ export const HomeCarousel = () => {
                 return (
                   <div key={phong.id}>
                     <Card
+                    onClick={()=>{
+                      navigate(`${PATH.details}/${phong.id}`)
+                    }}
                       hoverable
                       style={{ width: 240 }}
                       cover={

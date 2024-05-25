@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { TOKEN_CYBERSOFT } from './api'
+import { getUserLogin } from '../utils/getUserLogin'
 
 export const apiInstance = {
     create: (configDefault) => {
@@ -9,7 +10,8 @@ export const apiInstance = {
                 ...config,
                 headers: {
                     TokenCybersoft: TOKEN_CYBERSOFT,
-                    // Authorization: "Bearer " + getUserLogin()?.accessToken// Sử dụng userParse ở đây
+                    // Authorization: "Bearer " + getUserLogin()?.accessToken// Sử dụng userParse ở đây,
+                    Token: getUserLogin()?.token
                 },
             }
         })

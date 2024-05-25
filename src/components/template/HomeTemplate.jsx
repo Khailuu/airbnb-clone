@@ -1,9 +1,12 @@
 import React from "react";
 import { Card } from "antd";
 import { useGetPhong } from "../../hooks/useGetPhong";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../constant";
 const { Meta } = Card;
 
 export const HomeTemplate = () => {
+  const navigate = useNavigate()
   const { data: lstPhong } = useGetPhong();
 
   console.log(lstPhong);
@@ -17,6 +20,9 @@ export const HomeTemplate = () => {
         {lstPhong?.map((phong) => (
           <div key={phong.id}>
             <Card
+            onClick={()=>{
+              navigate(`${PATH.details}/${phong.id}`)
+            }}
               hoverable
               style={{ width: 240 }}
               cover={

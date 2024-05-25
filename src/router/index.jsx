@@ -5,6 +5,8 @@ import { Home, Login, Register } from "../pages";
 import { HomeLayout } from "../components/layouts/HomeLayout";
 import { Room } from "../pages/Room";
 import { RoomList } from "../components/ui/Content/RoomList";
+import { RoomDetail } from "../components/ui/Detail/RoomDetail";
+import { Details } from "../pages/Details";
 
 const router = [
     {
@@ -34,6 +36,16 @@ const router = [
                     {
                         path: `${PATH.roomlist}/:id`,
                         element: <RoomList />
+                    }
+                ]
+            },
+            {
+                path: PATH.details,
+                element: <Details />,
+                children: [
+                    {
+                        path: `${PATH.details}/:id`,
+                        element: <RoomDetail />
                     }
                 ]
             }
