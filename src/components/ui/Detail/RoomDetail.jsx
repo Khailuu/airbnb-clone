@@ -9,11 +9,14 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import { RoomComment } from "./RoomComment";
+import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
+
 
 export const RoomDetail = () => {
   const { id: maPhong } = useParams();
 
   const { data: chiTietPhong } = useGetPhongTheoId(maPhong);
+
 
   return (
     <div className="container mx-auto my-[40px]">
@@ -165,14 +168,17 @@ export const RoomDetail = () => {
                   </div>
                 </div>
               )}
-
             </div>
-            <button className="border-black border-solid border-[1px] p-[12px] rounded-[8px]">Hiển thị tất cả 24 tiện nghi</button>
+            <button className="border-black border-solid border-[1px] p-[12px] rounded-[8px]">
+              Hiển thị tất cả 24 tiện nghi
+            </button>
           </div>
         </div>
-        <div className="">b</div>
+        <div className="">
+         <CalenderComponent chiTietPhong={chiTietPhong} maPhong={maPhong} />
+        </div>
       </div>
-      <hr className="mt-[20px] mb-[30px]"/>
+      <hr className="mt-[20px] mb-[30px]" />
       <RoomComment />
     </div>
   );

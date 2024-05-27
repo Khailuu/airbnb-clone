@@ -7,6 +7,9 @@ import { Room } from "../pages/Room";
 import { RoomList } from "../components/ui/Content/RoomList";
 import { RoomDetail } from "../components/ui/Detail/RoomDetail";
 import { Details } from "../pages/Details";
+import { AdminLayout } from "../components/layouts/AdminLayout";
+import { AdminTemplate } from "../components/template/AdminTemplate";
+import { Payment } from "../pages/Payment";
 
 const router = [
     {
@@ -48,8 +51,23 @@ const router = [
                         element: <RoomDetail />
                     }
                 ]
+            },
+            {
+                path: PATH.payment,
+                element: <Payment />
             }
         ]
+    },
+    {
+        element: <AdminLayout />,
+        children: [
+            {
+                path: PATH.admin,
+                element: <AdminTemplate />
+
+            }
+        ]
+
     }
 ]
 export const Router = () => useRoutes(router)

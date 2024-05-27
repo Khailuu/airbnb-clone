@@ -16,15 +16,21 @@ export const LoginTemplate = () => {
   const {control , handleSubmit, formState: { errors }} = useForm({
     resolver: zodResolver(loginSchema)
   })
-
+  const { isFetchingLogin, userLogin } = useSelector((state) => state.quanLyNguoiDung)
+  console.log("user", userLogin)
+ 
   const onSubmit = (values) => {
     dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(() => {
       toast.success("Login Success!")
+      if(userLogin?.user.role === "ADMIN") {
+        navigate('/admin')
+      }
+      if(userLogin?.user.role === "USER") {
+        navigate('/')
+      }
     })
   }
 
-  const { isFetchingLogin } = useSelector((state) => state.quanLyNguoiDung)
-  console.log(isFetchingLogin)
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Login</h1>

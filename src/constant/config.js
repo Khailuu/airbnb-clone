@@ -3,5 +3,7 @@ export const PATH = {
     login: '/login',
     register: '/register',
     roomlist: '/roomlist',
-    details: '/details'
+    details: '/details',
+    admin: '/admin',
+    payment: '/payment'
 }
