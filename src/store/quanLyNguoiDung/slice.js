@@ -4,6 +4,7 @@ import { LOCAL_USER_LOGIN_KEY } from "../../constant";
 import { getUserLogin } from "../../utils";
 
 const initialState = {
+    isFetchingRegister: false,
     isFetchingLogin: false,
     userLogin: getUserLogin()
 }
@@ -14,7 +15,9 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction }
 
     // xử lý action đồng bộ
     reducers: {
-        
+        updateUserLogin: (state, action) => {
+            state.userLogin = action.payload;
+        },
     },
     // xử lý các action bất đồng bộ
     extraReducers: (builder) => {
@@ -28,6 +31,16 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction }
         })
         .addCase(quanLyNguoiDungActionThunks.loginThunk.rejected, (state) => {
             state.isFetchingLogin = false
+        })
+
+        .addCase(quanLyNguoiDungActionThunks.registerThunk.pending, (state) => {
+            state.isFetchingRegister = true
+        })
+        .addCase(quanLyNguoiDungActionThunks.registerThunk.fulfilled,(state) => {
+            state.isFetchingRegister = false
+        })
+        .addCase(quanLyNguoiDungActionThunks.registerThunk.rejected,(state) => {
+            state.isFetchingRegister = false
         })
     }
 })

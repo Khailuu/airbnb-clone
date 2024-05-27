@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { loginSchema } from '../../schemas/login.schema'
 import { quanLyNguoiDungActionThunks } from '../../store/quanLyNguoiDung'
 import { toast } from 'react-toastify'
@@ -18,18 +18,29 @@ export const LoginTemplate = () => {
   })
   const { isFetchingLogin, userLogin } = useSelector((state) => state.quanLyNguoiDung)
   console.log("user", userLogin)
- 
+  
+  const role = userLogin?.user.role
+
   const onSubmit = (values) => {
     dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(() => {
       toast.success("Login Success!")
-      if(userLogin?.user.role === "ADMIN") {
+      if(role === "ADMIN") {
         navigate('/admin')
       }
-      if(userLogin?.user.role === "USER") {
+      if(role === "USER") {
         navigate('/')
       }
     })
   }
+
+  if(userLogin) {
+    if(role === "ADMIN"){
+      return <Navigate to='/admin'/>
+    } else if (role === "USER"){
+      return <Navigate to='/'/>
+    }
+  }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

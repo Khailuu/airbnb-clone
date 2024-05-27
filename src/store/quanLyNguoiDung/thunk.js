@@ -12,3 +12,15 @@ async (payload, {rejectWithValue}) => {
         return rejectWithValue(err)
     }
 })
+
+export const registerThunk = createAsyncThunk('quanLyNguoiDung/register',
+async(payload, {rejectWithValue}) => {
+    try {
+        await sleep()
+        const res = await quanLyNguoiDungServices.dangKy(payload)
+        return res.data
+    } catch(err) {
+        return rejectWithValue(err)
+    }
+}
+)

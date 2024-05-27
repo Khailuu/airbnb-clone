@@ -4,27 +4,30 @@ import { UserOutlined } from "@ant-design/icons";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Button, Popover } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
-import { getUserLogin } from "../../../utils/getUserLogin";
-import { LOCAL_USER_LOGIN_KEY } from "../../../constant";
+import { LOCAL_USER_LOGIN_KEY, PATH } from "../../../constant";
+import { useDispatch, useSelector } from "react-redux";
+import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
 
 export const UserMenu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const hide = () => {
-    setOpen(false);
-  };
+  // const hide = () => {
+  //   setOpen(false);
+  // };
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
   };
-  const userLogin = localStorage.getItem(LOCAL_USER_LOGIN_KEY)
+  const userLogin = useSelector((state) => state.quanLyNguoiDung)
 
   console.log(userLogin)
 
   const handleDangXuat = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY)
-    navigate('/login')
+    dispatch(quanLyNguoiDungAction.updateUserLogin(null))
+    navigate(PATH.login)
   }
 
   const renderUser = () => {
