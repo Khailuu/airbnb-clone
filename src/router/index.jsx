@@ -10,6 +10,9 @@ import { Details } from "../pages/Details";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { AdminTemplate } from "../components/template/AdminTemplate";
 import { Payment } from "../pages/Payment";
+import User from "../pages/User";
+import { QuanLyDatPhong, QuanLyNguoiDung, QuanLyThongTinPhong, QuanLyThongTinViTri } from "../components/ui/admin";
+import { EditNguoiDung } from "../components/ui/admin/EditNguoiDung";
 
 const router = [
     {
@@ -55,6 +58,10 @@ const router = [
             {
                 path: PATH.payment,
                 element: <Payment />
+            },
+            {
+                path: PATH.user,
+                element: <User />
             }
         ]
     },
@@ -63,8 +70,28 @@ const router = [
         children: [
             {
                 path: PATH.admin,
-                element: <AdminTemplate />
-
+                element: <AdminTemplate />,
+            },
+            {
+                path: PATH.quanlydatphong,
+                element: <QuanLyDatPhong />
+            },
+            {
+                path: PATH.quanlynguoidung,
+                element: <QuanLyNguoiDung />,
+               
+            },
+            {
+                path: PATH.quanlythongtinphong,
+                element: <QuanLyThongTinPhong />
+            },
+            {
+                path: PATH.quanlythongtinvitri,
+                element: <QuanLyThongTinViTri />
+            },
+            {
+                path: `${PATH.editNguoiDung}/:id`,
+                element: <EditNguoiDung />
             }
         ]
 

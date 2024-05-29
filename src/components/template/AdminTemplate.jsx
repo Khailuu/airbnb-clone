@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import { PATH } from "../../constant";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import SubMenu from "antd/es/menu/SubMenu";
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -39,25 +39,31 @@ export const AdminTemplate = () => {
         minHeight: "100vh",
       }}
     >
-      <Sider
-        collapsible collapsed={collapsed} onCollapse={setCollapsed}
-      >
+      <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
-          <Menu.Item icon={<UserOutlined />}>
-            <NavLink to={PATH.dashboard}>Quản lý người dùng</NavLink>
+          <Menu.Item key={5} icon={<UserOutlined />}>
+            <NavLink key={1} to={PATH.quanlynguoidung}>
+              Quản lý người dùng
+            </NavLink>
           </Menu.Item>
-          <Menu.Item>
-              <NavLink>Quản lý thông tin vị trí</NavLink>
-            </Menu.Item>
-            <Menu.Item>
-              <NavLink>Quản lý thông tin phòng</NavLink>
-            </Menu.Item>
+          <Menu.Item key={6}>
+            <NavLink key={2} to={PATH.quanlythongtinvitri}>
+              Quản lý thông tin vị trí
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key={7}>
+            <NavLink key={3} to={PATH.quanlythongtinphong}>
+              Quản lý thông tin phòng
+            </NavLink>
+          </Menu.Item>
           {/* <SubMenu key="sub1" icon={<FileOutlined />} title="Films">
             
           </SubMenu> */}
-          <Menu.Item icon={<DesktopOutlined />}>
-            <NavLink>Quản lý đặt phòng</NavLink>
+          <Menu.Item key={8} icon={<DesktopOutlined />}>
+            <NavLink key={4} to={PATH.quanlydatphong}>
+              Quản lý đặt phòng
+            </NavLink>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -82,7 +88,7 @@ export const AdminTemplate = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            Bill is a cat.
+            <Outlet />
           </div>
         </Content>
         <Footer

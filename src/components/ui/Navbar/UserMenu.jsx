@@ -43,7 +43,7 @@ export const UserMenu = () => {
     }
     return (
       <>
-        <NavLink to={"/login"}>
+        <NavLink to={"/userinfo"}>
           <Button>
             Thông tin cá nhân
           </Button>

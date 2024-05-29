@@ -5,5 +5,11 @@ export const PATH = {
     roomlist: '/roomlist',
     details: '/details',
     admin: '/admin',
-    payment: '/payment'
+    payment: '/payment',
+    user: '/userinfo',
+    quanlydatphong: '/admin/quanlydatphong',
+    quanlynguoidung: '/admin/quanlynguoidung',
+    editNguoiDung: '/admin/quanlynguoidung/edit',
+    quanlythongtinphong: '/admin/quanlythongtinphong',
+    quanlythongtinvitri: '/admin/quanlythongtinvitri',
 }

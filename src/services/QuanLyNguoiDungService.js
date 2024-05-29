@@ -7,5 +7,6 @@ const api = apiInstance.create({
 
 export const quanLyNguoiDungServices = {
     dangNhap: (payload) => api.post('/signin', payload),
-    dangKy: (payload) => api.post('/signup', payload)
+    dangKy: (payload) => api.post('/signup', payload),
+    
 }

@@ -7,6 +7,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { loginSchema } from '../../schemas/login.schema'
 import { quanLyNguoiDungActionThunks } from '../../store/quanLyNguoiDung'
 import { toast } from 'react-toastify'
+import { PATH } from '../../constant'
 
 
 export const LoginTemplate = () => {
@@ -25,17 +26,17 @@ export const LoginTemplate = () => {
     dispatch(quanLyNguoiDungActionThunks.loginThunk(values)).unwrap().then(() => {
       toast.success("Login Success!")
       if(role === "ADMIN") {
-        navigate('/admin')
+        navigate(PATH.quanlynguoidung)
       }
       if(role === "USER") {
-        navigate('/')
+        navigate(PATH.home)
       }
     })
   }
 
   if(userLogin) {
     if(role === "ADMIN"){
-      return <Navigate to='/admin'/>
+      return <Navigate to={PATH.quanlynguoidung}/>
     } else if (role === "USER"){
       return <Navigate to='/'/>
     }
