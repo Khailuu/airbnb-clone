@@ -1,12 +1,19 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetBinhLuanTheoMaPhong } from "../../../hooks/useGetBinhLuanTheoMaPhong";
 import { usePostBinhLuan } from "../../../hooks/usePostBinhLuan";
 import { getUserLogin } from "../../../utils/getUserLogin";
 import { useFormik } from "formik";
 import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { PATH } from "../../../constant";
+import { useAuth } from "../../../hooks/useAuth";
 
 export const RoomComment = () => {
+  const navigate = useNavigate()
+
+  const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
+
   const { id: maPhong } = useParams();
   const { data: binhLuan, refetch } = useGetBinhLuanTheoMaPhong(maPhong);
   const currDate = new Date().toLocaleDateString();
@@ -14,13 +21,12 @@ export const RoomComment = () => {
   const mutation = usePostBinhLuan();
   const strDate = `${currDate} ${currTime}`;
   
-  const { user } = getUserLogin() || { user: {} };
 
   const formik = useFormik({
     initialValues: {
       id: 0,
       maPhong: maPhong,
-      maNguoiBinhLuan: user.id,
+      maNguoiBinhLuan: userLogin?.id,
       ngayBinhLuan: strDate,
       noiDung: '',
       saoBinhLuan: 0
@@ -40,7 +46,7 @@ export const RoomComment = () => {
   }, [maPhong, refetch]);  
 
   const renderIcon = () => {
-    if (user.role === "ADMIN") {
+    if (userLogin?.role === "ADMIN") {
       return (
         <div className="flex my-[20px]">
           <FormOutlined className="mr-[15px]" style={{ color: "blue" }} />

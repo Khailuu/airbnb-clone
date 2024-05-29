@@ -9,12 +9,16 @@ import { getUserLogin } from "../../../utils/getUserLogin";
 import { usePostDatPhong } from "../../../hooks/usePostDatPhong";
 import '../../../assets/style.css'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { PATH } from "../../../constant";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate()
+
+const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
+
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
-  const { user } = getUserLogin()
   const [ngayNhanPhong, setNgayNhanPhong] = useState('');
   const [ngayTraPhong, setNgayTraPhong] = useState('');
   const [state, setState] = useState([
@@ -70,7 +74,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"), 
       ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD"),  
       soLuongKhach: 0,
-      maNguoiDung: user.id,
+      maNguoiDung: userLogin?.id,
     },
     enableReinitialize: true,
     onSubmit: (values) => {
