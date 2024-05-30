@@ -6,11 +6,8 @@ import { getUserLogin } from "../../../utils/getUserLogin";
 import { useFormik } from "formik";
 import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { PATH } from "../../../constant";
-import { useAuth } from "../../../hooks/useAuth";
 
 export const RoomComment = () => {
-  const navigate = useNavigate()
 
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
 
@@ -26,7 +23,7 @@ export const RoomComment = () => {
     initialValues: {
       id: 0,
       maPhong: maPhong,
-      maNguoiBinhLuan: userLogin?.id,
+      maNguoiBinhLuan: userLogin?.user.id,
       ngayBinhLuan: strDate,
       noiDung: '',
       saoBinhLuan: 0
@@ -46,7 +43,7 @@ export const RoomComment = () => {
   }, [maPhong, refetch]);  
 
   const renderIcon = () => {
-    if (userLogin?.role === "ADMIN") {
+    if (userLogin?.user.role === "ADMIN") {
       return (
         <div className="flex my-[20px]">
           <FormOutlined className="mr-[15px]" style={{ color: "blue" }} />

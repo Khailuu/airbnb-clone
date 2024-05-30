@@ -18,7 +18,6 @@ export const NavBar = () => {
       guests: ''
     },
     onSubmit: values => {
-      console.log('Selected ViTri ID:', values.viTri);
       navigate(`${PATH.roomlist}/${values.viTri}`);
     },
   });

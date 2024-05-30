@@ -27,8 +27,6 @@ export const RegisterTemplate = () => {
       role: "USER" // format date before submitting
     });
 
-    console.log(payload)
-
     dispatch(quanLyNguoiDungActionThunks.registerThunk(payload)).unwrap().then(() => {
       toast.success("Đăng ký thành công!")
       navigate(PATH.login)

@@ -15,7 +15,6 @@ export const HomeCarousel = () => {
   const navigate = useNavigate()
   const { data: listViTriPhanTrang } = useGetViTriPhanTran();
   const [maViTri, setMaViTri] = useState(1);
-  console.log(maViTri)
   const { data: phongByViTri, refetch } = useGetPhongTheoMaViTri(maViTri);
 
   useEffect(() => {

@@ -13,7 +13,6 @@ export const RoomList = () => {
     refetch(maViTri);
   }, [maViTri]);
   
-  // console.log(viTri)
 
   if (isLoading) {
     return <div>Loading...</div>;

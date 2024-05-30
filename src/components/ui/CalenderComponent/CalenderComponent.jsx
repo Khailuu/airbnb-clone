@@ -29,8 +29,6 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     },
   ]);
 
-  console.log(chiTietPhong)
-
   const [isOverlap, setIsOverlap] = useState(false);
 
   const handleSelect = (ranges) => {
@@ -74,7 +72,7 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
       ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"), 
       ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD"),  
       soLuongKhach: 0,
-      maNguoiDung: userLogin?.id,
+      maNguoiDung: userLogin?.user.id,
     },
     enableReinitialize: true,
     onSubmit: (values) => {

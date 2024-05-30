@@ -10,15 +10,12 @@ import {
 } from "@ant-design/icons";
 import { RoomComment } from "./RoomComment";
 import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
-import { useSelector } from "react-redux";
-import { PATH } from "../../../constant";
+
 
 
 export const RoomDetail = () => {
   const navigate = useNavigate()
 
-  const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
-  console.log("user", userLogin)
 
   const { id: maPhong } = useParams();
 

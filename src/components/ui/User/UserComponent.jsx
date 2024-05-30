@@ -9,16 +9,17 @@ import { useFormik } from "formik";
 // import { useUploadHinh, useDeletePhongDaDat, useGetDatPhongTheoNguoiDung, useGetPhong } from "../../../hooks";
 import { NavLink } from "react-router-dom";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import { Avatar } from "./Avatar";
 
 export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [imgSrc, setImgSrc] = useState("");
+  // const [imgSrc, setImgSrc] = useState("");
 
-  const uploadMutation = useUploadHinh();
+  // const uploadMutation = useUploadHinh();
   const deleteMutation = useDeletePhongDaDat();
 
-  const { data: bookedRooms } = useGetDatPhongTheoNguoiDung(userLogin?.user.id);
+  const { data: bookedRooms, refetch } = useGetDatPhongTheoNguoiDung(userLogin?.user.id);
   const { data: allRooms } = useGetPhong();
 
   // const newData = bookedRooms?.map((bookedRoom) => {
@@ -30,74 +31,89 @@ export const UserComponent = () => {
     return room ? { ...selectRoom, ...room, idDelete: selectRoom.id } : selectRoom;
   });
   const deleteRoom = (id) => {
-    deleteMutation.mutate(id);
+    deleteMutation.mutate(id, {
+      onSuccess: () => {
+        refetch()
+      }
+    });
   };
-
   const renderBookedRooms = () => {
-    return newData?.map((room, index) => (
-      <div key={index} className="flex my-8">
-        <img src={room.hinhAnh} alt="Room" className="mr-4 w-48 rounded-lg"/>
-        <div>
-          <h3 className="text-xl text-rose-500">{room.tenPhong}</h3>
-          <p className="text-gray-500 mt-4 mb-1">Ngày nhận phòng: {room.ngayDen}</p>
-          <p className="text-gray-500">Ngày trả phòng: {room.ngayDi}</p>
-          <div className="mt-4 flex justify-between items-center">
-            <p>Giá tiền: ${room.giaTien}</p>
-            <button onClick={() => deleteRoom(room.idDelete)} className="bg-rose-500 text-white p-3 rounded-lg">
-              Huỷ Phòng
-            </button>
+    if (newData?.length > 0) {
+      return newData?.map((room, index) => (
+        <div key={index} className="flex my-8">
+          <img src={room.hinhAnh} alt="Room" className="mr-4 w-48 rounded-lg"/>
+          <div>
+            <h3 className="text-xl text-rose-500">{room.tenPhong}</h3>
+            <p className="text-gray-500 mt-4 mb-1">Ngày nhận phòng: {room.ngayDen}</p>
+            <p className="text-gray-500">Ngày trả phòng: {room.ngayDi}</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p>Giá tiền: ${room.giaTien}</p>
+              <button onClick={() => deleteRoom(room.idDelete)} className="bg-rose-500 text-white p-3 rounded-lg">
+                Huỷ Phòng
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    ));
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file && ["image/jpeg", "image/jpg", "image/png", "image/gif"].includes(file.type)) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => setImgSrc(e.target.result);
-      formik.setFieldValue("avatar", file);
+      ));
+    }
+    if(newData?.length === 0) {
+      return <div className="text-rose-500">Hãy quay lại trang chủ để book cho mình 1 phòng xinh đẹp!</div>
     }
   };
 
-  const formik = useFormik({
-    initialValues: { avatar: null },
-    onSubmit: (values) => {
-      if (values.avatar) {
-        const formData = new FormData();
-        formData.append("avatar", values.avatar, values.avatar.name);
-        uploadMutation.mutate(formData, {
-          onError: (error) => console.error("Upload failed:", error.response.data),
-        });
-      } else {
-        console.error("No file selected");
-      }
-    },
-  });
+  // const handleChangeFile = (e) => {
+  //   let file = e.target.files?.[0];
+  //   if (file && (file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png" || file.type === "image/gif")) {
+  //     let reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = (e) => {
+  //       setImgSrc(e.target?.result);
+  //     };
+  //     formik.setFieldValue("avatar", file);
+  //   }
+  // };
+  // const formik = useFormik({
+  //   initialValues: {
+  //     avatar: null
+  //   },
+  //   onSubmit: (values, { setSubmitting }) => {
+  //     const formData = new FormData();
+      
+  //     if (values.avatar) {
+  //       formData.append('avatar', values.avatar, values.avatar.name);
+  //     }
+  //     console.log(formik.initialValues.avatar)
+  //     console.log(formData)
+  //     uploadMutation.mutate(formData);
+  //     setSubmitting(false);
+  //   },
+  // });
+
+
 
   return (
     <div className="container mx-auto my-10">
       <div className="grid grid-cols-3 gap-24">
         <div className="border p-4 rounded-lg max-h-[488px]">
           <div className="text-center">
-            <img src={userLogin?.user.avatar} className="w-36 h-36 object-cover rounded-full mx-auto my-5" alt="avatar"/>
-            <Button onClick={() => setIsModalOpen(true)}>Chỉnh sửa ảnh</Button>
+            <Avatar />
+            {/* <img src={userLogin?.user.avatar} className="w-36 h-36 object-cover rounded-full mx-auto my-5" alt="avatar"/> */}
+            {/* <Button onClick={() => setIsModalOpen(true)}>Chỉnh sửa ảnh</Button>
             <Modal
               title="Upload ảnh"
               open={isModalOpen}
               onOk={() => setIsModalOpen(false)}
               onCancel={() => setIsModalOpen(false)}
             >
+              <Avatar />
               <form onSubmit={formik.handleSubmit}>
-                <input type="file" accept="image/*" onChange={handleFileChange}/>
+                <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile}/>
                 {imgSrc && <img src={imgSrc} alt="avatar" className="w-48"/>}
                 <button type="submit" className="border p-2 rounded-lg mt-5 block w-24">
                   Upload
                 </button>
               </form>
-            </Modal>
+            </Modal> */}
           </div>
           <div className="my-10 ml-5">
             <h2 className="mb-5">Xác minh danh tính</h2>

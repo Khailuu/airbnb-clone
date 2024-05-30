@@ -20,9 +20,8 @@ export const UserMenu = () => {
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
   };
-  const userLogin = useSelector((state) => state.quanLyNguoiDung)
+  const {userLogin} = useSelector((state) => state.quanLyNguoiDung)
 
-  console.log(userLogin)
 
   const handleDangXuat = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY)
@@ -41,18 +40,36 @@ export const UserMenu = () => {
         </div>
       );
     }
-    return (
-      <>
-        <NavLink to={"/userinfo"}>
-          <Button>
-            Thông tin cá nhân
-          </Button>
-        </NavLink>
-        <Button onClick={() => {
-          handleDangXuat()
-        }}>Đăng xuất</Button>
-      </>
-    );
+    if(userLogin) {
+      if(userLogin?.user.role === "USER"){
+        return (
+          <>
+            <NavLink to={"/userinfo"}>
+              <Button>
+                Thông tin cá nhân
+              </Button>
+            </NavLink>
+            <Button onClick={() => {
+              handleDangXuat()
+            }}>Đăng xuất</Button>
+          </>
+        );
+      }
+      if(userLogin?.user.role === "ADMIN"){
+        return (
+          <>
+            <NavLink to={PATH.quanlynguoidung}>
+              <Button>
+                Quản lý thông tin
+              </Button>
+            </NavLink>
+            <Button onClick={() => {
+              handleDangXuat()
+            }}>Đăng xuất</Button>
+          </>
+        );
+      }
+    }
   };
 
   return (

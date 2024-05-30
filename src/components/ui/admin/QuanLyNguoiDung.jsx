@@ -36,7 +36,7 @@ export const QuanLyNguoiDung = () => {
       width: "10%",
     },
     {
-      title: "Name",
+      title: "Họ Tên",
       dataIndex: "name",
       filterMode: "tree",
       filterSearch: true,
@@ -49,19 +49,19 @@ export const QuanLyNguoiDung = () => {
       width: "20%",
     },
     {
-      title: "Birthday",
+      title: "Ngày Sinh",
       dataIndex: "birthday",
       filterSearch: true,
       width: "15%",
     },
     {
-      title: "Role",
+      title: "Loại Người Dùng",
       dataIndex: "role",
       filterSearch: true,
       width: "10%",
     },
     {
-      title: "Gender",
+      title: "Giới tính",
       dataIndex: "gender",
       filterSearch: true,
       render: (_, nguoiDung) => {

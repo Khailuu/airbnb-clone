@@ -18,8 +18,6 @@ export const LoginTemplate = () => {
     resolver: zodResolver(loginSchema)
   })
   const { isFetchingLogin, userLogin } = useSelector((state) => state.quanLyNguoiDung)
-  console.log("user", userLogin)
-  
   const role = userLogin?.user.role
 
   const onSubmit = (values) => {

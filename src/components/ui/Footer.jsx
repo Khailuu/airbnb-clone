@@ -17,7 +17,7 @@ export const Footer = () => {
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">
-              <h3 className="tracking-wide uppercase text-gray-900">
+              <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">
                 Giới thiệu
               </h3>
               <ul className="space-y-1">
@@ -56,7 +56,7 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className="tracking-wide uppercase text-gray-900">Dịch vụ</h3>
+              <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">Dịch vụ</h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -88,7 +88,7 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className="uppercase text-gray-900">Hỗ trợ</h3>
+              <h3 className=" uppercase text-rose-500 text-[25px]">Hỗ trợ</h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -120,7 +120,7 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <div className="uppercase text-gray-900">Social media</div>
+              <div className="uppercase text-rose-500 text-[25px]">Social media</div>
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"

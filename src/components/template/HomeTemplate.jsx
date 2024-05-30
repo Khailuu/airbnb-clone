@@ -9,7 +9,6 @@ export const HomeTemplate = () => {
   const navigate = useNavigate()
   const { data: lstPhong } = useGetPhong();
 
-  console.log(lstPhong);
 
   return (
     <div>
