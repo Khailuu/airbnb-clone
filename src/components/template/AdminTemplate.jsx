@@ -79,7 +79,6 @@ export const AdminTemplate = () => {
       <Layout>
         <Header
           style={{
-            padding: s0,
             background: colorBgContainer,
           }}
         />
