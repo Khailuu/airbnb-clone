@@ -2,20 +2,20 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useGetViTri } from "../../../hooks/useGetViTri";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useDeleteNguoiDung } from "../../../hooks/useDeleteNguoiDung";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
+import { useDeleteViTri } from "../../../hooks/useDeleteViTri";
 
 export const QuanLyThongTinViTri = () => {
   const { data: lstViTri, refetch } = useGetViTri();
-  const mutationDeleteND = useDeleteNguoiDung();
+  const mutationDeleteVT = useDeleteViTri()
   const navigate = useNavigate()
 
 
   const handleDelete = (id) => {
-    if (window.confirm("Bạn có chắc chắn muốn xoá người dùng này không?")) {
-      mutationDeleteND.mutate(id, {
+    if (window.confirm("Bạn có chắc chắn muốn xoá vị trí này không?")) {
+      mutationDeleteVT.mutate(id, {
         onSuccess: () => {
           toast.success("Xoá Thành Công!");
           refetch();
@@ -71,7 +71,7 @@ export const QuanLyThongTinViTri = () => {
         return (
           <div key={viTri?.id}>
             <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH}/${viTri?.id}`)
+                navigate(`${PATH.editvitri}/${viTri?.id}`)
               }} style={{ color: "blue" }} />
                 <DeleteOutlined
                   onClick={() => handleDelete(viTri?.id)}
@@ -86,6 +86,11 @@ export const QuanLyThongTinViTri = () => {
 
 
   return (
-    <Table columns={columns} dataSource={lstViTri}  />
+    <div>
+      <NavLink to={PATH.themvitri}>
+        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">Thêm Vị Trí</button>
+      </NavLink>
+      <Table columns={columns} dataSource={lstViTri}  />
+    </div>    
   );
 };

@@ -9,7 +9,9 @@ export const PATH = {
     user: '/userinfo',
     quanlydatphong: '/admin/quanlydatphong',
     quanlynguoidung: '/admin/quanlynguoidung',
-    editNguoiDung: '/admin/quanlynguoidung/edit',
+    editNguoiDung: '/admin/quanlynguoidung/editnguoidung',
     quanlythongtinphong: '/admin/quanlythongtinphong',
     quanlythongtinvitri: '/admin/quanlythongtinvitri',
+    themvitri: '/admin/quanlythongtinvitri/themvitri',
+    editvitri: '/admin/quanlythongtinvitri/editvitri'
 }

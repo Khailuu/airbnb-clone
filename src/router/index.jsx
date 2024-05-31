@@ -13,6 +13,8 @@ import { Payment } from "../pages/Payment";
 import User from "../pages/User";
 import { QuanLyDatPhong, QuanLyNguoiDung, QuanLyThongTinPhong, QuanLyThongTinViTri } from "../components/ui/admin";
 import { EditNguoiDung } from "../components/ui/admin/EditNguoiDung";
+import { ThemViTri } from "../components/ui/admin/ThemViTri";
+import { EditViTri } from "../components/ui/admin/EditViTri";
 
 const router = [
     {
@@ -92,6 +94,14 @@ const router = [
             {
                 path: `${PATH.editNguoiDung}/:id`,
                 element: <EditNguoiDung />
+            },
+            {
+                path: PATH.themvitri,
+                element: <ThemViTri />
+            },
+            {
+                path: `${PATH.editvitri}/:id`,
+                element: <EditViTri />
             }
         ]
 

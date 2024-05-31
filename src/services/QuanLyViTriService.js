@@ -6,5 +6,9 @@ const api = apiInstance.create({
 
 export const quanLyViTriService = {
     getViTri: () => api.get(),
-    getPhanTrangTimKiem: () => api.get('/phan-trang-tim-kiem?pageIndex=1&pageSize=20')
+    getViTriTheoId: (id) => api.get(`/${id}`),
+    getPhanTrangTimKiem: () => api.get('/phan-trang-tim-kiem?pageIndex=1&pageSize=20'),
+    postViTri: (payload) => api.post('', payload),
+    deleteViTri: (id) => api.delete(`/${id}`),
+    editViTri: (id, payload) => api.put(`/${id}`, payload)
 }

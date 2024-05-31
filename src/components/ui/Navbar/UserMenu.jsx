@@ -44,28 +44,32 @@ export const UserMenu = () => {
       if(userLogin?.user.role === "USER"){
         return (
           <>
+            <div className="flex flex-col">
             <NavLink to={"/userinfo"}>
-              <Button>
+              <Button className="w-full mb-[15px]">
                 Thông tin cá nhân
               </Button>
             </NavLink>
             <Button onClick={() => {
               handleDangXuat()
             }}>Đăng xuất</Button>
+            </div>
           </>
         );
       }
       if(userLogin?.user.role === "ADMIN"){
         return (
           <>
-            <NavLink to={PATH.quanlynguoidung}>
-              <Button>
-                Quản lý thông tin
+          <div className="flex flex-col">
+          <NavLink to={PATH.quanlynguoidung}>
+              <Button className="w-full mb-[15px]">
+                Dành cho admin
               </Button>
             </NavLink>
             <Button onClick={() => {
               handleDangXuat()
             }}>Đăng xuất</Button>
+          </div>
           </>
         );
       }
@@ -80,7 +84,7 @@ export const UserMenu = () => {
         </div>
         <Popover
           content={renderUser()}
-          title="Title"
+          title={userLogin?.user.name}
           trigger="click"
           open={open}
           onOpenChange={handleOpenChange}
