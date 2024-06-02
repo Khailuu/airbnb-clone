@@ -12,9 +12,11 @@ import { AdminTemplate } from "../components/template/AdminTemplate";
 import { Payment } from "../pages/Payment";
 import User from "../pages/User";
 import { QuanLyDatPhong, QuanLyNguoiDung, QuanLyThongTinPhong, QuanLyThongTinViTri } from "../components/ui/admin";
-import { EditNguoiDung } from "../components/ui/admin/EditNguoiDung";
-import { ThemViTri } from "../components/ui/admin/ThemViTri";
-import { EditViTri } from "../components/ui/admin/EditViTri";
+import { EditNguoiDung } from "../components/ui/admin/quanLyNguoiDung/EditNguoiDung";
+import { ThemViTri } from "../components/ui/admin/quanLyThonTinViTri/ThemViTri";
+import { EditViTri } from "../components/ui/admin/quanLyThonTinViTri/EditViTri";
+import { Admin } from "../pages/Admin";
+import { ThemPhong } from "../components/ui/admin/quanLyThongTInPhong/ThemPhong";
 
 const router = [
     {
@@ -72,7 +74,7 @@ const router = [
         children: [
             {
                 path: PATH.admin,
-                element: <AdminTemplate />,
+                element: <Admin />,
             },
             {
                 path: PATH.quanlydatphong,
@@ -86,6 +88,10 @@ const router = [
             {
                 path: PATH.quanlythongtinphong,
                 element: <QuanLyThongTinPhong />
+            },
+            {
+                path: PATH.themphong,
+                element: <ThemPhong />
             },
             {
                 path: PATH.quanlythongtinvitri,

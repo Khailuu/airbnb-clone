@@ -10,11 +10,24 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import { PATH } from "../../constant";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import SubMenu from "antd/es/menu/SubMenu";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 const { Header, Content, Footer, Sider } = Layout;
 
 export const AdminTemplate = () => {
+  const navigate = useNavigate()
+
+  const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
+  if(!userLogin) {
+    navigate(PATH.login)
+  }
+  if(userLogin) {
+    if(userLogin?.user.role === "USER") {
+      navigate(PATH.home)
+    }
+  }
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },

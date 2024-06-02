@@ -7,5 +7,7 @@ const api = apiInstance.create({
 export const quanLyPhongService = {
     getPhongThue: () => api.get(),
     getPhongTheoMaViTri: (id) => api.get(`/lay-phong-theo-vi-tri?maViTri=${id}`),
-    getPhongThueTheoId: (id) => api.get(`/${id}`)
+    getPhongThueTheoId: (id) => api.get(`/${id}`),
+    deletePhong: (id) => api.delete(`/${id}`),
+    addPhong: (payload) => api.post('', payload)
 }

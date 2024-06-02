@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetPhongTheoMaViTri } from '../../../hooks/useGetPhongTheoViTri';
+import { useGetPhongTheoMaViTri } from '../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri';
 
 export const RoomList = () => {
   const { id: maViTri } = useParams();

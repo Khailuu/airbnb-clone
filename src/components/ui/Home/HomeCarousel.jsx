@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useGetViTriPhanTran } from "../../../hooks/useGetViTriPhanTrang";
+import { useGetViTriPhanTran } from "../../../hooks/api/quanLyViTriApi/useGetViTriPhanTrang";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Card, Tabs } from "antd";
-import { useGetPhongTheoMaViTri } from "../../../hooks/useGetPhongTheoViTri";
+import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";

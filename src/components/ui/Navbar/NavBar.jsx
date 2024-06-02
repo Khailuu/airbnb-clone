@@ -2,7 +2,7 @@ import React from "react";
 import { BiSearch } from "react-icons/bi";
 import { Form, Input, Select, Button } from "antd";
 import "./style.css";
-import { useGetViTri } from "../../../hooks/useGetViTri";
+import { useGetViTri } from "../../../hooks/api/quanLyViTriApi/useGetViTri";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";

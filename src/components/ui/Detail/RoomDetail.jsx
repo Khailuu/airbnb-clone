@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetPhongTheoId } from "../../../hooks/useGetPhongTheoId";
+import { useGetPhongTheoId } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoId";
 import {
   CopyOutlined,
   FilterOutlined,

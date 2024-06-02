@@ -1,7 +1,7 @@
-import { useUploadHinh } from "../../../hooks/useUploadHinh";
-import { useGetDatPhongTheoNguoiDung } from "../../../hooks/useGetDatPhongTheoNguoiDung";
-import { useGetPhong } from "../../../hooks/useGetPhong";
-import { useDeletePhongDaDat } from "../../../hooks/useDeletePhongDaDat";
+import { useUploadHinh } from "../../../hooks/api/quanLyNguoiDungApi/useUploadHinh";
+import { useGetDatPhongTheoNguoiDung } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhongTheoNguoiDung";
+import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
+import { useDeletePhongDaDat } from "../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "antd";

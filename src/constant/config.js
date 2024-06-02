@@ -11,6 +11,7 @@ export const PATH = {
     quanlynguoidung: '/admin/quanlynguoidung',
     editNguoiDung: '/admin/quanlynguoidung/editnguoidung',
     quanlythongtinphong: '/admin/quanlythongtinphong',
+    themphong:'/admin/quanlythongtinphong/themphong',
     quanlythongtinvitri: '/admin/quanlythongtinvitri',
     themvitri: '/admin/quanlythongtinvitri/themvitri',
     editvitri: '/admin/quanlythongtinvitri/editvitri'

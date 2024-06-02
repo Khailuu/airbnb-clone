@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "antd";
-import { useGetPhong } from "../../hooks/useGetPhong";
+import { useGetPhong } from "../../hooks/api/quanLyPhongApi/useGetPhong";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../constant";
 const { Meta } = Card;

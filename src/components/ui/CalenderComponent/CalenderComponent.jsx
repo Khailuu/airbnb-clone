@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { useGetDatPhong } from "../../../hooks/useGetDatPhong";
+import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
 import { getUserLogin } from "../../../utils/getUserLogin";
-import { usePostDatPhong } from "../../../hooks/usePostDatPhong";
+import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 import '../../../assets/style.css'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
