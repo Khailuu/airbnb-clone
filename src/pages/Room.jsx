@@ -1,11 +1,11 @@
 import React from 'react'
-import { RoomList } from '../components/ui/Content/RoomList'
+import { RoomList } from '../components/ui/roomList/RoomList'
 import { NavBar } from '../components/ui/Navbar/NavBar'
 
 export const Room = () => {
   return (
   <div>
-        <div className='container mt-[40px] min-w-[1240px] ms-auto'>
+        <div className='container mx-auto'>
           <RoomList />
         </div>
   </div>

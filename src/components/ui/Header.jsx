@@ -11,7 +11,7 @@ export const Header = () => {
         <div className='max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4'>
         <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
           <NavLink to={PATH.home}>
-          <img src="public/images/pngwing.com.png" className='w-[100px]' alt="" />
+          <img src="../../../public/images/pngwing.com.png" className='w-[100px]' alt="" />
           </NavLink>
           <div className=''>
             <NavBar />

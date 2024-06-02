@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { PATH } from "../../constant";
 
 
 export const Footer = () => {
@@ -7,13 +9,13 @@ export const Footer = () => {
       <footer className="px-4 divide-y bg-gray-100 text-gray-800">
         <div className="container flex flex-col pb-10 justify-between lg:py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
-            <a
-              href="https://www.facebook.com/"
+            <NavLink
+              to={PATH.home}
               rel="noopener noreferrer"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <img className="h-48" src="public/images/pngwing.com.png"  alt="travel_logo" />
-            </a>
+              <img className="h-48" src="../../../public/images/pngwing.com.png"  alt="travel_logo" />
+            </NavLink>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">
