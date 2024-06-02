@@ -25,18 +25,18 @@ export const NavBar = () => {
   
   return (
     <Form
-      className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+      className="border-[1px] w-full mb-[0px] md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
       onFinish={formik.handleSubmit}
     >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold justify-between">
-          <div className="text-sm font-semibold !px-6 text-center">
-            AnyWhere{" "}
-            <Form.Item className="w-[200px]">
+          <div className="text-sm flex flex-row items-center font-semibold !px-6 text-center">
+            <Form.Item className="mr-[8px] w-[200px] mb-[0px]">
               <Select
                 name="viTri"
                 onChange={value => formik.setFieldValue('viTri', value)}
                 value={formik.values.viTri}
+                placeholder='Any Where'
               >
                 {listViTri?.map((viTri) => (
                   <Select.Option
@@ -48,9 +48,13 @@ export const NavBar = () => {
                 ))}
               </Select>
             </Form.Item>
+            <Button type="primary" htmlType="submit" className="p-2 bg-rose-500 h-[20px] w-[20px] rounded-full text-white text-center">
+              <BiSearch style={{ lineHeight: 20, transform: "translate(-36%, -30%)" }} className="size-3" />
+            </Button>
           </div>
+          
         </div>
-        <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
+        {/* <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
           AnyWeek
           <Input
             name="date"
@@ -67,10 +71,8 @@ export const NavBar = () => {
               onChange={formik.handleChange}
             />
           </div>
-          <Button type="primary" htmlType="submit" className="p-2 bg-rose-500 h-[50px] w-[50px] rounded-full text-white text-center">
-            <BiSearch className="size-7" />
-          </Button>
-        </div>
+          
+        </div> */}
       </div>
     </Form>
   );
