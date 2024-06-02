@@ -2,7 +2,7 @@ import { useUploadHinh } from "../../../hooks/api/quanLyNguoiDungApi/useUploadHi
 import { useGetDatPhongTheoNguoiDung } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhongTheoNguoiDung";
 import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
 import { useDeletePhongDaDat } from "../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "antd";
 import { useFormik } from "formik";
@@ -30,6 +30,10 @@ export const UserComponent = () => {
     const room = allRooms?.find((item) => item.id === selectRoom.maPhong);
     return room ? { ...selectRoom, ...room, idDelete: selectRoom.id } : selectRoom;
   });
+
+  useEffect(() => {
+    alert("Vui lòng cập nhật avatar để hoàn thành xác minh danh tính!")
+  }, [])
   const deleteRoom = (id) => {
     deleteMutation.mutate(id, {
       onSuccess: () => {
