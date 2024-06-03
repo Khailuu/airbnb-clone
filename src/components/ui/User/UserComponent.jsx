@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { Avatar } from "./Avatar";
+import { PATH } from "../../../constant";
 
 export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
@@ -31,9 +32,9 @@ export const UserComponent = () => {
     return room ? { ...selectRoom, ...room, idDelete: selectRoom.id } : selectRoom;
   });
 
-  useEffect(() => {
-    alert("Vui lòng cập nhật avatar để hoàn thành xác minh danh tính!")
-  }, [])
+  // useEffect(() => {
+  //   alert("Vui lòng cập nhật avatar để hoàn thành xác minh danh tính!")
+  // }, [])
   const deleteRoom = (id) => {
     deleteMutation.mutate(id, {
       onSuccess: () => {
@@ -48,8 +49,22 @@ export const UserComponent = () => {
           <img src={room.hinhAnh} alt="Room" className="mr-4 w-48 rounded-lg"/>
           <div>
             <h3 className="text-xl text-rose-500">{room.tenPhong}</h3>
+            <p className="text-gray-500">{room?.soLuongKhach} khách</p>
+            <hr className="w-[10%] mt-[10px]" />
             <p className="text-gray-500 mt-4 mb-1">Ngày nhận phòng: {room.ngayDen}</p>
             <p className="text-gray-500">Ngày trả phòng: {room.ngayDi}</p>
+            <hr className="w-[100%] mt-[10px]" />
+            <p className="mt-[10px] text-[14px] text-gray-500">
+                      {room?.mayGiat ? "Máy giặt " : ""}
+                      {room?.bep ? "- Bếp " : ""}
+                      {room?.dieuHoa ? "- Điều hoà " : ""}
+                      {room?.doXe ? "- Bãi đỗ xe " : ""}
+                      {room?.hoBoi ? "- Hồ bơi " : ""}
+                      {room?.tivi ? "- Tivi " : ""}
+                      {room?.wifi ? "- Wifi " : ""}
+                      {room?.banLa ? "- Bàn là " : ""}
+                      {room?.banUi ? "- Bàn ủi " : ""}
+                    </p>
             <div className="mt-4 flex justify-between items-center">
               <p>Giá tiền: ${room.giaTien}</p>
               <button onClick={() => deleteRoom(room.idDelete)} className="bg-rose-500 text-white p-3 rounded-lg">
@@ -133,7 +148,7 @@ export const UserComponent = () => {
           <h2 className="text-2xl mb-2 text-rose-500 font-bold">Xin chào, tôi là {userLogin?.user.name}</h2>
           <p className="text-gray-500">Bắt đầu tham gia vào 2024</p>
           <div className="my-8">
-            <NavLink to="/edit-profile">Chỉnh sửa thông tin</NavLink>
+            <NavLink to={`${PATH.editprofile}/${userLogin?.user.id}`} style={{ textDecoration: "underline" }} className="hover:text-rose-500 transition-all">Chỉnh sửa thông tin</NavLink>
           </div>
           <h2 className="text-2xl">Phòng đã thuê:</h2>
           {renderBookedRooms()}

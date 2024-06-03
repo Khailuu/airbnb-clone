@@ -29,6 +29,15 @@ export const UserMenu = () => {
     navigate(PATH.login)
   }
 
+  const renderAvatar = () => {
+    if(userLogin?.user?.avatar !== "") {
+      return (
+        <img src={userLogin?.user?.avatar} className="w-[32px] h-[32px] rounded-full" alt="" />
+      )
+    }
+    return <UserOutlined />
+  }
+
   const renderUser = () => {
     if (!userLogin) {
       return (
@@ -41,7 +50,7 @@ export const UserMenu = () => {
       );
     }
     if(userLogin) {
-      if(userLogin?.user.role === "USER"){
+      if(userLogin?.user?.role === "USER"){
         return (
           <>
             <div className="flex flex-col">
@@ -57,7 +66,7 @@ export const UserMenu = () => {
           </>
         );
       }
-      if(userLogin?.user.role === "ADMIN"){
+      if(userLogin?.user?.role === "ADMIN"){
         return (
           <>
           <div className="flex flex-col">
@@ -89,7 +98,7 @@ export const UserMenu = () => {
         </div>
         <Popover
           content={renderUser()}
-          title={userLogin?.user.name}
+          title={userLogin?.user?.name}
           trigger="click"
           open={open}
           onOpenChange={handleOpenChange}
@@ -97,7 +106,7 @@ export const UserMenu = () => {
           <div className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
             <AiOutlineMenu />
             <div className="hidden md:block">
-            <img src={userLogin?.user.avatar} className="w-[32px] h-[32px] rounded-full" alt="" />
+            {renderAvatar()}
             </div>
           </div>
         </Popover>

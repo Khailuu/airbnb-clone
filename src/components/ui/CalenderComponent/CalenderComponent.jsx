@@ -71,7 +71,7 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
       maPhong: maPhong,
       ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"), 
       ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD"),  
-      soLuongKhach: 0,
+      soLuongKhach: 1,
       maNguoiDung: userLogin?.user.id,
     },
     enableReinitialize: true,
@@ -94,7 +94,7 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     <form onSubmit={formik.handleSubmit}>
       <div className="flex items-center">
       <p className="font-bold mr-[12px]">Số lượng khách: </p>
-      <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" min={1} max={2} />
+      <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" placeholder="1" min={1} max={2} />
       </div>
       {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
       <button disabled={isOverlap} type="submit" className={buttonClass}>Đặt Phòng</button>

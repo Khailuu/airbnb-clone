@@ -7,6 +7,7 @@ export const PATH = {
     admin: '/admin',
     payment: '/payment',
     user: '/userinfo',
+    editprofile: '/userinfo/editprofile',
     quanlydatphong: '/admin/quanlydatphong',
     quanlynguoidung: '/admin/quanlynguoidung',
     editNguoiDung: '/admin/quanlynguoidung/editnguoidung',

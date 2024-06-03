@@ -13,5 +13,5 @@ export const quanLyUserServices = {
     deleteNguoiDung: (id) => api.delete(`?id=${id}`),
     editNguoiDung: (id, payload) => {
         return api.put(`/${id}`, payload);
-      }
+    }
 }
