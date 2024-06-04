@@ -6,6 +6,9 @@ import { getUserLogin } from "../../../utils/getUserLogin";
 import { useFormik } from "formik";
 import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import { quanLyBinhLuanService } from "../../../services/QuanLyBinhLuanService";
+import { useDeleteBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/useDeleteBinhLuan";
+import { toast } from "react-toastify";
 
 export const RoomComment = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
@@ -15,6 +18,7 @@ export const RoomComment = () => {
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const mutation = usePostBinhLuan();
+  const mutaionDelete = useDeleteBinhLuan()
   const strDate = `${currDate} ${currTime}`;
 
   const formik = useFormik({
@@ -40,12 +44,25 @@ export const RoomComment = () => {
     refetch();
   }, [maPhong, refetch]);
 
-  const renderIcon = () => {
+
+
+  const renderIcon = (id) => {
+    console.log(id)
     if (userLogin?.user.role === "ADMIN") {
       return (
         <div className="flex my-[20px]">
-          <FormOutlined className="mr-[15px]" style={{ color: "blue" }} />
-          <DeleteOutlined style={{ color: "red" }} />
+          <DeleteOutlined style={{ color: "red" }} onClick={() => {
+            mutaionDelete.mutate(id, {
+              onSuccess: () => {
+                refetch()
+                toast.success("Xoá bình luận thanh công!")
+              },
+              onError: (err) => {
+                console.log(err?.message)
+                toast.error(err?.message)
+              }
+            })
+          }}/>
         </div>
       );
     }
@@ -73,7 +90,7 @@ export const RoomComment = () => {
                 <p className="text-gray-500">{v.ngayBinhLuan}</p>
               </div>
             </div>
-            {renderIcon()}
+            {renderIcon(v?.id)}
             <div className="flex justify-between">
               <h3 className="w-[500px]">{v.noiDung}</h3>
               <div className="flex items-center">

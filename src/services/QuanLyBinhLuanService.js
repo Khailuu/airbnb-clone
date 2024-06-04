@@ -7,5 +7,5 @@ const api = apiInstance.create({
 export const quanLyBinhLuanService = {
     getBinhLuanTheoMaPhong: (id) => api.get(`/lay-binh-luan-theo-phong/${id}`),
     postBinhLuan: (payload) => api.post('', payload),
-    deleteBinhLuan: () => api.delete()
+    deleteBinhLuan: (id) => api.delete(`/${id}`)
 }
