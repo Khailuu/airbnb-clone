@@ -137,7 +137,7 @@ export const HomeCarousel = () => {
       >
         {listViTriPhanTrang?.map((viTri) => (
           <TabPane
-
+            style={{ overflow: "hidden" }}
             key={viTri.id}
             tab={
               <div

@@ -35,7 +35,7 @@ export const RoomDetail = () => {
         />
       </div>
       <div className="grid grid-cols-3 my-[30px] gap-[100px]">
-        <div className="col-span-2">
+        <div className="col-span-3 xl:col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-3">
           <div className="flex justify-between">
             <div className="content">
               <h3 className="font-bold text-[20px] mb-[12px]">
@@ -178,7 +178,7 @@ export const RoomDetail = () => {
             </button>
           </div>
         </div>
-        <div className="">
+        <div className="col-span-3 xl:col-span-1 lg:col-span-1 md:col-span-3 sm:col-span-3">
          <CalenderComponent chiTietPhong={chiTietPhong} maPhong={maPhong} />
         </div>
       </div>
