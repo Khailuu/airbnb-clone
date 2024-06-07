@@ -47,7 +47,6 @@ export const RoomComment = () => {
 
 
   const renderIcon = (id) => {
-    console.log(id)
     if (userLogin?.user.role === "ADMIN") {
       return (
         <div className="flex my-[20px]">

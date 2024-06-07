@@ -9,6 +9,7 @@ import { useEditNguoiDung } from '../../../hooks/api/quanLyNguoiDungApi/useEditN
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { quanLyNguoiDungAction } from '../../../store/quanLyNguoiDung/slice';
+import dayjs from 'dayjs';
 
 export const EditProfile = () => {
   const { id } = useParams();
@@ -66,6 +67,15 @@ export const EditProfile = () => {
     setDisable(false);
     setIsEditing(true);
   };
+  const handleChangeDatePicker = (date) => {
+    console.log(date)
+    console.log(date.format("DD/MM/YYYY"))
+    if (date) {
+      formik.setFieldValue("birthday", date.format("DD/MM/YYYY"));
+    } else {
+      formik.setFieldValue("birthday", null);
+    }
+  };
 
   return (
     <div className='container mx-auto my-[40px]'>
@@ -105,9 +115,9 @@ export const EditProfile = () => {
           <DatePicker 
             disabled={disable}
             name="birthday" 
-            value={moment(formik.values.birthday, 'DD-MM-YYYY')} 
+            value={dayjs(formik.values.birthday ,"DD/MM/YYYY")} 
             format='DD-MM-YYYY'
-            onChange={(date) => formik.setFieldValue('birthday', date)} 
+            onChange={handleChangeDatePicker} 
           />
         </Form.Item>
         <Form.Item label="Gender">

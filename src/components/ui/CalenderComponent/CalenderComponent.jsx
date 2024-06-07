@@ -40,6 +40,8 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
   const isDateRangeOverlap = (start1, end1, start2, end2) => {
     return start1.isSameOrBefore(end2) && start2.isSameOrBefore(end1);
   };
+
+  console.log(ngayNhanPhong)
   
   useEffect(() => {
     const parseStartDate = moment(state[0].startDate);
@@ -49,6 +51,7 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     phongDat?.forEach((phong) => {
       if (phong.maPhong === maPhongParse) {
         const ngayDen = moment(phong.ngayDen);
+        console.log("ngayDen: ", ngayDen)
         const ngayDi = moment(phong.ngayDi);
         if (isDateRangeOverlap(parseStartDate, parseEndDate, ngayDen, ngayDi)) {
           overlap = true;
