@@ -22,7 +22,7 @@ import { EditViTri } from "../components/ui/admin/quanLyThonTinViTri/EditViTri";
 import { Admin } from "../pages/Admin";
 import { ThemPhong } from "../components/ui/admin/quanLyThongTInPhong/ThemPhong";
 import { EditProfile } from "../components/ui/User/EditProfile";
-
+import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 const router = [
   {
     element: <AuthLayout />,
@@ -38,6 +38,7 @@ const router = [
     ],
   },
   {
+    
     element: <HomeLayout />,
     children: [
       {
@@ -92,6 +93,10 @@ const router = [
       {
         path: PATH.quanlynguoidung,
         element: <QuanLyNguoiDung />,
+      },
+      {
+        path: PATH.themnguoidung,
+        element: <AddNguoiDung />,
       },
       {
         path: PATH.quanlythongtinphong,

@@ -6,6 +6,7 @@ const api = apiInstance.create({
 
 export const quanLyUserServices = {
     getNguoiDung: () => api.get(),
+    getAddNguoiDung: (payload) => api.post('', payload),
     getNguoiDungTheoId: (id) => api.get(`/${id}`),
     uploadHinh: (payload) => {
         return api.post('/upload-avatar', payload)
