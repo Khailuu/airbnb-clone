@@ -38,7 +38,7 @@ export const RoomList = () => {
         {viTriKV?.tinhThanh} - {viTriKV?.quocGia}{" "}
       </h2>
       <div className="grid grid-cols-5 gap-[30px]">
-        <div className="col-span-3">
+        <div className="xl:col-span-3 lg:col-span-3 col-span-5">
           {roomList?.map((viTri) => {
             return (
               <div style={{ position: "relative" }}>
@@ -89,9 +89,9 @@ export const RoomList = () => {
             );
           })}
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2 xl:col-span-2 col-span-5">
           <iframe
-            className="rounded-[12px]"
+            className="rounded-[12px] w-full"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31355.765283079985!2d106.67776297585065!3d10.77521852898983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f38f9ed887b%3A0x14aded5703768989!2zUXXhuq1uIDEsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1717346736604!5m2!1svi!2s"
             style={{ border: 0, minHeight: "100%", minWidth: "100%" }}
             allowFullScreen

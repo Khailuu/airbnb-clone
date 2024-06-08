@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  Input,
-  Radio,
-  DatePicker
-} from "antd";
+import { Button, Form, Input, Radio, DatePicker } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { quanLyUserServices } from "../../../../services/QuanLyUser";
@@ -42,7 +36,7 @@ export const EditNguoiDung = () => {
       name: nguoiDung?.name || '',
       email: nguoiDung?.email || '',
       phone: nguoiDung?.phone || '',
-      birthday: nguoiDung?.birthday || '',
+      birthday: nguoiDung?.birthday ,
       gender: nguoiDung?.gender || true,
       role: nguoiDung?.role || ''
     },
@@ -54,6 +48,14 @@ export const EditNguoiDung = () => {
       });
     }
   });
+
+  const handleChangeDatePicker = (date) => {
+    if (date) {
+      formik.setFieldValue("birthday", date.format("DD/MM/YYYY"));
+    } else {
+      formik.setFieldValue("birthday", null);
+    }
+  };
 
   return (
     <Form
@@ -87,10 +89,9 @@ export const EditNguoiDung = () => {
       </Form.Item>
       <Form.Item label="Birthday">
         <DatePicker 
-          name="birthday" 
-          value={moment(formik.values.birthday, 'DD-MM-YYYY')} 
-          format='DD-MM-YYYY'
-          onChange={(date) => formik.setFieldValue('birthday', date)} 
+          value={formik.values.birthday ? moment(formik.values.birthday, 'DD/MM/YYYY') : null} 
+          format='DD/MM/YYYY'
+          onChange={handleChangeDatePicker} 
         />
       </Form.Item>
       <Form.Item label="Gender">
