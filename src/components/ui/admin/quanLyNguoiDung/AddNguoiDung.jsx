@@ -1,6 +1,4 @@
-// src/components/AddNguoiDung.jsx
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Radio, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -12,6 +10,11 @@ import { toast } from "react-toastify";
 export const AddNguoiDung = () => {
   const mutation = useAddNguoiDung();
   const navigate = useNavigate();
+
+  const [componentSize, setComponentSize] = useState("default");
+  const onFormLayoutChange = ({size}) => {
+    setComponentSize(size)
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -47,15 +50,25 @@ export const AddNguoiDung = () => {
   }, [mutation.isError, mutation.error]);
 
   return (
+
+    
     <Form
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 14 }}
-      layout="horizontal"
-      size="default"
-      style={{ maxWidth: 600 }}
-      onFinish={formik.handleSubmit}
-    >
-      For 
+    labelCol={{ span: 4 }}
+    wrapperCol={{ span: 14 }}
+    layout="horizontal"
+    initialValues={{ size: componentSize }}
+    onValuesChange={onFormLayoutChange}
+    size={componentSize}
+    style={{ maxWidth: 600 }}
+    onSubmitCapture={formik.handleSubmit}
+  >
+      <Form.Item label="Form Size" name="size">
+        <Radio.Group>
+          <Radio.Button value="small">Small</Radio.Button>
+          <Radio.Button value="default">Default</Radio.Button>
+          <Radio.Button value="large">Large</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
       <Form.Item label="Name">
         <Input name="name" value={formik.values.name} onChange={formik.handleChange} />
       </Form.Item>

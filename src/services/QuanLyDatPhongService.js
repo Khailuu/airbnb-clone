@@ -8,5 +8,5 @@ export const quanLyDatPhongService = {
     getDatPhong: () => api.get(),
     getDatPhongTheoNguoiDung: (id) => api.get(`lay-theo-nguoi-dung/${id}`),
     postDatPhong: (payload) => api.post('', payload),
-    deletePhongDaDat: (id) => api.delete(`/${id}`)
+    deletePhongDaDat: (id) => api.delete(`/${id}`),
 }
