@@ -50,7 +50,7 @@ export const EditProfile = () => {
             user: values
           }
           dispatch(quanLyNguoiDungAction.updateUserLogin({
-            profile
+            ...profile
           }));
           localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(profile))
           toast.success("Cập nhật thông tin thành công!");

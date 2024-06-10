@@ -28,6 +28,7 @@ export const UserMenu = () => {
     dispatch(quanLyNguoiDungAction.updateUserLogin(null))
     navigate(PATH.login)
   }
+  console.log(userLogin)
 
   const renderAvatar = () => {
     if(userLogin?.user?.avatar !== "") {
