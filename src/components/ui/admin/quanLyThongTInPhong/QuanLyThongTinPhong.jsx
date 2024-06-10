@@ -72,7 +72,7 @@ export const QuanLyThongTinPhong = () => {
         return (
           <div key={phong.id}>
             <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH}/${phong.id}`)
+                navigate(`${PATH.editphong}/${phong.id}`)
               }} style={{ color: "blue" }} />
                 <DeleteOutlined
                   onClick={() => handleDelete(phong.id)}

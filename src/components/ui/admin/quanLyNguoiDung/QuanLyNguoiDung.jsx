@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table } from "antd";
 import { useGetNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useGetNguoiDung";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -6,6 +6,7 @@ import { useDeleteNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/use
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../../constant";
+import { NavLink } from "react-router-dom";
 
 export const QuanLyNguoiDung = () => {
   const { data: lstNguoiDung, refetch } = useGetNguoiDung();
@@ -100,6 +101,16 @@ export const QuanLyNguoiDung = () => {
 
 
   return (
-    <Table columns={columns} dataSource={lstNguoiDung}  />
+
+     <div>
+      <NavLink to={PATH.themnguoidung}>
+        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
+          Thêm Người Dùng
+        </button>
+      </NavLink>
+      <Table columns={columns} dataSource={lstNguoiDung} rowKey="id" />
+    </div>
+
+    
   );
 };
