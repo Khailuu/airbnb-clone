@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { quanLyBinhLuanService } from "../../../services/QuanLyBinhLuanService";
 import { useDeleteBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/useDeleteBinhLuan";
 import { toast } from "react-toastify";
+import { Button } from "antd";
 
 export const RoomComment = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
@@ -137,13 +138,14 @@ export const RoomComment = () => {
           value={formik.values.saoBinhLuan}
         />
         <span> : Số sao</span>
-        <button
-          type="submit"
-          className="bg-rose-500 p-[12px] rounded-[6px] text-white"
+        <Button
+          htmlType="submit"
+          className="bg-rose-500 rounded-[6px] text-white"
           style={{ display: "block" }}
+          loading={mutation.isPending}
         >
           Thêm Bình Luận
-        </button>
+        </Button>
       </form>
     </div>
   );

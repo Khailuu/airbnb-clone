@@ -11,7 +11,7 @@ export const QuanLyNguoiDung = () => {
   const { data: lstNguoiDung, refetch } = useGetNguoiDung();
   const mutationDeleteND = useDeleteNguoiDung();
   const navigate = useNavigate()
-
+  console.log(lstNguoiDung)
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xoá người dùng này không?")) {

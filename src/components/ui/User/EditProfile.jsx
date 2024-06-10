@@ -42,12 +42,17 @@ export const EditProfile = () => {
       password: user?.password || "",
     },
     onSubmit: values => {
+      const token = userLogin.userLogin.token
       mutation.mutate({ id: user?.id, payload: values }, {
         onSuccess: () => {
-          dispatch(quanLyNguoiDungAction.updateUserLogin({
-            ...userLogin,
+          const profile = {
+            token,
             user: values
+          }
+          dispatch(quanLyNguoiDungAction.updateUserLogin({
+            profile
           }));
+          localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(profile))
           toast.success("Cập nhật thông tin thành công!");
           setIsEditing(false); // Hide update button and show edit button
           setDisable(true); // Disable form fields
@@ -135,6 +140,7 @@ export const EditProfile = () => {
             type="primary" 
             htmlType="submit"
             onClick={() => setDisable(false)}
+            loading={mutation.isPending}
           >
             Cập Nhật
           </Button>

@@ -36,7 +36,7 @@ export const NavBar = () => {
                 name="viTri"
                 onChange={value => formik.setFieldValue('viTri', value)}
                 value={formik.values.viTri}
-                placeholder='Any Where'
+                placeholder='Nhập địa điểm bạn muốn đến'
               >
                 {listViTri?.map((viTri) => (
                   <Select.Option

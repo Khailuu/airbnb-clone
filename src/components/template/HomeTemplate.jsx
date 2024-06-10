@@ -11,11 +11,11 @@ export const HomeTemplate = () => {
 
 
   return (
-    <div>
+    <div className="mb-[40px]">
       <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
         Những địa điểm được yêu thích
       </h2>
-      <div className="grid gap-[30px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+      <div className="grid gap-[30px] grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {lstPhong?.map((phong) => (
           <div key={phong.id}>
             <Card

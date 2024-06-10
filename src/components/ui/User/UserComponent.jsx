@@ -82,12 +82,13 @@ export const UserComponent = () => {
             </p>
             <div className="mt-4 flex justify-between items-center w-full">
               <p>Giá tiền: ${room.giaTien}</p>
-              <button
+              <Button
+                loading={room.idDelete ? deleteMutation.isPending : ''}
                 onClick={() => deleteRoom(room.idDelete || room.id)}
                 className="bg-rose-500 text-white p-3 rounded-lg"
               >
                 Huỷ Phòng
-              </button>
+              </Button>
             </div>
           </div>
         </div>
