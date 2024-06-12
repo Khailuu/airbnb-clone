@@ -1,6 +1,6 @@
 import { Avatar } from "antd";
 import React, { useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { GlobalOutlined, UserOutlined } from "@ant-design/icons";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Button, Popover } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -93,9 +93,9 @@ export const UserMenu = () => {
 
   return (
     <div className="relative">
-      <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-          airbnb
+      <div className="flex flex-row items-center gap-1">
+        <div className="text-gray-500 hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+          Trở thành chủ nhà <GlobalOutlined />           
         </div>
         <Popover
           content={renderUser()}
