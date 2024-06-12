@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
 import { getUserLogin } from "../../../utils/getUserLogin";
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
-import '../../../assets/style.css'
+import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
 import { Button, Form } from "antd";
+import axios from "axios"; // Import Axios
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
-
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
-
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
   const [ngayNhanPhong, setNgayNhanPhong] = useState('');
@@ -76,13 +75,27 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       maNguoiDung: userLogin?.user.id,
     },
     enableReinitialize: true,
-    onSubmit: (values) => {
-      mutation.mutate(values, {
-        onSuccess: () => {
-          // Optionally handle success, e.g., navigate to another page
-          navigate('/payment');
-        },
-      });
+    onSubmit: async (values) => {
+      try {
+        const paymentResponse = await axios.post("https://server-payment.vercel.app/payment", {
+          amount: chiTietPhong?.giaTien,
+          orderInfo: "Thanh toán đặt phòng",
+          redirectUrl: "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b",
+          ipnUrl: "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b"
+        });
+        
+        // Handle payment response here, e.g., redirect to MoMo payment page
+        console.log(paymentResponse.data);
+
+        // Call the booking API
+        mutation.mutate(values, {
+          onSuccess: () => {
+            navigate(PATH.PAYMENT); // Adjust the path as needed
+          },
+        });
+      } catch (error) {
+        console.error("Error processing payment:", error);
+      }
     },
   });
 
