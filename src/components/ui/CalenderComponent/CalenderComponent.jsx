@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
@@ -12,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
 import { Button, Form } from "antd";
-import axios from "axios"; // Import Axios
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
