@@ -6,12 +6,13 @@ import 'react-date-range/dist/theme/default.css';
 import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
+import { getUserLogin } from "../../../utils/getUserLogin";
+import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
+import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
 import { Button, Form } from "antd";
-import { toast } from "react-toastify";
-import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
@@ -56,64 +57,72 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     });
 
     setIsOverlap(overlap);
-  }, [state, phongDat, maPhongParse]);
-
-  const buttonClass = isOverlap
-    ? "w-full bg-gray-400 cursor-not-allowed text-black rounded-[6px]"
-    : "w-full bg-rose-500 text-white rounded-[6px]";
+  }, [state, phongDat]);
 
   const mutation = usePostDatPhong();
-
   const formik = useFormik({
     initialValues: {
-      id: 0,
-      maPhong: maPhong,
-      ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"),
-      ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD"),
+      maPhong: maPhongParse,
+      ngayDen: ngayNhanPhong,
+      ngayDi: ngayTraPhong,
       soLuongKhach: 1,
-      maNguoiDung: userLogin?.user.id,
+      maNguoiDung: getUserLogin()?.user?.id,
     },
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        const paymentResponse = await axios.post("https://serverairbnb-git-main-khailuus-projects.vercel.app/payment", {
+        const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0',
+          maPhong: values.maPhong,
+          ngayDen: values.ngayDen,
+          ngayDi: values.ngayDi,
+          soLuongKhach: values.soLuongKhach,
+          maNguoiDung: values.maNguoiDung,
+          redirectUrl: "https://airbnb-capstone.vercel.app/payment",
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
-      
+
         const { payUrl } = paymentResponse.data;
-        console.log(paymentResponse.data)
-      
+
         // Chuyển hướng người dùng đến URL thanh toán MoMo
         window.location.href = payUrl;
-      
       } catch (error) {
         console.error("Error processing payment:", error);
       }
-      
     },
   });
 
+  const handleFormSubmit = () => {
+    if (isOverlap) {
+      alert('Phòng đã được đặt trong khoảng thời gian này.');
+    } else {
+      formik.handleSubmit();
+    }
+  };
+
   return (
     <div>
-      <h2 className="mb-[20px] text-rose-500 font-bold text-[20px]">Price: ${chiTietPhong?.giaTien}</h2>
       <DateRange
-        className="w-[100%]"
         editableDateInputs={true}
         onChange={handleSelect}
         moveRangeOnFirstSelection={false}
         ranges={state}
+        className="date-range"
       />
-      <Form onSubmitCapture={formik.handleSubmit}>
-        <div className="flex items-center">
-          <p className="font-bold mr-[12px]">Số lượng khách: </p>
-          <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" placeholder="1" min={1} max={2} />
-        </div>
-        {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
-        <Button disabled={isOverlap} htmlType="submit" loading={mutation.isPending} className={buttonClass}>
-          Đặt Phòng
+      <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
+        <Form.Item label="Số lượng khách">
+          <input
+            type="number"
+            value={formik.values.soLuongKhach}
+            onChange={formik.handleChange}
+            name="soLuongKhach"
+            min="1"
+            max="10"
+          />
+        </Form.Item>
+        <Button type="primary" htmlType="submit" disabled={isOverlap}>
+          Đặt phòng
         </Button>
       </Form>
     </div>
