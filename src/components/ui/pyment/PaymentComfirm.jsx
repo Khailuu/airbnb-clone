@@ -12,23 +12,32 @@ export const PaymentComfirm = () => {
 
   useEffect(() => {
     const { orderId, return_code } = queryString.parse(location.search);
+    console.log("Query params:", { orderId, return_code });
 
-    if (return_code === '1') { // giả sử '0' là mã thành công
+    if (return_code === '1') { // Check if '1' indicates a successful payment
       const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+      console.log("Booking data:", bookingData);
 
-      mutation.mutate(bookingData, {
-        onSuccess: () => {
-          toast.success("Đặt phòng thành công!");
-          navigate(PATH.DASHBOARD); // chuyển hướng đến bảng điều khiển hoặc trang khác
-        },
-        onError: (error) => {
-          toast.error("Đặt phòng thất bại!");
-        }
-      });
+      if (bookingData) {
+        mutation.mutate(bookingData, {
+          onSuccess: () => {
+            toast.success("Đặt phòng thành công!");
+            navigate(PATH.DASHBOARD); // Redirect to dashboard or any other page
+          },
+          onError: (error) => {
+            console.error("Mutation error:", error);
+            toast.error("Đặt phòng thất bại!");
+          }
+        });
+      } else {
+        console.error("No booking data found in localStorage.");
+        toast.error("Không tìm thấy dữ liệu đặt phòng.");
+      }
     } else {
+      console.error("Payment failed with return_code:", return_code);
       toast.error("Thanh toán thất bại!");
     }
-  }, [location.search, mutation, navigate]);
+  }, []);
 
   return (
     <div>

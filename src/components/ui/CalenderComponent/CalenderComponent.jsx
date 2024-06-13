@@ -71,7 +71,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        localStorage.setItem('bookingData', JSON.stringify(values));
+        localStorage.setItem('bookingData', JSON.stringify(values)); // Store booking data in localStorage
         const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
@@ -82,7 +82,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         const { order_url } = paymentResponse.data;
         console.log(paymentResponse.data);
     
-        // Chuyển hướng người dùng đến URL thanh toán Zalopay
+        // Redirect user to the payment URL
         if (order_url) {
           window.location.href = order_url;
         } else {
@@ -93,7 +93,6 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         console.error("Error processing payment:", error);
       }
     }
-    
   });
 
   const handleFormSubmit = () => {
