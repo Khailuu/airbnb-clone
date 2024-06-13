@@ -80,7 +80,7 @@ const router = [
         element: <EditProfile />
       },
       {
-        path: "/payment-confirmation", // Đường dẫn cho PaymentConfirmation
+        path: PATH.paymentConfirm, // Đường dẫn cho PaymentConfirmation
         element: <PaymentComfirm />,
       },
     ],

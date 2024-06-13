@@ -75,7 +75,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: `${window.location.origin}/payment-confirmation`,
+          redirectUrl: PATH.paymentConfirm,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
     
