@@ -6,14 +6,12 @@ import 'react-date-range/dist/theme/default.css';
 import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
-import { getUserLogin } from "../../../utils/getUserLogin";
-import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
-import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
 import { Button, Form } from "antd";
 import { toast } from "react-toastify";
+import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
@@ -78,25 +76,18 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
+        localStorage.setItem('bookingData', JSON.stringify(values));
         const paymentResponse = await axios.post("https://serverpayment.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: "https://airbnb-capstone.vercel.app/payment",
+          redirectUrl: `${window.location.origin}/payment-confirmation`,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
         
         const { payUrl } = paymentResponse.data;
         console.log(paymentResponse.data)
 
-        // Chuyển hướng người dùng đến URL thanh toán MoMo
         window.location.href = payUrl;
-
-        // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
-        mutation.mutate(values, {
-          onSuccess: () => {
-            toast.success("Đặt phòng thành công!") // Điều chỉnh đường dẫn nếu cần
-          },
-        });
 
       } catch (error) {
         console.error("Error processing payment:", error);

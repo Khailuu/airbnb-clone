@@ -24,6 +24,7 @@ import { ThemPhong } from "../components/ui/admin/quanLyThongTInPhong/ThemPhong"
 import { EditProfile } from "../components/ui/User/EditProfile";
 import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
+import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
 const router = [
   {
     element: <AuthLayout />,
@@ -77,7 +78,11 @@ const router = [
       {
         path: `${PATH.editprofile}/:id`,
         element: <EditProfile />
-      }
+      },
+      {
+        path: "/payment-confirmation", // Đường dẫn cho PaymentConfirmation
+        element: <PaymentComfirm />,
+      },
     ],
   },
   {
