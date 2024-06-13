@@ -78,42 +78,40 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       try {
         localStorage.setItem('bookingData', JSON.stringify(values));
         const paymentResponse = await axios.post("https://serverpayment.vercel.app/payment", {
-          amount: chiTietPhong?.giaTien * 100,
+          amount: chiTietPhong?.giaTien * 2300,
           orderInfo: "Thanh toán đặt phòng",
           redirectUrl: `${window.location.origin}/payment-confirmation`,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
         
         const { payUrl } = paymentResponse.data;
-        console.log(paymentResponse.data)
-
         window.location.href = payUrl;
-
       } catch (error) {
-        console.error("Error processing payment:", error);
+        toast.error(error?.response?.data?.message);
       }
     },
   });
 
   return (
-    <div>
-      <h2 className="mb-[20px] text-rose-500 font-bold text-[20px]">Price: ${chiTietPhong?.giaTien}</h2>
+    <div className="py-4 px-5 border-2 border-black border-solid rounded-lg">
+      <div className="font-semibold text-lg pb-4 border-b border-black border-solid">
+        Chọn ngày nhận phòng - trả phòng
+      </div>
       <DateRange
-        className="w-[100%]"
         editableDateInputs={true}
         onChange={handleSelect}
         moveRangeOnFirstSelection={false}
         ranges={state}
+        minDate={new Date()}
+        rangeColors={["#262626"]}
       />
-      <Form onSubmitCapture={formik.handleSubmit}>
-        <div className="flex items-center">
-          <p className="font-bold mr-[12px]">Số lượng khách: </p>
-          <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" placeholder="1" min={1} max={2} />
-        </div>
-        {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
-        <Button disabled={isOverlap} htmlType="submit" loading={mutation.isPending} className={buttonClass}>
-          Đặt Phòng
-        </Button>
+      <Form
+        className="mt-5"
+        onFinish={formik.handleSubmit}
+      >
+        <Form.Item>
+          <button className={buttonClass} disabled={isOverlap} type="submit">Đặt phòng</button>
+        </Form.Item>
       </Form>
     </div>
   );
