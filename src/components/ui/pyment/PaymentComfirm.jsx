@@ -28,7 +28,7 @@ export const PaymentComfirm = () => {
     } else {
       toast.error("Thanh toán thất bại!");
     }
-  }, [location.search, mutation, navigate]);
+  }, []);
 
   return (
     <div>
