@@ -6,12 +6,14 @@ import 'react-date-range/dist/theme/default.css';
 import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
+import { getUserLogin } from "../../../utils/getUserLogin";
+import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
+import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
 import { Button, Form } from "antd";
-import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
-import '../../../assets/style.css';
+import { toast } from "react-toastify";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
@@ -89,41 +91,18 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         // Chuyển hướng người dùng đến URL thanh toán MoMo
         window.location.href = payUrl;
 
+        // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
+        mutation.mutate(values, {
+          onSuccess: () => {
+            toast.success("Đặt phòng thành công!") // Điều chỉnh đường dẫn nếu cần
+          },
+        });
+
       } catch (error) {
         console.error("Error processing payment:", error);
       }
     },
   });
-
-  useEffect(() => {
-    // Function to check for payment success and complete the booking process
-    const checkPaymentAndCompleteBooking = async () => {
-      try {
-        // Check the payment status from your payment server or webhook
-        const paymentStatus = await axios.get('https://serverpayment.vercel.app/payment/status');
-
-        if (paymentStatus.data.success) {
-          // Complete the booking
-          mutation.mutate({
-            ...formik.values,
-            ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"),
-            ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD")
-          }, {
-            onSuccess: () => {
-              navigate(PATH.payment); // Điều chỉnh đường dẫn nếu cần
-            },
-          });
-        }
-      } catch (error) {
-        console.error("Error checking payment status:", error);
-      }
-    };
-
-    // Call the function if the user is redirected back from the payment gateway
-    if (window.location.href.includes('https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0')) {
-      checkPaymentAndCompleteBooking();
-    }
-  }, [mutation, formik.values, ngayNhanPhong, ngayTraPhong, navigate]);
 
   return (
     <div>
