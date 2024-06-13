@@ -80,18 +80,21 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         const paymentResponse = await axios.post("https://serverpayment.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 23000,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: "https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0"
+          redirectUrl: "https://webhook.site/your-webhook-url"
         });
         
-        // Handle payment response here, e.g., redirect to MoMo payment page
-        console.log(paymentResponse.data);
+        const { payUrl } = paymentResponse.data;
 
-        // Call the booking API
-        mutation.mutate(values, {
-          onSuccess: () => {
-            navigate(PATH.PAYMENT); // Adjust the path as needed
-          },
-        });
+        // Chuyển hướng người dùng đến URL thanh toán MoMo
+        window.location.href = payUrl;
+
+        // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
+        // mutation.mutate(values, {
+        //   onSuccess: () => {
+        //     navigate(PATH.PAYMENT); // Điều chỉnh đường dẫn nếu cần
+        //   },
+        // });
+
       } catch (error) {
         console.error("Error processing payment:", error);
       }
