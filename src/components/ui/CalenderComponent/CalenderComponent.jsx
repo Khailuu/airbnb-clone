@@ -81,7 +81,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
           amount: chiTietPhong?.giaTien * 2300,
           orderInfo: "Thanh toán đặt phòng",
           redirectUrl: `${window.location.origin}/payment-confirmation`,
-          ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
+          ipnUrl: `${window.location.origin}/payment-confirmation`
         });
         
         const { payUrl } = paymentResponse.data;
