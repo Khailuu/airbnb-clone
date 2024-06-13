@@ -87,14 +87,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         } else {
           console.error("Order URL không tồn tại");
         }
-    
-        // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
-        mutation.mutate(values, {
-          onSuccess: () => {
-            toast.success("Đặt phòng thành công!");
-          },
-        });
-    
+
       } catch (error) {
         console.error("Error processing payment:", error);
       }
