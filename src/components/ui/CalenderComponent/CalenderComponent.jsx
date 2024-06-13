@@ -78,10 +78,9 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     onSubmit: async (values) => {
       try {
         const paymentResponse = await axios.post("https://serverpayment.vercel.app/payment", {
-          amount: chiTietPhong?.giaTien,
+          amount: chiTietPhong?.giaTien * 23000,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b",
-          ipnUrl: "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b"
+          redirectUrl: "https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0"
         });
         
         // Handle payment response here, e.g., redirect to MoMo payment page
