@@ -8,6 +8,9 @@ export default defineConfig({
   server: {
     port: 3000
   },
+  optimizeDeps: {
+    exclude: ['query-string'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
