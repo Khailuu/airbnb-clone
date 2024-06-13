@@ -76,7 +76,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        const paymentResponse = await axios.post("https://serverairbnb.vercel.app/payment", {
+        const paymentResponse = await axios.post("https://serverairbnb-git-main-khailuus-projects.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
           redirectUrl: `${window.location.origin}/payment-confirmation`,
