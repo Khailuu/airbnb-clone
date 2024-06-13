@@ -9,6 +9,7 @@ export const PaymentComfirm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const mutation = usePostDatPhong();
+  console.log(location)
 
   useEffect(() => {
     const { orderId, return_code } = queryString.parse(location.search);
