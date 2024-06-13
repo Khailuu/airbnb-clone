@@ -23,7 +23,7 @@ export const PaymentComfirm = () => {
         mutation.mutate(bookingData, {
           onSuccess: () => {
             toast.success("Đặt phòng thành công!");
-            navigate(PATH.DASHBOARD); // Redirect to dashboard or any other page
+            navigate(PATH.payment); // Redirect to dashboard or any other page
           },
           onError: (error) => {
             console.error("Mutation error:", error);
