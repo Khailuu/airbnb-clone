@@ -11,9 +11,9 @@ export const PaymentComfirm = () => {
   const mutation = usePostDatPhong();
 
   useEffect(() => {
-    const { orderId, resultCode } = queryString.parse(location.search);
+    const { orderId, return_code } = queryString.parse(location.search);
 
-    if (resultCode === '0') { // giả sử '0' là mã thành công
+    if (return_code === '1') { // giả sử '0' là mã thành công
       const bookingData = JSON.parse(localStorage.getItem('bookingData'));
 
       mutation.mutate(bookingData, {
