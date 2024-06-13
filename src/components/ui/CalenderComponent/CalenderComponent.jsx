@@ -76,22 +76,23 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        localStorage.setItem('bookingData', JSON.stringify(values));
         const paymentResponse = await axios.post("https://serverairbnb.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
           redirectUrl: `${window.location.origin}/payment-confirmation`,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
-        
+      
         const { payUrl } = paymentResponse.data;
         console.log(paymentResponse.data)
-
+      
+        // Chuyển hướng người dùng đến URL thanh toán MoMo
         window.location.href = payUrl;
-
+      
       } catch (error) {
         console.error("Error processing payment:", error);
       }
+      
     },
   });
 
