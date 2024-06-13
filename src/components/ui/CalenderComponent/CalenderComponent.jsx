@@ -74,23 +74,32 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 100,
           orderInfo: "Thanh toán đặt phòng",
-          maPhong: values.maPhong,
-          ngayDen: values.ngayDen,
-          ngayDi: values.ngayDi,
-          soLuongKhach: values.soLuongKhach,
-          maNguoiDung: values.maNguoiDung,
           redirectUrl: "https://airbnb-capstone.vercel.app/payment",
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
-
+    
         const { order_url } = paymentResponse.data;
-
-        // Chuyển hướng người dùng đến URL thanh toán MoMo
-        window.location.href = order_url;
+        console.log(paymentResponse.data);
+    
+        // Chuyển hướng người dùng đến URL thanh toán Zalopay
+        if (order_url) {
+          window.location.href = order_url;
+        } else {
+          console.error("Order URL không tồn tại");
+        }
+    
+        // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
+        mutation.mutate(values, {
+          onSuccess: () => {
+            toast.success("Đặt phòng thành công!");
+          },
+        });
+    
       } catch (error) {
         console.error("Error processing payment:", error);
       }
-    },
+    }
+    
   });
 
   const handleFormSubmit = () => {
