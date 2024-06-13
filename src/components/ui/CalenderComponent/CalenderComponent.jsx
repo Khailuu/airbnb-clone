@@ -85,16 +85,17 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         });
         
         const { payUrl } = paymentResponse.data;
+        console.log(paymentResponse.data)
 
         // Chuyển hướng người dùng đến URL thanh toán MoMo
         window.location.href = payUrl;
 
         // Sau khi hoàn thành thanh toán, bạn có thể gọi API đặt phòng nếu cần
-        // mutation.mutate(values, {
-        //   onSuccess: () => {
-        //     navigate(PATH.PAYMENT); // Điều chỉnh đường dẫn nếu cần
-        //   },
-        // });
+        mutation.mutate(values, {
+          onSuccess: () => {
+            navigate(PATH.payment); // Điều chỉnh đường dẫn nếu cần
+          },
+        });
 
       } catch (error) {
         console.error("Error processing payment:", error);
