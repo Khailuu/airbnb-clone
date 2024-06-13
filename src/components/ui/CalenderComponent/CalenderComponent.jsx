@@ -80,7 +80,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         const paymentResponse = await axios.post("https://serverpayment.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 2300,
           orderInfo: "Thanh toán đặt phòng",
-          redirectUrl: "",
+          redirectUrl: `${window.location.origin}/payment-confirmation`,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
         
