@@ -83,10 +83,10 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
 
-        const { payUrl } = paymentResponse.data;
+        const { order_url } = paymentResponse.data;
 
         // Chuyển hướng người dùng đến URL thanh toán MoMo
-        window.location.href = payUrl;
+        window.location.href = order_url;
       } catch (error) {
         console.error("Error processing payment:", error);
       }
