@@ -42,7 +42,7 @@ export const PaymentComfirm = () => {
 
   return (
     <div className='flex items-center justify-center'>
-      <h2 className='text-rose-500 text-[100px]'>Đang xử lý thanh toán...</h2>
+      <h2 className='text-rose-500 text-[40px]'>Đang xử lý thanh toán...</h2>
     </div>
   );
 };
