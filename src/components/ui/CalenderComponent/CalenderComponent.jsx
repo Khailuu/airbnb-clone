@@ -12,7 +12,7 @@ import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
-import { Button, Form } from "antd";
+import { Button, Form, InputNumber } from "antd";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   const navigate = useNavigate();
@@ -110,20 +110,14 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         onChange={handleSelect}
         moveRangeOnFirstSelection={false}
         ranges={state}
-        className="date-range"
+        className="date-range w-full"
       />
       <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
         <Form.Item label="Số lượng khách">
-          <input
-            type="number"
-            value={formik.values.soLuongKhach}
-            onChange={formik.handleChange}
-            name="soLuongKhach"
-            min="1"
-            max="10"
-          />
+        <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" min={1} max={2} />
         </Form.Item>
-        <Button type="primary" htmlType="submit" disabled={isOverlap}>
+        {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
+        <Button  htmlType="submit" className="w-full bg-rose-500 text-white transition-all ease-in-out" disabled={isOverlap}>
           Đặt phòng
         </Button>
       </Form>

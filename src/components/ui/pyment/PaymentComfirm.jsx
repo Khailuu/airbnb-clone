@@ -41,8 +41,8 @@ export const PaymentComfirm = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Đang xử lý thanh toán...</h2>
+    <div className='flex items-center justify-center'>
+      <h2 className='text-rose-500 text-[100px]'>Đang xử lý thanh toán...</h2>
     </div>
   );
 };
