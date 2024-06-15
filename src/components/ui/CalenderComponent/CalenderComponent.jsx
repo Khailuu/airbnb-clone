@@ -73,7 +73,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       try {
         localStorage.setItem('bookingData', JSON.stringify(values)); // Store booking data in localStorage
         const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
-          amount: chiTietPhong?.giaTien * 100,
+          amount: chiTietPhong?.giaTien * 10000,
           orderInfo: "Thanh toán đặt phòng",
           redirectUrl: `${window.location.origin}/payment-confirm`,
           cancelUrl: `${window.location.origin}/details`,

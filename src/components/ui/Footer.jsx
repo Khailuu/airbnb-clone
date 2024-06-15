@@ -14,7 +14,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <img className="h-48" src="../../../public/images/pngwing.com.png"  alt="travel_logo" />
+              <img className="h-48" src="../../../images/pngwing.com.png"  alt="travel_logo" />
             </NavLink>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
