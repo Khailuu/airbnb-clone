@@ -4,10 +4,11 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { quanLyNguoiDungActionThunks } from "../../store/quanLyNguoiDung";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../constant";
+import { IconAirbnb } from "../IconAirbnb";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../schemas/register.shcema";
-import { zodResolver } from '@hookform/resolvers/zod'
 
 export const RegisterTemplate = () => {
   const {
@@ -19,132 +20,112 @@ export const RegisterTemplate = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (values) => {
-    const payload = ({
+    const payload = {
       ...values,
       birthday: values.birthday ? values.birthday.format('YYYY-MM-DD') : null,
-      role: "USER" // format date before submitting
-    });
+      role: "USER", // format date before submitting
+    };
 
-    dispatch(quanLyNguoiDungActionThunks.registerThunk(payload)).unwrap().then(() => {
-      toast.success("Đăng ký thành công!")
-      navigate(PATH.login)
-    })
-      .catch((err) => {
-        toast.error(err)
+    dispatch(quanLyNguoiDungActionThunks.registerThunk(payload)).unwrap()
+      .then(() => {
+        toast.success("Đăng ký thành công!");
+        navigate(PATH.login);
       })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div className="text-dark mb-[6px] fw-bold">Full Name</div>
-          <Controller
-            control={control}
-            name="name"
-            render={({ field }) => (
-              <Input
-                {...field}
-                className="!mb-[10px] !border-[1px] !border-black"
-                style={{ border: "1px solid #000 !important" }}
-                placeholder="Full Name"
-              />
-            )}
-          />
-          {
-            !!errors.fullName && (
-              <p className='text-red-500'>{errors.fullName.message}</p>
-            )
-          }
+        <div className="flex justify-center">
+          <IconAirbnb className="mx-auto" />
         </div>
-        <div>
-
-          <div className="text-dark mb-[6px] fw-bold">Email</div>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field }) => (
-              <Input
-                {...field}
-                className="!mb-[10px] !border-[1px] !border-black"
-                style={{ border: "1px solid #000 !important" }}
-                placeholder="Email"
-              />
-            )
+        <h1 className="text-[25px]">Register</h1>
+        <div className="text-dark mb-[6px] fw-bold">Full Name</div>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <Input
+              {...field}
+              className="!mb-[10px] !border-[1px] !border-black"
+              style={{ border: "1px solid #000 !important" }}
+              placeholder="Full Name"
+            />
+          )}
+        />
+        {!!errors.name && (
+          <p className="text-red-500">{errors.name.message}</p>
+        )}
+        <div className="text-dark mb-[6px] fw-bold">Email</div>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field }) => (
+            <Input
+              {...field}
+              className="!mb-[10px] !border-[1px] !border-black"
+              style={{ border: "1px solid #000 !important" }}
+              placeholder="Email"
+            />
+          )}
+          rules={{
+            required: "Required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+              message: "Invalid email address"
             }
-          />
-          {
-            !!errors.email && (
-              <p className='text-red-500'>{errors.email.message}</p>
-            )
-          }
-        </div>
-        <div>
-          <div className="text-dark !mb-[10px] fw-bold">Password</div>
-          <Controller
-            control={control}
-            name="password"
-            render={({ field }) => (
-              <Input.Password
-                {...field}
-                className="!mb-[10px] !border-[1px] !border-black"
-                style={{ border: "1px solid #000 !important" }}
-                placeholder="Password"
-              />
-            )}
-          />
-          {
-            !!errors.password && (
-              <p className='text-red-500'>{errors.password.message}</p>
-            )
-          }
-        </div>
-        <div>
-          <div className="text-dark mb-[6px] fw-bold">Phone</div>
-          <Controller
-            control={control}
-            name="phone"
-            render={({ field }) => (
-              <Input
-                {...field}
-                className="!mb-[10px] !border-[1px] !border-black"
-                style={{ border: "1px solid #000 !important" }}
-                placeholder="Phone"
-              />
-            )}
-          />
-          {
-            !!errors.phone && (
-              <p className='text-red-500'>{errors.phone.message}</p>
-            )
-          }
-        </div>
-        <div>
-          <div className="text-dark mb-[6px] fw-bold">Birthday</div>
-          <Controller
-            control={control}
-            name="birthday"
-            render={({ field }) => (
-              <DatePicker
-                {...field}
-                onChange={(date) => {
-                  field.onChange(date);
-                }}
-              />
-            )}
-          />
-    {
-            !!errors.birthday && (
-              <p className='text-red-500'>{errors.birthday.message}</p>
-            )
-          }
-        </div>
+          }}
+        />
+        {!!errors.email && (
+          <p className="text-red-500">{errors.email.message}</p>
+        )}
+        <div className="text-dark !mb-[10px] fw-bold">Password</div>
+        <Controller
+          control={control}
+          name="password"
+          render={({ field }) => (
+            <Input.Password
+              {...field}
+              className="!mb-[10px] !border-[1px] !border-black"
+              style={{ border: "1px solid #000 !important" }}
+              placeholder="Password"
+            />
+          )}
+        />
+        <div className="text-dark mb-[6px] fw-bold">Phone</div>
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field }) => (
+            <Input
+              {...field}
+              className="!mb-[10px] !border-[1px] !border-black"
+              style={{ border: "1px solid #000 !important" }}
+              placeholder="Phone"
+            />
+          )}
+        />
+        <div className="text-dark mb-[6px] fw-bold">Birthday</div>
+        <Controller
+          control={control}
+          name="birthday"
+          render={({ field }) => (
+            <DatePicker
+              className="mb-[10px]"
+              {...field}
+              onChange={(date) => {
+                field.onChange(date);
+              }}
+            />
+          )}
+        />
         <div className="text-dark mb-[6px] fw-bold">Gender</div>
         <Controller
           control={control}
@@ -161,7 +142,7 @@ export const RegisterTemplate = () => {
             </Radio.Group>
           )}
         />
-        <div className="text-dark mb-[6px] fw-bold">Role</div>
+        {/* <div className="text-dark mb-[6px] fw-bold">Role</div> */}
         <Controller
           control={control}
           name="role"
@@ -169,9 +150,24 @@ export const RegisterTemplate = () => {
             <></>
           )}
         />
-        <Button className="col-6" htmlType="submit" type="primary" size="large">
+        <Button
+          className="w-full col-6 mt-[20px]"
+          style={{ backgroundColor: "rgb(244 63 94)", border: "none", transition: "all .3s" }}
+          htmlType="submit"
+          type="primary"
+          size="large"
+        >
           Register
         </Button>
+        <div className="mt-[15px] text-center">
+          <NavLink
+            className="hover:text-rose-500"
+            to={PATH.login}
+            style={{ textDecoration: "underline", transition: "all .3s" }}
+          >
+            Bạn đã có tài khoản ?
+          </NavLink>
+        </div>
       </form>
     </div>
   );

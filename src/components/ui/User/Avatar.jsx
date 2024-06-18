@@ -64,7 +64,7 @@ export const Avatar = () => {
         alt="avatar"
       />
       <form onSubmit={onSubmit}>
-        <p>Thay đổi avatar</p>
+        <p>{userLogin?.user.name}</p>
         <Button className="mt-[15px]" onClick={showModal}>
           Upload Avatar
         </Button>

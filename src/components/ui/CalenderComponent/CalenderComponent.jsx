@@ -1,22 +1,22 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { useGetDatPhong } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
 import moment from "moment";
 import { useFormik } from "formik";
 import { getUserLogin } from "../../../utils/getUserLogin";
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
-import '../../../assets/style.css'
+import '../../../assets/style.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PATH } from "../../../constant";
+import { Button, Form, InputNumber } from "antd";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
-  const navigate = useNavigate()
-
-const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
-
+  const navigate = useNavigate();
+  const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
   const [ngayNhanPhong, setNgayNhanPhong] = useState('');
@@ -41,8 +41,6 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     return start1.isSameOrBefore(end2) && start2.isSameOrBefore(end1);
   };
 
-  console.log(ngayNhanPhong)
-  
   useEffect(() => {
     const parseStartDate = moment(state[0].startDate);
     const parseEndDate = moment(state[0].endDate);
@@ -51,7 +49,6 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     phongDat?.forEach((phong) => {
       if (phong.maPhong === maPhongParse) {
         const ngayDen = moment(phong.ngayDen);
-        console.log("ngayDen: ", ngayDen)
         const ngayDi = moment(phong.ngayDi);
         if (isDateRangeOverlap(parseStartDate, parseEndDate, ngayDen, ngayDi)) {
           overlap = true;
@@ -60,49 +57,71 @@ const { userLogin } = useSelector((state) => state.quanLyNguoiDung)
     });
 
     setIsOverlap(overlap);
-  }, [state, phongDat, maPhongParse]);
-
-  const buttonClass = isOverlap
-    ? "w-full bg-gray-400 cursor-not-allowed text-black p-[12px] rounded-[6px]"
-    : "w-full bg-rose-500 text-white p-[12px] rounded-[6px]";
+  }, [state, phongDat]);
 
   const mutation = usePostDatPhong();
-
   const formik = useFormik({
     initialValues: {
-      id: 0,
-      maPhong: maPhong,
-      ngayDen: moment(ngayNhanPhong).format("YYYY/MM/DD"), 
-      ngayDi: moment(ngayTraPhong).format("YYYY/MM/DD"),  
+      maPhong: maPhongParse,
+      ngayDen: ngayNhanPhong,
+      ngayDi: ngayTraPhong,
       soLuongKhach: 1,
-      maNguoiDung: userLogin?.user.id,
+      maNguoiDung: getUserLogin()?.user?.id,
     },
     enableReinitialize: true,
-    onSubmit: (values) => {
-      mutation.mutate(values);
-      navigate('/payment')
+    onSubmit: async (values) => {
+      try {
+        localStorage.setItem('bookingData', JSON.stringify(values)); // Store booking data in localStorage
+        const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
+          amount: chiTietPhong?.giaTien * 10000,
+          orderInfo: "Thanh toán đặt phòng",
+          redirectUrl: `${window.location.origin}/payment-confirm`,
+          cancelUrl: `${window.location.origin}/details`,
+          ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
+        });
+    
+        const { order_url } = paymentResponse.data;
+        console.log(paymentResponse.data);
+    
+        // Redirect user to the payment URL
+        if (order_url) {
+          window.location.href = order_url;
+        } else {
+          console.error("Order URL không tồn tại");
+        }
+
+      } catch (error) {
+        console.error("Error processing payment:", error);
+      }
     }
   });
 
+  const handleFormSubmit = () => {
+    if (isOverlap) {
+      alert('Phòng đã được đặt trong khoảng thời gian này.');
+    } else {
+      formik.handleSubmit();
+    }
+  };
+
   return (
-   <div>
-    <h2 className="mb-[20px] text-rose-500 font-bold text-[20px]">Price: ${chiTietPhong?.giaTien}</h2>
-     <DateRange
-        className="w-[100%]"
+    <div>
+      <DateRange
         editableDateInputs={true}
         onChange={handleSelect}
         moveRangeOnFirstSelection={false}
         ranges={state}
+        className="date-range w-full"
       />
-    <form onSubmit={formik.handleSubmit}>
-      <div className="flex items-center">
-      <p className="font-bold mr-[12px]">Số lượng khách: </p>
-      <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" placeholder="1" min={1} max={2} />
-      </div>
-      {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
-      <button disabled={isOverlap} type="submit" className={buttonClass}>Đặt Phòng</button>
-
-    </form>
-   </div>
+      <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
+        <Form.Item label="Số lượng khách">
+        <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" min={1} max={2} />
+        </Form.Item>
+        {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
+        <Button  htmlType="submit" className="w-full bg-rose-500 text-white transition-all ease-in-out" disabled={isOverlap}>
+          Đặt phòng
+        </Button>
+      </Form>
+    </div>
   );
 };

@@ -127,7 +127,7 @@ export const HomeCarousel = () => {
         ))}
       </Slider>
       <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
-        Khám phá những điểm nổi tiếng gần bạn
+        Khám phá những điểm nổi tiếng
       </h2>
       <Tabs
         onChange={(key) => {

@@ -1,57 +1,46 @@
-import { useUploadHinh } from "../../../hooks/api/quanLyNguoiDungApi/useUploadHinh";
-import { useGetDatPhongTheoNguoiDung } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhongTheoNguoiDung";
-import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
-import { useDeletePhongDaDat } from "../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "antd";
-import { useFormik } from "formik";
-// import { useUploadHinh, useDeletePhongDaDat, useGetDatPhongTheoNguoiDung, useGetPhong } from "../../../hooks";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { Avatar } from "./Avatar";
 import { PATH } from "../../../constant";
+import { useDeletePhongDaDat } from "../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
+import { useGetDatPhongTheoNguoiDung } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhongTheoNguoiDung";
+import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
 
 export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate()
-  // const [imgSrc, setImgSrc] = useState("");
-
-  // const uploadMutation = useUploadHinh();
+  const [deletingRoomId, setDeletingRoomId] = useState(null);
+  const navigate = useNavigate();
+  
   const deleteMutation = useDeletePhongDaDat();
 
-  const { data: bookedRooms, refetch } = useGetDatPhongTheoNguoiDung(
-    userLogin?.user.id
-  );
+  const { data: bookedRooms, refetch } = useGetDatPhongTheoNguoiDung(userLogin?.user.id);
   const { data: allRooms } = useGetPhong();
 
-  // const newData = bookedRooms?.map((bookedRoom) => {
-  //   const room = allRooms?.find((room) => room.id === bookedRoom.maPhong);
-  //   return { ...bookedRoom, ...room, idDelete: bookedRoom.id };
-  // });
   const newData = bookedRooms?.map((selectRoom) => {
     const room = allRooms?.find((item) => item.id === selectRoom.maPhong);
-    return room
-      ? { ...selectRoom, ...room, idDelete: selectRoom.id }
-      : selectRoom;
+    return room ? { ...selectRoom, ...room, idDelete: selectRoom.id } : selectRoom;
   });
 
-  console.log("Newdata", newData);
-
-  // useEffect(() => {
-  //   alert("Vui lòng cập nhật avatar để hoàn thành xác minh danh tính!")
-  // }, [])
   const deleteRoom = (id) => {
+    setDeletingRoomId(id);  // Set the room ID being deleted
     deleteMutation.mutate(id, {
       onSuccess: () => {
         refetch();
+        setDeletingRoomId(null);  // Reset the deleting room ID after success
       },
+      onError: () => {
+        setDeletingRoomId(null);  // Reset the deleting room ID on error
+      }
     });
   };
+
   const renderBookedRooms = () => {
     if (newData?.length > 0) {
-      return newData?.map((room, index) => (
+      return newData.map((room, index) => (
         <div key={index} className="flex my-8">
           <img
             src={room.hinhAnh}
@@ -60,7 +49,7 @@ export const UserComponent = () => {
           />
           <div className="flex-grow">
             <h3 className="text-xl text-rose-500 cursor-pointer" onClick={() => {
-              navigate(`${PATH.details}/${room?.id}`)
+              navigate(`${PATH.details}/${room?.id}`);
             }}>{room.tenPhong}</h3>
             <p className="text-gray-500">{room?.soLuongKhach} khách</p>
             <hr className="w-[10%] mt-[10px]" />
@@ -82,12 +71,13 @@ export const UserComponent = () => {
             </p>
             <div className="mt-4 flex justify-between items-center w-full">
               <p>Giá tiền: ${room.giaTien}</p>
-              <button
+              <Button
+                loading={deletingRoomId === room.idDelete} 
                 onClick={() => deleteRoom(room.idDelete || room.id)}
-                className="bg-rose-500 text-white p-3 rounded-lg"
+                className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
               >
                 Huỷ Phòng
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -96,13 +86,12 @@ export const UserComponent = () => {
     if (newData?.length === 0) {
       return (
         <div className="text-rose-500">
-          Hãy quay lại trang chủ để book cho mình 1 phòng xinh đẹp!
+          Lịch sử đặt phòng trống!
         </div>
       );
     }
   };
 
-  // text-left sm:text-left md:text-center lg:text-center xl:text-center
   return (
     <div className="container mx-auto my-10">
       <div className="grid grid-cols-3 gap-[30px]">
@@ -125,7 +114,6 @@ export const UserComponent = () => {
               </div>
             </div>
           </div>
-          {/* <hr className="mb-10 w-11/12 mx-auto" /> */}
         </div>
         <div className="xs:col-span-3 xl-col-span-2 md:col-span-2 lg:col-span-2 sm:col-span-3 col-span-3">
           <h2 className="text-2xl mb-2 text-rose-500 font-bold">

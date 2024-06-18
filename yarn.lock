@@ -320,6 +320,13 @@
   resolved "https://registry.npmjs.org/@eslint/js/-/js-8.57.0.tgz"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@googlemaps/js-api-loader@^1.13.8":
+  version "1.16.6"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.6.tgz#c89970c94b55796d51746c092f0e52953994a171"
+  integrity sha512-V8p5W9DbPQx74jWUmyYJOerhiB4C+MHekaO0ZRmc6lrOYrvY7+syLhzOWpp55kqSPeNb+qbC2h8i69aLIX6krQ==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+
 "@hookform/resolvers@^3.4.2":
   version "3.4.2"
   resolved "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-3.4.2.tgz"
@@ -387,6 +394,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@mapbox/point-geometry@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
+  integrity sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -1095,6 +1107,11 @@ debug@^4.1.0, debug@^4.3.1, debug@^4.3.2:
   dependencies:
     ms "2.1.2"
 
+decode-uri-component@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.4.1.tgz#2ac4859663c704be22bf7db760a1494a49ab2cc5"
+  integrity sha512-+8VxcR21HhTy8nOt6jf20w0c9CADrw1O8d+VZ/YzzCt4bJ3uBjw+D1q2osAB8RnpwwaeYBxy0HyKQxD5JBMuuQ==
+
 deep-is@^0.1.3:
   version "0.1.4"
   resolved "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz"
@@ -1461,6 +1478,11 @@ esutils@^2.0.2:
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
+eventemitter3@^4.0.4:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
+  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
@@ -1507,6 +1529,11 @@ fill-range@^7.1.1:
   integrity sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==
   dependencies:
     to-regex-range "^5.0.1"
+
+filter-obj@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/filter-obj/-/filter-obj-5.1.0.tgz#5bd89676000a713d7db2e197f660274428e524ed"
+  integrity sha512-qWeTREPoT7I0bifpPUXtxkZJ1XJzxWtfoWWkdVGqa+eCr3SHW/Ocp89o8vLvbUuQnadybJpjOKu4V+RwO6sGng==
 
 find-up@^5.0.0:
   version "5.0.0"
@@ -1691,6 +1718,16 @@ globalthis@^1.0.3:
   dependencies:
     define-properties "^1.2.1"
     gopd "^1.0.1"
+
+google-map-react@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-2.2.1.tgz#54c45899966fb0000e04cde2d5ca44ad728bdba6"
+  integrity sha512-Dg8aexf5rNSmywj0XKQ5m4RNzVcWwKEM2BGDj5aPChD0um8ZRjB5Upcb/yg/i0oG1aES29asQ5+6BHVgrK5xGA==
+  dependencies:
+    "@googlemaps/js-api-loader" "^1.13.8"
+    "@mapbox/point-geometry" "^0.1.0"
+    eventemitter3 "^4.0.4"
+    prop-types "^15.7.2"
 
 gopd@^1.0.1:
   version "1.0.1"
@@ -2484,6 +2521,15 @@ qrcode.react@^3.1.0:
   resolved "https://registry.npmjs.org/qrcode.react/-/qrcode.react-3.1.0.tgz"
   integrity sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==
 
+query-string@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-9.0.0.tgz#1fe177cd95545600f0deab93f5fb02fd4e3e7273"
+  integrity sha512-4EWwcRGsO2H+yzq6ddHcVqkCQ2EFUSfDMEjF8ryp8ReymyZhIuaFRGLomeOQLkrzacMHoyky2HW0Qe30UbzkKw==
+  dependencies:
+    decode-uri-component "^0.4.1"
+    filter-obj "^5.1.0"
+    split-on-first "^3.0.0"
+
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -3182,6 +3228,11 @@ source-map-js@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.0.tgz"
   integrity sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==
+
+split-on-first@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-3.0.0.tgz#f04959c9ea8101b9b0bbf35a61b9ebea784a23e7"
+  integrity sha512-qxQJTx2ryR0Dw0ITYyekNQWpz6f8dGd7vffGNflQQ3Iqj9NJ6qiZ7ELpZsJ/QBhIVAiDfXdag3+Gp8RvWa62AA==
 
 string-convert@^0.2.0:
   version "0.2.1"
