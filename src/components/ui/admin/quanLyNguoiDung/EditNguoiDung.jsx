@@ -3,9 +3,16 @@ import { Button, Form, Input, Radio, DatePicker } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { quanLyUserServices } from "../../../../services/QuanLyUser";
-import moment from 'moment';
+import dayjs from 'dayjs'; // Import dayjs
+import advancedFormat from 'dayjs/plugin/advancedFormat'; // Import plugin for custom format
 import { useEditNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useEditNguoiDung";
 import { PATH } from "../../../../constant";
+import 'dayjs/locale/vi'; // Import Vietnamese locale for dayjs
+import localeData from 'dayjs/plugin/localeData'; // Import plugin for locale data
+
+dayjs.extend(advancedFormat); // Extend dayjs with advanced formatting
+dayjs.locale('vi'); // Set default locale to Vietnamese
+dayjs.extend(localeData);
 
 export const EditNguoiDung = () => {
   const { id } = useParams();
@@ -49,12 +56,8 @@ export const EditNguoiDung = () => {
     }
   });
 
-  const handleChangeDatePicker = (date) => {
-    if (date) {
-      formik.setFieldValue("birthday", date.format("DD/MM/YYYY"));
-    } else {
-      formik.setFieldValue("birthday", null);
-    }
+  const handleChangeDatePicker = (date, dateString) => {
+    formik.setFieldValue("birthday", dateString);
   };
 
   return (
@@ -89,7 +92,7 @@ export const EditNguoiDung = () => {
       </Form.Item>
       <Form.Item label="Birthday">
         <DatePicker 
-          value={formik.values.birthday ? moment(formik.values.birthday, 'DD/MM/YYYY') : null} 
+          value={formik.values.birthday ? dayjs(formik.values.birthday, 'DD/MM/YYYY') : null} 
           format='DD/MM/YYYY'
           onChange={handleChangeDatePicker} 
         />

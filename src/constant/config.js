@@ -10,6 +10,8 @@ export const PATH = {
     user: '/userinfo',
     editprofile: '/userinfo/editprofile',
     quanlydatphong: '/admin/quanlydatphong',
+    themdatphong: '/admin/quanlydatphong/themdatphong',
+    editdatphong: '/admin/quanlydatphong/editdatphong',
     quanlynguoidung: '/admin/quanlynguoidung',
     themnguoidung: '/admin/quanlynguoidung/themnguoidung',
     editNguoiDung: '/admin/quanlynguoidung/editnguoidung',

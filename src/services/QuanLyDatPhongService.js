@@ -5,8 +5,10 @@ const api = apiInstance.create({
 })
 
 export const quanLyDatPhongService = {
-    getDatPhong: () => api.get(),
-    getDatPhongTheoNguoiDung: (id) => api.get(`lay-theo-nguoi-dung/${id}`),
-    postDatPhong: (payload) => api.post('', payload),
+    getDatPhong: () => api.get('/'),
+    getPhongDaDat: (payload) => api.post('/', payload),
+    getDatPhongTheoNguoiDung: (id) => api.get(`/lay-theo-nguoi-dung/${id}`),
+    postDatPhong: (payload) => api.post('/', payload),
+    updateDatPhong: (id, payload) => api.put(`/${id}`, payload),
     deletePhongDaDat: (id) => api.delete(`/${id}`),
 }
