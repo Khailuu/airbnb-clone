@@ -33,7 +33,7 @@ export const EditNguoiDung = () => {
     enableReinitialize: true,
     initialValues: {
       id: nguoiDung?.id || 0,
-      name: nguoiDung?.name || '',
+       name: nguoiDung?.name || '',
       email: nguoiDung?.email || '',
       phone: nguoiDung?.phone || '',
       birthday: nguoiDung?.birthday ,
