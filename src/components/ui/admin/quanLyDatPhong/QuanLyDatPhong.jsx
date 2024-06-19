@@ -20,7 +20,6 @@ export const QuanLyDatPhong = () => {
           refetch();
         },
         onError: (error) => {
-          console.log(error);
           toast.error("Xoá Thất Bại!");
         },
       });

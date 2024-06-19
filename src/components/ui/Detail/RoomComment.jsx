@@ -58,7 +58,6 @@ export const RoomComment = () => {
                 toast.success("Xoá bình luận thanh công!")
               },
               onError: (err) => {
-                console.log(err?.message)
                 toast.error(err?.message)
               }
             })

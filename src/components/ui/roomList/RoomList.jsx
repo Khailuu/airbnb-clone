@@ -119,10 +119,16 @@ export const RoomList = () => {
     }
     return (
       <div className="flex flex-col items-center">
-        <img src="../../../../images/work.png" alt="logo" className="w-[500px]" />
-        <div className="text-[30px] text-rose-500">Vị trí đang được cập nhật...</div>
+        <img
+          src="../../../../images/work.png"
+          alt="logo"
+          className="w-[500px]"
+        />
+        <div className="text-[30px] text-rose-500">
+          Vị trí đang được cập nhật...
+        </div>
       </div>
-    )
+    );
   };
 
   return (

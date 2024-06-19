@@ -27,16 +27,13 @@ export const AddNguoiDung = () => {
       role: ''
     },
     onSubmit: values => {
-      console.log('Form submitted with values:', values);
       mutation.mutate(values, {
         onSuccess: () => {
           toast.success("Thêm người dùng mới thành công");
-          console.log('Navigate to user management');
           navigate(PATH.quanlynguoidung);
         },
         onError: (error) => {
           toast.error("Thêm người dùng thất bại");
-          console.error("Failed to add user:", error);
         }
       });
     }

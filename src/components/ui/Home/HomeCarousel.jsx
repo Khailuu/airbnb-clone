@@ -8,20 +8,53 @@ import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGet
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
-
-const { TabPane } = Tabs;
+import HeartIcon from "../../HeartIcon";
 
 export const HomeCarousel = () => {
-  const navigate = useNavigate()
-  const { data: listViTriPhanTrang } = useGetViTriPhanTran();
+  const navigate = useNavigate();
+  const { data: listViTriPhanTrang, refetch: refetchViTri } =
+    useGetViTriPhanTran();
   const [maViTri, setMaViTri] = useState(1);
   const { data: phongByViTri, refetch } = useGetPhongTheoMaViTri(maViTri);
 
   useEffect(() => {
-    refetch(maViTri);
+    refetch();
   }, [maViTri]);
 
-  var settings = {
+  useEffect(() => {
+    const passiveSupported = (() => {
+      let passive = false;
+      try {
+        const options = {
+          get passive() {
+            passive = true;
+            return false;
+          },
+        };
+        window.addEventListener("test", null, options);
+        window.removeEventListener("test", null, options);
+      } catch (err) {
+        passive = false;
+      }
+      return passive;
+    })();
+
+    const handleWheel = (event) => {
+      // Your wheel event handling logic here
+    };
+
+    window.addEventListener(
+      "wheel",
+      handleWheel,
+      passiveSupported ? { passive: true } : false
+    );
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
+  const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 12,
@@ -116,12 +149,66 @@ export const HomeCarousel = () => {
     },
   ];
 
+  const tabItems = listViTriPhanTrang?.map((viTri) => ({
+    key: viTri.id,
+    label: (
+      <div className="text-center flex flex-col items-center">
+        <img
+          className="rounded-full mx-auto"
+          src={viTri.hinhAnh}
+          style={{ width: 60, minHeight: 60, maxHeight: 60 }}
+          alt="hinhAnhViTri"
+        />
+        <div>
+          <p className="text-rose-400 my-3 font-bold">{viTri.tenViTri}</p>
+        </div>
+      </div>
+    ),
+    children: (
+      <div className="grid gap-[30px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        {phongByViTri?.map((phong) => (
+          <div key={phong.id} style={{ position: "relative" }}>
+            <Card
+              onClick={() => {
+                navigate(`${PATH.details}/${phong.id}`);
+              }}
+              hoverable
+              style={{ width: 240 }}
+              cover={
+                <img
+                  style={{ height: 240, width: 480 }}
+                  alt="example"
+                  src={phong.hinhAnh}
+                />
+              }
+            >
+              <Meta title={phong.tenPhong} />
+              <p className="my-[10px]">
+                Phòng ngủ: {phong.phongNgu} + số giường {phong.giuong}
+              </p>
+              <p className="text-rose-500 font-bold">${phong.giaTien}</p>
+            </Card>
+            <div
+              style={{
+                position: "absolute",
+                top: "5%",
+                right: "2%",
+              }}
+            >
+              <HeartIcon />
+            </div>
+          </div>
+        ))}
+      </div>
+    ),
+  }));
+
   return (
     <div className="container mx-auto my-[40px]">
       <Slider {...settings} className="mb-[20px]">
         {lstIcon.map((icon, i) => (
           <div className="flex flex-col aligns-center" key={i}>
-            <img className="mx-auto !w-[20px]" src={icon.hinhAnh} alt="icon" />
+            <img className="mx-auto !w-[20px] " src={icon.hinhAnh} alt="icon" />
             <p className="text-[12px] text-center mt-[8px]">{icon.text}</p>
           </div>
         ))}
@@ -132,62 +219,9 @@ export const HomeCarousel = () => {
       <Tabs
         onChange={(key) => {
           setMaViTri(key);
-          console.log("key", key)
         }}
-      >
-        {listViTriPhanTrang?.map((viTri) => (
-          <TabPane
-            style={{ overflow: "hidden" }}
-            key={viTri.id}
-            tab={
-              <div
-                className="text-center flex flex-col items-center"
-                key={viTri.id}
-              >
-                <img
-                  className="rounded-full mx-auto"
-                  src={viTri.hinhAnh}
-                  style={{ width: 60, minHeight: 60 }}
-                  alt="hinhAnhViTri"
-                />
-                <div>
-                  <p className="text-rose-400 my-3 font-bold">
-                    {viTri.tenViTri}
-                  </p>
-                </div>
-              </div>
-            }
-          >
-            <div className="grid gap-[30px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              {phongByViTri?.map((phong) => {
-                return (
-                  <div key={phong.id}>
-                    <Card
-                    onClick={()=>{
-                      navigate(`${PATH.details}/${phong.id}`)
-                    }}
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={
-                        <img
-                          style={{ height: 240, width: 480 }}
-                          alt="example"
-                          src={phong.hinhAnh}
-                        />
-                      }
-                    >
-                      <Meta title={phong.tenPhong}
-                      />
-                      <p className="my-[10px]">Phòng ngủ: {phong.phongNgu} + số giường {phong.giuong}</p>
-                      <p className="text-rose-500 font-bold">${phong.giaTien}</p>
-                    </Card>
-                  </div>
-                );
-              })}
-            </div>
-          </TabPane>
-        ))}
-      </Tabs>
+        items={tabItems}
+      />
     </div>
   );
 };

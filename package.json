@@ -19,6 +19,7 @@
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
+    "font-awesome": "^4.7.0",
     "formik": "^2.4.6",
     "google-map-react": "^2.2.1",
     "moment": "^2.30.1",

@@ -1,7 +1,7 @@
 import { Button, Input, Radio, DatePicker, Space } from "antd";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { quanLyNguoiDungActionThunks } from "../../store/quanLyNguoiDung";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -23,20 +23,25 @@ export const RegisterTemplate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { isFetchingRegister } = useSelector(
+    (state) => state.quanLyNguoiDung
+  );
+
   const onSubmit = (values) => {
     const payload = {
       ...values,
-      birthday: values.birthday ? values.birthday.format('YYYY-MM-DD') : null,
+      birthday: values.birthday ? values.birthday.format("YYYY-MM-DD") : null,
       role: "USER", // format date before submitting
     };
 
-    dispatch(quanLyNguoiDungActionThunks.registerThunk(payload)).unwrap()
+    dispatch(quanLyNguoiDungActionThunks.registerThunk(payload))
+      .unwrap()
       .then(() => {
         toast.success("Đăng ký thành công!");
         navigate(PATH.login);
       })
       .catch((err) => {
-        toast.error(err);
+        toast.error(err.response.data.content);
       });
   };
 
@@ -60,9 +65,7 @@ export const RegisterTemplate = () => {
             />
           )}
         />
-        {!!errors.name && (
-          <p className="text-red-500">{errors.name.message}</p>
-        )}
+        {!!errors.name && <p className="text-red-500">{errors.name.message}</p>}
         <div className="text-dark mb-[6px] fw-bold">Email</div>
         <Controller
           control={control}
@@ -79,8 +82,8 @@ export const RegisterTemplate = () => {
             required: "Required",
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-              message: "Invalid email address"
-            }
+              message: "Invalid email address",
+            },
           }}
         />
         {!!errors.email && (
@@ -98,7 +101,19 @@ export const RegisterTemplate = () => {
               placeholder="Password"
             />
           )}
+          rules={{
+            required: "Required",
+            pattern: {
+              value:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i,
+              message:
+                "Password must include uppercase, lowercase, number, and special character",
+            },
+          }}
         />
+        {!!errors.password && (
+          <p className="text-red-500">{errors.password.message}</p>
+        )}
         <div className="text-dark mb-[6px] fw-bold">Phone</div>
         <Controller
           control={control}
@@ -111,7 +126,17 @@ export const RegisterTemplate = () => {
               placeholder="Phone"
             />
           )}
+          rules={{
+            required: "Required",
+            pattern: {
+              value: /^\d{10,11}$/,
+              message: "Invalid phone number",
+            },
+          }}
         />
+        {!!errors.phone && (
+          <p className="text-red-500">{errors.phone.message}</p>
+        )}
         <div className="text-dark mb-[6px] fw-bold">Birthday</div>
         <Controller
           control={control}
@@ -146,13 +171,16 @@ export const RegisterTemplate = () => {
         <Controller
           control={control}
           name="role"
-          render={({ field }) => (
-            <></>
-          )}
+          render={({ field }) => <></>}
         />
         <Button
           className="w-full col-6 mt-[20px]"
-          style={{ backgroundColor: "rgb(244 63 94)", border: "none", transition: "all .3s" }}
+          style={{
+            backgroundColor: "rgb(244 63 94)",
+            border: "none",
+            transition: "all .3s",
+          }}
+          loading={isFetchingRegister}
           htmlType="submit"
           type="primary"
           size="large"

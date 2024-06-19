@@ -1,15 +1,15 @@
-import { useQuery } from "@tanstack/react-query"
-import { quanLyPhongService } from "../../../services/QuanLyPhongService"
+import { useQuery } from "@tanstack/react-query";
+import { quanLyPhongService } from "../../../services/QuanLyPhongService";
 
 export const useGetPhongTheoId = (id) => {
-    const q = useQuery({
-        queryKey: ['GetPhongTheoId'],
-        queryFn: () => {
-            return quanLyPhongService.getPhongThueTheoId(id)
-        }
-    })
-    return {
-        ...q,
-        data: q.data?.data.content
-    }
-}
+  const q = useQuery({
+    queryKey: ["GetPhongTheoId"],
+    queryFn: async () => {
+      return await quanLyPhongService.getPhongThueTheoId(id);
+    },
+  });
+  return {
+    ...q,
+    data: q.data?.data.content,
+  };
+};

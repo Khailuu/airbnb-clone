@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetPhongTheoId } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoId";
 import {
@@ -11,16 +11,12 @@ import {
 import { RoomComment } from "./RoomComment";
 import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
 
-
-
 export const RoomDetail = () => {
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const { id: maPhong } = useParams();
 
   const { data: chiTietPhong } = useGetPhongTheoId(maPhong);
-
 
   return (
     <div className="container mx-auto my-[40px]">
@@ -179,7 +175,7 @@ export const RoomDetail = () => {
           </div>
         </div>
         <div className="col-span-3 xl:col-span-1 lg:col-span-1 md:col-span-3 sm:col-span-3">
-         <CalenderComponent chiTietPhong={chiTietPhong} maPhong={maPhong} />
+          <CalenderComponent chiTietPhong={chiTietPhong} maPhong={maPhong} />
         </div>
       </div>
       <hr className="mt-[20px] mb-[30px]" />

@@ -25,6 +25,7 @@ import { EditProfile } from "../components/ui/User/EditProfile";
 import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
+import { LikeRoom } from "../components/ui/User/LikeRoom";
 const router = [
   {
     element: <AuthLayout />,
@@ -76,11 +77,15 @@ const router = [
         element: <User />,
       },
       {
+        path: PATH.likeroom,
+        element: <LikeRoom />
+      },
+      {
         path: `${PATH.editprofile}/:id`,
         element: <EditProfile />
       },
       {
-        path: PATH.paymentConfirm, // Đường dẫn cho PaymentConfirmation
+        path: PATH.paymentConfirm,
         element: <PaymentComfirm />,
       },
     ],

@@ -48,7 +48,7 @@ export const EditPhong = () => {
             maViTri: phong?.maViTri || '',
             hinhAnh: phong?.hinhAnh || '',
             moTa: phong?.moTa || '',
-            tienNghi: phong?.tienNghi || [], // Assuming phong has tiệnNghi property
+            tienNghi: phong?.tienNghi || [],
         },
         onSubmit: (values) => {
             mutation.mutate({ id: phong?.id, payload: values }, {
