@@ -65,7 +65,7 @@ export const HomeCarousel = () => {
       }
       return passive;
     })();
-    const handleWheel = () => {};
+    const handleWheel = (event) => {};
     window.addEventListener(
       "wheel",
       handleWheel,
