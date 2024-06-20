@@ -26,12 +26,9 @@ import { EditProfile } from "../components/ui/User/EditProfile";
 import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
-<<<<<<< HEAD
 import { Like } from "../pages/Like";
-=======
 import { EditRoomBooking } from "../components/ui/admin/quanLyDatPhong/EditRoomBooking";
 import { LikeRoom } from "../components/ui/User/LikeRoom";
->>>>>>> caf57dca5257a5dbd911bfddc95a480bf66c7189
 const router = [
   {
     element: <AuthLayout />,
