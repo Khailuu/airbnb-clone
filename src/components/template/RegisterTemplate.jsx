@@ -15,7 +15,6 @@ export const RegisterTemplate = () => {
     handleSubmit,
     control,
     formState: { errors },
-    setValue,
   } = useForm({
     resolver: zodResolver(registerSchema),
   });

@@ -10,7 +10,6 @@ import { quanLyViTriService } from "../../../services/QuanLyViTriService";
 
 export const RoomList = () => {
   const { id: maViTri } = useParams();
-  // const [ viTri, setViTri ] = useState(maViTri)
 
   const { data: viTriKV, refetch: refetchViTri } = useGetViTriTheoId(maViTri);
   const [currentPosition, setCurrentPosition] = useState(false);

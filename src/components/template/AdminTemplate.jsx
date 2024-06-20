@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
   CarFilled,
   HomeFilled,
   UserOutlined,
@@ -11,11 +8,9 @@ import {
 import { Button, Layout, Menu, theme } from "antd";
 import { LOCAL_USER_LOGIN_KEY, PATH } from "../../constant";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import SubMenu from "antd/es/menu/SubMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { quanLyNguoiDungAction } from "../../store/quanLyNguoiDung/slice";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Footer, Sider } = Layout;
 
 export const AdminTemplate = () => {
   const navigate = useNavigate();

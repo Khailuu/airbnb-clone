@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { quanLyUserServices } from '../../../services/QuanLyUser';
 import { useFormik } from 'formik';
 import { Button, DatePicker, Form, Input, Radio } from 'antd';
-import { LOCAL_USER_LOGIN_KEY, PATH } from '../../../constant';
-import moment from 'moment';
+import { LOCAL_USER_LOGIN_KEY } from '../../../constant';
 import { useEditNguoiDung } from '../../../hooks/api/quanLyNguoiDungApi/useEditNguoiDung';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,8 +53,8 @@ export const EditProfile = () => {
           }));
           localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(profile))
           toast.success("Cập nhật thông tin thành công!");
-          setIsEditing(false); // Hide update button and show edit button
-          setDisable(true); // Disable form fields
+          setIsEditing(false); 
+          setDisable(true);
         },
         onError: (err) => {
           toast.error(err);

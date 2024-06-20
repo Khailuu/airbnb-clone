@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEditPhong } from '../../../../hooks/api/quanLyPhongApi/useEditPhong';
 import { quanLyPhongService } from '../../../../services/QuanLyPhongService';
 import { useFormik } from 'formik';
-import { PATH } from '../../../../constant';
 import { Button, Input, Checkbox, Col, Row, message } from 'antd';
 
 export const EditPhong = () => {

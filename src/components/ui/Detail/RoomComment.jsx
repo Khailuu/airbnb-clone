@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetBinhLuanTheoMaPhong } from "../../../hooks/api/quanLyBinhLuanApi/useGetBinhLuanTheoMaPhong";
 import { usePostBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/usePostBinhLuan";
-import { getUserLogin } from "../../../utils/getUserLogin";
 import { useFormik } from "formik";
 import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { quanLyBinhLuanService } from "../../../services/QuanLyBinhLuanService";
 import { useDeleteBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/useDeleteBinhLuan";
 import { toast } from "react-toastify";
 import { Button } from "antd";

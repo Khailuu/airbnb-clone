@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { NavBar } from '../components/ui/Navbar/NavBar'
 import { HomeCarousel } from '../components/ui/Home/HomeCarousel'
 import { HomeTemplate } from '../components/template/HomeTemplate'
 import { useSelector } from 'react-redux'
@@ -21,8 +20,8 @@ export const Home = () => {
     <div>
         <div className='container mx-auto'>
           <HomeCarousel />
-          <HomeTemplate />
           <HomeAnyWhere />
+          <HomeTemplate />
         </div>
 
     </div>

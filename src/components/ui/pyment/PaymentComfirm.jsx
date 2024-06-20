@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 import queryString from 'query-string';
 import { PATH } from '../../../constant';
 
 export const PaymentComfirm = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const mutation = usePostDatPhong();
 
   useEffect(() => {
     const return_code = "1"
-    if (return_code) { // Check if '1' indicates a successful payment
+    if (return_code) {
       const bookingData = JSON.parse(localStorage.getItem('bookingData'));
       console.log("Booking data:", bookingData);
 
@@ -20,7 +19,7 @@ export const PaymentComfirm = () => {
         mutation.mutate(bookingData, {
           onSuccess: () => {
             toast.success("Đặt phòng thành công!");
-            navigate(PATH.payment); // Redirect to dashboard or any other page
+            navigate(PATH.payment);
           },
           onError: (error) => {
             console.error("Mutation error:", error);

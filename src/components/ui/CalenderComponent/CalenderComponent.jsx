@@ -9,13 +9,9 @@ import { useFormik } from "formik";
 import { getUserLogin } from "../../../utils/getUserLogin";
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 import '../../../assets/style.css';
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { PATH } from "../../../constant";
-import { Button, Form, InputNumber } from "antd";
+import { Button, Form } from "antd";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
-  const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
   const [ngayNhanPhong, setNgayNhanPhong] = useState('');
@@ -82,7 +78,6 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
 
         const { order_url } = paymentResponse.data;
 
-        // Redirect user to the payment URL
         if (order_url) {
           window.location.href = order_url;
         } else {
@@ -92,7 +87,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       } catch (error) {
         console.error("Error processing payment:", error);
       } finally {
-        setIsLoading(false); // Tắt trạng thái loading
+        setIsLoading(false); 
       }
     }
   });
@@ -101,7 +96,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     if (isOverlap) {
       alert('Phòng đã được đặt trong khoảng thời gian này.');
     } else {
-      setIsLoading(true); // Bật trạng thái loading
+      setIsLoading(true); 
       formik.handleSubmit();
     }
   };

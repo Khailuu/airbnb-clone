@@ -1,6 +1,6 @@
 import React from "react";
 import { BiSearch } from "react-icons/bi";
-import { Form, Input, Select, Button } from "antd";
+import { Form, Select, Button } from "antd";
 import "./style.css";
 import { useGetViTri } from "../../../hooks/api/quanLyViTriApi/useGetViTri";
 import { useFormik } from "formik";
@@ -54,25 +54,6 @@ export const NavBar = () => {
           </div>
           
         </div>
-        {/* <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
-          AnyWeek
-          <Input
-            name="date"
-            value={formik.values.date}
-            onChange={formik.handleChange}
-          />
-        </div>
-        <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-          <div className="hidden sm:block text-center">
-            Add Guests
-            <Input
-              name="guests"
-              value={formik.values.guests}
-              onChange={formik.handleChange}
-            />
-          </div>
-          
-        </div> */}
       </div>
     </Form>
   );

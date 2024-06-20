@@ -18,7 +18,6 @@ export const EditViTri = () => {
   const { id } = useParams()
   const parseId = parseInt(id)
   const [ viTri, setViTri] = useState(null)
-//   const { data: viTri } = useGetViTriTheoId(parseId
 
   useEffect(() => {
     quanLyViTriService.getViTriTheoId(parseId)
@@ -104,9 +103,3 @@ export const EditViTri = () => {
     </div>
   );
 };
-
-// "id": 0,
-//   "tenViTri": "string",
-//   "tinhThanh": "string",
-//   "quocGia": "string",
-//   "hinhAnh": "string"

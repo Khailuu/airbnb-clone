@@ -1,10 +1,9 @@
-import { Card } from "antd";
 import React from "react";
 
 export const HomeAnyWhere = () => {
   return (
     <div className="container mx-auto mb-[40px]">
-      <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
+      <h2 className="text-rose-500 text-[32px] font-bold mb-[30px]">
         Ở bất cứ đâu
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid:cols-4 gap-[30px]">

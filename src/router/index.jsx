@@ -28,7 +28,7 @@ import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong"
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
 import { Like } from "../pages/Like";
 import { EditRoomBooking } from "../components/ui/admin/quanLyDatPhong/EditRoomBooking";
-import { LikeRoom } from "../components/ui/User/LikeRoom";
+
 const router = [
   {
     element: <AuthLayout />,

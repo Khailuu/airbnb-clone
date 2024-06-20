@@ -1,17 +1,14 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-// import { MapIcon } from "../../../utils/iconSVG";
 import { Popover } from "antd";
 import { randomNumber } from "../../../utils/randomNumber";
 import { Link } from "react-router-dom";
 
 export const MapRoom = ({ roomList, currentPosition }) => {
-  const MyMark = ({ item, center }) => {
+  const MyMark = ({ item }) => {
     const content = (
       <div className="flex flex-col w-80 md:w-96">
         <Link
-          //   to={`/room/${item.id}/${center[0]}/${center[1]}`}
-
           className="hover:cursor-pointer text-base font-semibold text-blue-400 hover:text-blue-700 duration-300 "
         >
           {item.tenPhong}

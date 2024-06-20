@@ -29,7 +29,7 @@ export const ThemViTri = () => {
         onSuccess: () => {
           toast.success('Thêm Vị Trí Thành Công');
           formik.resetForm();
-          triggerRefetch(); // Trigger refetch here
+          triggerRefetch();
           navigate(PATH.quanlythongtinvitri);
         },
         onError: () => {
