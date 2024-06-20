@@ -4,9 +4,10 @@ import { GlobalOutlined, UserOutlined } from "@ant-design/icons";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Button, Popover } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LOCAL_USER_LOGIN_KEY, PATH } from "../../../constant";
+import { LOCAL_LIKE_CART, LOCAL_USER_LOGIN_KEY, PATH } from "../../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
+import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
 
 export const UserMenu = () => {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,9 @@ export const UserMenu = () => {
 
   const handleDangXuat = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
+    localStorage.removeItem(LOCAL_LIKE_CART)
     dispatch(quanLyNguoiDungAction.updateUserLogin(null));
+    dispatch(quanLyPhongActions.deleteCart(null))
     navigate(PATH.login);
   };
 

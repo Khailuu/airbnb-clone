@@ -25,7 +25,7 @@ import { EditProfile } from "../components/ui/User/EditProfile";
 import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
-import { LikeRoom } from "../components/ui/User/LikeRoom";
+import { Like } from "../pages/Like";
 const router = [
   {
     element: <AuthLayout />,
@@ -78,7 +78,7 @@ const router = [
       },
       {
         path: PATH.likeroom,
-        element: <LikeRoom />
+        element: <Like />
       },
       {
         path: `${PATH.editprofile}/:id`,

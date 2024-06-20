@@ -25,5 +25,8 @@ export const { reducer: quanLyPhongReducer, actions: quanLyPhongActions } =
           localStorage.setItem(LOCAL_LIKE_CART, JSON.stringify(state.likeCart));
         }
       },
+      deleteCart: (state, action) => {
+        state.likeCart = action.payload;
+      },
     },
   });
