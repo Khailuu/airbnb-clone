@@ -74,9 +74,6 @@ export const HomeTemplate = () => {
           return (
             <div style={{ position: "relative" }} key={phong.id}>
               <div className="p-3">
-                <h2 className="text-lg mb-[10px] font-bold text-rose-400">
-                  {tenPhong}
-                </h2>
                 <img
                   style={{ width: "100%", height: "auto" }}
                   className="hover:cursor-pointer rounded-[15px]"
@@ -86,24 +83,23 @@ export const HomeTemplate = () => {
                   src={hinhAnh}
                   alt="mainImage"
                 />
-                <div className="flex justify-between pt-4 pb-2">
-                  <div className="text-[16px]">
+                <div className="p-3">
+                  <h2 className="font-bold">{tenPhong}</h2>
+                  <div className="pt-4 pb-2">
                     <span className="span-gray">{khach} khách</span>
                     <span className="span-gray">{phongNgu} phòng ngủ</span>
                     <span className="span-gray">{giuong} giường</span>
                     <span className="span-gray">{phongTam} phòng tắm</span>
-                    <span className="span-gray mx-[10px] bg-yellow-300 !text-[18px]">
+                    <span className="span-gray bg-yellow-300  ">
                       {giaTien}$/đêm
                     </span>
+                    <NavLink
+                      to={`${PATH.details}/${id}`}
+                      className="span-gray text-gray-50 bg-rose-500 hover:text-white"
+                    >
+                      Chi tiết
+                    </NavLink>
                   </div>
-                  <NavLink
-                    to={`${PATH.details}/${id}`}
-                    className="span-gray p-[8px] text-gray-50 bg-rose-500 w-[100px] hover:text-white hover:bg-rose-600 transition-all ease-in-out text-center rounded-[6px]"
-                  >
-                    Chi tiết
-                  </NavLink>
-                </div>
-                <div className="flex justify-between">
                   <div className="flex">{renderComforts(phong, "mx-1")}</div>
                 </div>
               </div>
@@ -220,10 +216,14 @@ export const renderComforts = (data, element, note) => {
     }
   }
   let homeComforts = itemsHome.filter((item) => keyArray.includes(item.key));
-  return homeComforts.map((item, i) => (
-    <p key={i} className={element}>
-      {item.icon}
-      {note === "isRoom" && <span>{item.name}</span>}
-    </p>
-  ));
+  return (
+    <div className="iphone-6:grid-cols-8 grid">
+      {homeComforts.map((item, i) => (
+        <p key={i} className={element}>
+          {item.icon}
+          {note === "isRoom" && <span>{item.name}</span>}
+        </p>
+      ))}
+    </div>
+  );
 };

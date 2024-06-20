@@ -22,7 +22,7 @@ export const AuthLayout = () => {
 
             <div className="absolute w-[450px] p-[30px] top-1/2 left-1/2 bg-[rgba(255,255,255)] z-20 -translate-x-1/2 -translate-y-1/2 rounded-md">
 
-                <Outlet />
+                <Outlet className=" sm:w-[90%] w-[90%] mx-auto md:w-[90%]" />
 
             </div>
 

@@ -14,15 +14,14 @@ export const NavBar = () => {
   const formik = useFormik({
     initialValues: {
       viTri: null,
-      date: '',
-      guests: ''
+      date: "",
+      guests: "",
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       navigate(`${PATH.roomlist}/${values.viTri}`);
     },
   });
 
-  
   return (
     <Form
       className="border-[1px] w-full mb-[0px] md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
@@ -34,25 +33,28 @@ export const NavBar = () => {
             <Form.Item className="mr-[8px] w-[200px] mb-[0px]">
               <Select
                 name="viTri"
-                onChange={value => formik.setFieldValue('viTri', value)}
+                onChange={(value) => formik.setFieldValue("viTri", value)}
                 value={formik.values.viTri}
-                placeholder='Nhập địa điểm bạn muốn đến'
+                placeholder="Nhập địa điểm bạn muốn đến"
               >
                 {listViTri?.map((viTri) => (
-                  <Select.Option
-                    key={viTri.id}
-                    value={viTri.id}
-                  >
+                  <Select.Option key={viTri.id} value={viTri.id}>
                     {viTri.tenViTri} , {viTri.tinhThanh}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
-            <Button type="primary" htmlType="submit" className="p-2 bg-rose-500 h-[20px] w-[20px] rounded-full text-white text-center">
-              <BiSearch style={{ lineHeight: 20, transform: "translate(-36%, -30%)" }} className="size-3" />
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="p-2 bg-rose-500 h-[20px] w-[20px] rounded-full text-white text-center"
+            >
+              <BiSearch
+                style={{ lineHeight: 20, transform: "translate(-36%, -30%)" }}
+                className="size-3"
+              />
             </Button>
           </div>
-          
         </div>
       </div>
     </Form>
