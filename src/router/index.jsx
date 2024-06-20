@@ -16,6 +16,7 @@ import {
   QuanLyThongTinPhong,
   QuanLyThongTinViTri,
 } from "../components/ui/admin";
+import {AddRoomBooking} from "../components/ui/admin/quanLyDatPhong/AddRoomBooking"
 import { EditNguoiDung } from "../components/ui/admin/quanLyNguoiDung/EditNguoiDung";
 import { ThemViTri } from "../components/ui/admin/quanLyThonTinViTri/ThemViTri";
 import { EditViTri } from "../components/ui/admin/quanLyThonTinViTri/EditViTri";
@@ -25,7 +26,12 @@ import { EditProfile } from "../components/ui/User/EditProfile";
 import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDung";
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
+<<<<<<< HEAD
 import { Like } from "../pages/Like";
+=======
+import { EditRoomBooking } from "../components/ui/admin/quanLyDatPhong/EditRoomBooking";
+import { LikeRoom } from "../components/ui/User/LikeRoom";
+>>>>>>> caf57dca5257a5dbd911bfddc95a480bf66c7189
 const router = [
   {
     element: <AuthLayout />,
@@ -100,6 +106,15 @@ const router = [
       {
         path: PATH.quanlydatphong,
         element: <QuanLyDatPhong />,
+      },
+
+      {
+        path: PATH.themdatphong,
+        element: <AddRoomBooking/>
+      },
+      {
+        path: `${PATH.editdatphong}/:id`,
+        element: <EditRoomBooking/>
       },
       {
         path: PATH.quanlynguoidung,

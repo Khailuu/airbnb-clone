@@ -11,6 +11,8 @@ export const PATH = {
     likeroom: '/userinfo/likeroom',
     editprofile: '/userinfo/editprofile',
     quanlydatphong: '/admin/quanlydatphong',
+    themdatphong: '/admin/quanlydatphong/themdatphong',
+    editdatphong: '/admin/quanlydatphong/editdatphong',
     quanlynguoidung: '/admin/quanlynguoidung',
     themnguoidung: '/admin/quanlynguoidung/themnguoidung',
     editNguoiDung: '/admin/quanlynguoidung/editnguoidung',

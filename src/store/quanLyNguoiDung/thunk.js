@@ -22,5 +22,4 @@ async(payload, {rejectWithValue}) => {
     } catch(err) {
         return rejectWithValue(err)
     }
-}
-)
+})

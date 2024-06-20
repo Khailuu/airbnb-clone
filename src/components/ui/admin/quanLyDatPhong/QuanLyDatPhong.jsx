@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { Table } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useDeleteNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useDeleteNguoiDung";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../../constant";
 import { useGetDatPhong } from "../../../../hooks/api/quanLyDatPhongApi/useGetDatPhong";
+import { useDeletePhongDaDat } from "../../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
+import { NavLink } from "react-router-dom";
 
 export const QuanLyDatPhong = () => {
   const { data: lstDatPhong, refetch } = useGetDatPhong();
-  const mutationDeleteND = useDeleteNguoiDung();
+  const mutationDeleteND = useDeletePhongDaDat();
   const navigate = useNavigate()
 
   const handleDelete = (id) => {
@@ -71,14 +72,18 @@ export const QuanLyDatPhong = () => {
       render: (_, phong) => {
         return (
           <div key={phong.id}>
-            <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH}/${phong.id}`)
-              }} style={{ color: "blue" }} />
-                <DeleteOutlined
-                  onClick={() => handleDelete(phong.id)}
-                  className="mr-[15px]"
-                  style={{ color: "red" }}
-                />
+           <EditOutlined
+              className="mr-[15px]"
+              onClick={() => {
+               navigate(`${PATH.editdatphong}/${phong.id}`)
+              }}
+              style={{ color: "blue" }}
+            />
+            <DeleteOutlined
+              onClick={() => handleDelete(phong.id)}
+              className="mr-[15px]"
+              style={{ color: "red" }}
+            />
           </div>
         );
       },
@@ -87,6 +92,14 @@ export const QuanLyDatPhong = () => {
 
 
   return (
-    <Table columns={columns} dataSource={lstDatPhong}  />
+    <div>
+    <NavLink to={PATH.themdatphong}>
+        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
+          Thêm Đặt Phòng
+        </button>
+      </NavLink>
+
+      <Table columns={columns} dataSource={lstDatPhong} />
+    </div>
   );
 };

@@ -4,7 +4,7 @@ import { useEditPhong } from '../../../../hooks/api/quanLyPhongApi/useEditPhong'
 import { quanLyPhongService } from '../../../../services/QuanLyPhongService';
 import { useFormik } from 'formik';
 import { PATH } from '../../../../constant';
-import { Button, Input, Checkbox, Col, Row } from "antd";
+import { Button, Input, Checkbox, Col, Row, message } from 'antd';
 
 export const EditPhong = () => {
     const { id } = useParams();
@@ -14,25 +14,27 @@ export const EditPhong = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        quanLyPhongService.getPhongThueTheoId(parseId)
+        quanLyPhongService
+            .getPhongThueTheoId(parseId)
             .then((res) => {
                 setPhong(res.data?.content);
             })
             .catch((err) => {
-                console.log(err);
+                console.error('Failed to fetch room data:', err);
+                message.error('Failed to fetch room data. Please try again.');
             });
     }, [id]);
 
     const [dataBox] = useState([
-        "mayGiat",
-        "tivi",
-        "doXe",
-        "hoBoi",
-        "dieuHoa",
-        "banLa",
-        "banUi",
-        "bep",
-        "wifi",
+        'mayGiat',
+        'tivi',
+        'doXe',
+        'hoBoi',
+        'dieuHoa',
+        'banLa',
+        'banUi',
+        'bep',
+        'wifi',
     ]);
 
     const formik = useFormik({
@@ -51,16 +53,12 @@ export const EditPhong = () => {
             tienNghi: phong?.tienNghi || [],
         },
         onSubmit: (values) => {
-            mutation.mutate({ id: phong?.id, payload: values }, {
-                onSuccess: () => {
-                    navigate(PATH.quanlythongtinphong);
-                }
-            });
-        }
+            mutation.mutate({ id: parseId, payload: values });
+        },
     });
 
     const onChangeCheckboxGroup = (checkedValues) => {
-        formik.setFieldValue('tiệnNghi', checkedValues);
+        formik.setFieldValue('tienNghi', checkedValues);
     };
 
     return (
