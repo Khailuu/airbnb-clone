@@ -73,8 +73,6 @@ export const EditProfile = () => {
     setIsEditing(true);
   };
   const handleChangeDatePicker = (date) => {
-    console.log(date)
-    console.log(date.format("DD/MM/YYYY"))
     if (date) {
       formik.setFieldValue("birthday", date.format("DD/MM/YYYY"));
     } else {

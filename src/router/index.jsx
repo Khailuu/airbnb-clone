@@ -27,6 +27,7 @@ import { AddNguoiDung } from "../components/ui/admin/quanLyNguoiDung/AddNguoiDun
 import { EditPhong } from "../components/ui/admin/quanLyThongTInPhong/EditPhong";
 import { PaymentComfirm } from "../components/ui/pyment/PaymentComfirm";
 import { EditRoomBooking } from "../components/ui/admin/quanLyDatPhong/EditRoomBooking";
+import { LikeRoom } from "../components/ui/User/LikeRoom";
 const router = [
   {
     element: <AuthLayout />,
@@ -78,11 +79,15 @@ const router = [
         element: <User />,
       },
       {
+        path: PATH.likeroom,
+        element: <LikeRoom />
+      },
+      {
         path: `${PATH.editprofile}/:id`,
         element: <EditProfile />
       },
       {
-        path: PATH.paymentConfirm, // Đường dẫn cho PaymentConfirmation
+        path: PATH.paymentConfirm,
         element: <PaymentComfirm />,
       },
     ],
@@ -148,3 +153,4 @@ const router = [
   },
 ];
 export const Router = () => useRoutes(router);
+  

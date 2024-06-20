@@ -5,3 +5,12 @@
 :where(.css-dev-only-do-not-override-17seli4).ant-form-item {
     margin-bottom: 15px;
 }
+
+:where(.css-dev-only-do-not-override-17seli4).ant-tabs-top >.ant-tabs-nav::before {
+    border-bottom: 2px solid #efefef !important;
+}
+
+.ant-tabs-ink-bar {
+    height: 5px;
+    background: #f43f5e !important;
+  }

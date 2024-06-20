@@ -15,7 +15,6 @@ import { PATH } from "../../../constant";
 import { Button, Form, InputNumber } from "antd";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
-  const navigate = useNavigate();
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
@@ -30,6 +29,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   ]);
 
   const [isOverlap, setIsOverlap] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Thêm trạng thái loading
 
   const handleSelect = (ranges) => {
     setState([ranges.selection]);
@@ -71,7 +71,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        localStorage.setItem('bookingData', JSON.stringify(values)); // Store booking data in localStorage
+        localStorage.setItem('bookingData', JSON.stringify(values));
         const paymentResponse = await axios.post("https://server-lovat-theta.vercel.app/payment", {
           amount: chiTietPhong?.giaTien * 10000,
           orderInfo: "Thanh toán đặt phòng",
@@ -79,10 +79,9 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
           cancelUrl: `${window.location.origin}/details`,
           ipnUrl: 'https://webhook.site/5254fac2-369f-4f25-b13b-0ad3a1f1e5e0'
         });
-    
+
         const { order_url } = paymentResponse.data;
-        console.log(paymentResponse.data);
-    
+
         // Redirect user to the payment URL
         if (order_url) {
           window.location.href = order_url;
@@ -92,6 +91,8 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
 
       } catch (error) {
         console.error("Error processing payment:", error);
+      } finally {
+        setIsLoading(false); // Tắt trạng thái loading
       }
     }
   });
@@ -100,6 +101,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     if (isOverlap) {
       alert('Phòng đã được đặt trong khoảng thời gian này.');
     } else {
+      setIsLoading(true); // Bật trạng thái loading
       formik.handleSubmit();
     }
   };
@@ -115,11 +117,11 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
       />
       <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
         <Form.Item label="Số lượng khách">
-        <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" min={1} max={2} />
+          <input type="number" onChange={formik.handleChange} className="border-[1px] border-black p-[12px] rounded-[5px] my-[10px] w-[100px]" name="soLuongKhach" min={1} max={2} />
         </Form.Item>
         {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
-        <Button  htmlType="submit" className="w-full bg-rose-500 text-white transition-all ease-in-out" disabled={isOverlap}>
-          Đặt phòng
+        <Button htmlType="submit" className="w-full bg-rose-500 text-white transition-all ease-in-out" disabled={isOverlap || isLoading}>
+          {isLoading ? 'Đang xử lý...' : 'Đặt phòng'}
         </Button>
       </Form>
     </div>

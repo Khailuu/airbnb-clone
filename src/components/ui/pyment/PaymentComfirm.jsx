@@ -9,11 +9,8 @@ export const PaymentComfirm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const mutation = usePostDatPhong();
-  console.log(location)
 
   useEffect(() => {
-    // const { orderId, return_code } = queryString.parse(location.search);
-    // console.log("Query params:", { orderId, return_code });
     const return_code = "1"
     if (return_code) { // Check if '1' indicates a successful payment
       const bookingData = JSON.parse(localStorage.getItem('bookingData'));

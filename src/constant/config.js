@@ -8,6 +8,7 @@ export const PATH = {
     payment: '/payment',
     paymentConfirm: '/payment-confirm',
     user: '/userinfo',
+    likeroom: '/userinfo/likeroom',
     editprofile: '/userinfo/editprofile',
     quanlydatphong: '/admin/quanlydatphong',
     themdatphong: '/admin/quanlydatphong/themdatphong',

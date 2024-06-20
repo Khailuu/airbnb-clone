@@ -5,10 +5,10 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../../constant";
 import { toast } from "react-toastify";
-import { usePostPhong } from '../../../../hooks/api/quanLyPhongApi/usePostPhong'
+import { usePostPhong } from "../../../../hooks/api/quanLyPhongApi/usePostPhong";
 
 export const ThemPhong = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [dataBox, setDataBox] = useState([
     "mayGiat",
     "tivi",
@@ -20,7 +20,7 @@ export const ThemPhong = () => {
     "bep",
     "wifi",
   ]);
-  const mutation = usePostPhong()
+  const mutation = usePostPhong();
   const onFinishSign = (values) => {
     let newData = [];
     dataBox.forEach((item) => {
@@ -29,13 +29,13 @@ export const ThemPhong = () => {
     let dataSend = { ...values, ...newData };
     mutation.mutate(dataSend, {
       onSuccess: () => {
-        toast.success("Thêm Phòng Mới Thành Công")
-        navigate(PATH.quanlythongtinphong)
+        toast.success("Thêm Phòng Mới Thành Công");
+        navigate(PATH.quanlythongtinphong);
       },
       onError: () => {
-        toast.error("Thêm Phòng Mới Thất Bại!")
-      }
-    })
+        toast.error("Thêm Phòng Mới Thất Bại!");
+      },
+    });
   };
   const onChange = (checkedValues) => {
     setDataBox(checkedValues);
@@ -212,7 +212,7 @@ export const ThemPhong = () => {
             </Col>
           </Row>
         </Checkbox.Group>
-        <Form.Item >
+        <Form.Item>
           <Button className="mt-5" type="primary" htmlType="submit">
             Đăng Kí
           </Button>

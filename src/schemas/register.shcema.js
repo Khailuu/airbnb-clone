@@ -1,21 +1,14 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-    name: z.string({required_error: "Please enter your full name !"}).min(2),
-    email: z.string({required_error: "Please enter your email !"}).min(1),
-    password: z.string({required_error: "Please enter password to 1 from 10 character!"}).min(1).max(10),
-    phone: z.string({required_error: "Please enter your phone number"}).min(10).max(10),
-    birthday: z.string({required_error: "Please select your birthday !"})
-
-})
-
-// {
-//     "id": 0,
-//     "name": "string",
-//     "email": "string",
-//     "password": "string",
-//     "phone": "string",
-//     "birthday": "string",
-//     "gender": true,
-//     "role": "string"
-//   }
+  name: z.string().nonempty("Full Name is required"),
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must include uppercase, lowercase, number, and special character"
+    ),
+  phone: z.string().regex(/^\d{10,11}$/, "Invalid phone number"),
+});
