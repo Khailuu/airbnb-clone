@@ -4,17 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../store/quanLyPhong/slice";
-import {
-  AirIcon,
-  IronIcon,
-  KichenIcon,
-  ParkIcon,
-  PoolIcon,
-  RefrigeratorIcon,
-  TiviIcon,
-  WashIcon,
-  WifiIcon,
-} from "../../utils/IconSVG";
+import { RenderComforts } from '../../utils/RenderComforts'
 
 export const HomeTemplate = () => {
   const navigate = useNavigate();
@@ -100,7 +90,7 @@ export const HomeTemplate = () => {
                       Chi tiết
                     </NavLink>
                   </div>
-                  <div className="flex">{renderComforts(phong, "mx-1")}</div>
+                  <div className="flex">{RenderComforts(phong, "mx-1")}</div>
                 </div>
               </div>
               <div
@@ -156,74 +146,6 @@ export const HomeTemplate = () => {
           </button>
         )}
       </div>
-    </div>
-  );
-};
-
-export let itemsHome = [
-  {
-    key: "tivi",
-    icon: <TiviIcon />,
-    name: "Tivi 32in",
-  },
-  {
-    key: "dieuHoa",
-    icon: <AirIcon />,
-    name: "Điều hòa",
-  },
-  {
-    key: "mayGiat",
-    icon: <RefrigeratorIcon />,
-    name: "Máy giặt miễn phí",
-  },
-  {
-    key: "doXe",
-    icon: <ParkIcon />,
-    name: "Bãi đỗ xe",
-  },
-  {
-    key: "banLa",
-    icon: <IronIcon />,
-    name: "Bàn là",
-  },
-  {
-    key: "wifi",
-    icon: <WifiIcon />,
-    name: "Wifi",
-  },
-  {
-    key: "bep",
-    icon: <KichenIcon />,
-    name: "Bếp",
-  },
-  {
-    key: "banUi",
-    icon: <WashIcon />,
-    name: "Bàn ủi",
-  },
-  {
-    key: "hoBoi",
-    icon: <PoolIcon />,
-    name: "Hồ bơi",
-  },
-];
-
-export const renderComforts = (data, element, note) => {
-  let keyArray = [];
-  for (const key in data) {
-    if (data[key] === true) {
-      keyArray.push(key);
-    }
-  }
-  let homeComforts = itemsHome.filter((item) => keyArray.includes(item.key));
-  return (
-    <div className="iphone-6:grid-cols-8 grid">
-      {homeComforts.map((item, i) => (
-        <p key={i} className={element}>
-          {item.icon}
-          {note === "isRoom" && <span>{item.name}</span>}
-        </p>
-      ))}
     </div>
   );
 };

@@ -12,14 +12,13 @@ import { RoomComment } from "./RoomComment";
 import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
 
 export const RoomDetail = () => {
-
   const { id: maPhong } = useParams();
 
   const { data: chiTietPhong, refetch } = useGetPhongTheoId(maPhong);
 
   useEffect(() => {
-    refetch()
-  }, [maPhong])
+    refetch();
+  }, [maPhong]);
 
   return (
     <div className="container mx-auto my-[40px]">
@@ -27,11 +26,13 @@ export const RoomDetail = () => {
         <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
           {chiTietPhong?.tenPhong}
         </h2>
-        <img
-          src={chiTietPhong?.hinhAnh}
-          alt="hinhChiTiet"
-          className="w-full rounded-3xl"
-        />
+        <div className="grid grid-cols-3">
+          <img
+            src={chiTietPhong?.hinhAnh}
+            alt="hinhChiTiet"
+            className="col-span-3 w-full rounded-3xl"
+          />
+        </div>
       </div>
       <div className="grid grid-cols-3 my-[30px] gap-[100px]">
         <div className="col-span-3 xl:col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-3">

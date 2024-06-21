@@ -2,24 +2,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
 import { useGetViTriTheoId } from "../../../hooks/api/quanLyViTriApi/useGetViTriTheoId";
-import { HeartOutlined } from "@ant-design/icons";
 import { PATH } from "../../../constant";
 import { locationVN } from "./dataLocation";
 import { MapRoom } from "./MapRoom";
 import { quanLyViTriService } from "../../../services/QuanLyViTriService";
-import {
-  AirIcon,
-  IronIcon,
-  KichenIcon,
-  ParkIcon,
-  PoolIcon,
-  RefrigeratorIcon,
-  TiviIcon,
-  WashIcon,
-  WifiIcon,
-} from "../../../utils/IconSVG";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
 import { useDispatch, useSelector } from "react-redux";
+import { RenderComforts } from "../../../utils/RenderComforts";
+
 
 export const RoomList = () => {
   const { id: maViTri } = useParams();
@@ -129,7 +119,7 @@ export const RoomList = () => {
                         </NavLink>
                       </div>
                       <div className="flex">
-                        {renderComforts(phong, "mx-1")}
+                        {RenderComforts(phong, "mx-1")}
                       </div>
                     </div>
                   </div>
@@ -197,74 +187,6 @@ export const RoomList = () => {
         {viTriKV?.tinhThanh} - {viTriKV?.quocGia}{" "}
       </h2>
       {renderRoomList()}
-    </div>
-  );
-};
-
-export let itemsHome = [
-  {
-    key: "tivi",
-    icon: <TiviIcon />,
-    name: "Tivi 32in",
-  },
-  {
-    key: "dieuHoa",
-    icon: <AirIcon />,
-    name: "Điều hòa",
-  },
-  {
-    key: "mayGiat",
-    icon: <RefrigeratorIcon />,
-    name: "Máy giặt miễn phí",
-  },
-  {
-    key: "doXe",
-    icon: <ParkIcon />,
-    name: "Bãi đỗ xe",
-  },
-  {
-    key: "banLa",
-    icon: <IronIcon />,
-    name: "Bàn là",
-  },
-  {
-    key: "wifi",
-    icon: <WifiIcon />,
-    name: "Wifi",
-  },
-  {
-    key: "bep",
-    icon: <KichenIcon />,
-    name: "Bếp",
-  },
-  {
-    key: "banUi",
-    icon: <WashIcon />,
-    name: "Bàn ủi",
-  },
-  {
-    key: "hoBoi",
-    icon: <PoolIcon />,
-    name: "Hồ bơi",
-  },
-];
-
-export const renderComforts = (data, element, note) => {
-  let keyArray = [];
-  for (const key in data) {
-    if (data[key] === true) {
-      keyArray.push(key);
-    }
-  }
-  let homeComforts = itemsHome.filter((item) => keyArray.includes(item.key));
-  return (
-    <div className="iphone-6:grid-cols-7 grid">
-      {homeComforts.map((item, i) => (
-        <p key={i} className={element}>
-          {item.icon}
-          {note === "isRoom" && <span>{item.name}</span>}
-        </p>
-      ))}
     </div>
   );
 };
