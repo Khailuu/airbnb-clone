@@ -106,7 +106,7 @@ export const HomeTemplate = () => {
               <div
                 style={{
                   position: "absolute",
-                  top: "15%",
+                  top: "8%",
                   right: "5%",
                 }}
               >

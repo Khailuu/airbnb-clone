@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -8,6 +8,9 @@ import { PATH } from "../../../constant";
 import { useDeletePhongDaDat } from "../../../hooks/api/quanLyDatPhongApi/useDeletePhongDaDat";
 import { useGetDatPhongTheoNguoiDung } from "../../../hooks/api/quanLyDatPhongApi/useGetDatPhongTheoNguoiDung";
 import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
+import { CloseIcon } from "../../../utils/IconSVG";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
@@ -28,15 +31,21 @@ export const UserComponent = () => {
       : selectRoom;
   });
 
+  useEffect(() => {
+    if (userLogin?.user.avatar === "") {
+      toast.error("Vui lòng cập nhật avatar để xác thực tài khoản");
+    }
+  }, []);
+
   const deleteRoom = (id) => {
-    setDeletingRoomId(id); 
+    setDeletingRoomId(id);
     deleteMutation.mutate(id, {
       onSuccess: () => {
         refetch();
         setDeletingRoomId(null);
       },
       onError: () => {
-        setDeletingRoomId(null); 
+        setDeletingRoomId(null);
       },
     });
   };
@@ -44,11 +53,11 @@ export const UserComponent = () => {
   const renderBookedRooms = () => {
     if (newData?.length > 0) {
       return newData.map((room, index) => (
-        <div key={index} className="flex my-8">
+        <div key={index} className="flex my-8 flex-col lg:flex-row ">
           <img
             src={room.hinhAnh}
             alt="Room"
-            className="mr-4 w-48 rounded-lg flex-none"
+            className="mr-4 lg:w-48 rounded-lg w-full flex-none"
           />
           <div className="flex-grow">
             <h3
@@ -99,7 +108,7 @@ export const UserComponent = () => {
   return (
     <div className="container mx-auto my-10">
       <div className="grid grid-cols-3 gap-[30px]">
-        <div className="border p-4 rounded-lg max-h-[450px] xs:col-span-3 xl-col-span-1 md:col-span-1 lg:col-span-1 sm:col-span-3 col-span-3">
+        <div className="border p-4 rounded-lg max-h-[450px] xs:col-span-3 xl-col-span-1 md:col-span-3 lg:col-span-1 sm:col-span-3 col-span-3">
           <div className="flex lg:block xl:block md:block items-center">
             <div className="text-center">
               <Avatar />
@@ -121,7 +130,7 @@ export const UserComponent = () => {
             </div>
           </div>
         </div>
-        <div className="xs:col-span-3 xl-col-span-2 md:col-span-2 lg:col-span-2 sm:col-span-3 col-span-3">
+        <div className="xs:col-span-3 xl-col-span-2 md:col-span-3 lg:col-span-2 sm:col-span-3 col-span-3">
           <h2 className="text-2xl mb-2 text-rose-500 font-bold">
             Xin chào, {userLogin?.user.name}
           </h2>

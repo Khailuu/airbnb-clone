@@ -39,7 +39,6 @@ export const { reducer: quanLyNguoiDungReducer, actions: quanLyNguoiDungAction }
             state.isFetchingLogin = true;
         })
         .addCase(quanLyNguoiDungActionThunks.loginThunk.fulfilled, (state, { payload }) => {
-            console.log(payload)
             state.isFetchingLogin = false;
             localStorage.setItem(LOCAL_USER_LOGIN_KEY, JSON.stringify(payload.content));
             state.userLogin = payload.content;

@@ -13,6 +13,7 @@ export const Header = () => {
             <NavLink to={PATH.home}>
               <IconAirbnb />
             </NavLink>
+            <NavBar />
             <UserMenu />
           </div>
         </div>

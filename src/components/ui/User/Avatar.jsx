@@ -4,12 +4,12 @@ import { quanLyUserServices } from "../../../services/QuanLyUser";
 import { toast } from "react-toastify";
 import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
 import { Button, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export const Avatar = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const dispatch = useDispatch();
   const [imgURL, setImgURL] = useState(userLogin?.user.avatar);
-
   useEffect(() => {
     setImgURL(userLogin?.user.avatar);
   }, [userLogin]);
@@ -32,6 +32,7 @@ export const Avatar = () => {
         dispatch(quanLyNguoiDungAction.updateUserAvatar(newAvatarURL));
         setImgURL(newAvatarURL);
         toast.success("Avatar đã được cập nhật.");
+
       })
       .catch((err) => {
         console.error(err);

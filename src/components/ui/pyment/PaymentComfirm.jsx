@@ -13,7 +13,6 @@ export const PaymentComfirm = () => {
     const return_code = "1"
     if (return_code) {
       const bookingData = JSON.parse(localStorage.getItem('bookingData'));
-      console.log("Booking data:", bookingData);
 
       if (bookingData) {
         mutation.mutate(bookingData, {

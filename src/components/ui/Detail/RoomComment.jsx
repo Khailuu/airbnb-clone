@@ -67,7 +67,7 @@ export const RoomComment = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-[30px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
         {binhLuan?.map((v) => (
           <div
             key={v.id}

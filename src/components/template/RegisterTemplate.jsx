@@ -9,6 +9,7 @@ import { PATH } from "../../constant";
 import { IconAirbnb } from "../IconAirbnb";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../schemas/register.shcema";
+import moment from "moment";
 
 export const RegisterTemplate = () => {
   const {
@@ -22,14 +23,14 @@ export const RegisterTemplate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isFetchingRegister } = useSelector(
-    (state) => state.quanLyNguoiDung
-  );
+  const { isFetchingRegister } = useSelector((state) => state.quanLyNguoiDung);
 
   const onSubmit = (values) => {
+    const formattedBirthday = moment(values.birthday).format("DD-MM-YYYY");
+
     const payload = {
       ...values,
-      birthday: values.birthday ? values.birthday.format("YYYY-MM-DD") : null,
+      birthday: formattedBirthday,
       role: "USER", // format date before submitting
     };
 
@@ -145,6 +146,7 @@ export const RegisterTemplate = () => {
               className="mb-[10px]"
               {...field}
               onChange={(date) => {
+                console.log(date);
                 field.onChange(date);
               }}
             />
