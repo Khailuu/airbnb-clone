@@ -10,7 +10,7 @@ export const RenderComforts = (data, element, note) => {
   }
   let homeComforts = itemsHome.filter((item) => keyArray.includes(item.key));
   return (
-    <div className="iphone-6:grid-cols-7 grid">
+    <div className="iphone-6:grid-cols-8 grid">
       {homeComforts.map((item, i) => (
         <p key={i} className={element}>
           {item.icon}

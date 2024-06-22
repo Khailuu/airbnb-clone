@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import { RoomComment } from "./RoomComment";
 import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
+import { RenderComforts } from "../../../utils/RenderComforts";
 
 export const RoomDetail = () => {
   const { id: maPhong } = useParams();
@@ -99,80 +100,7 @@ export const RoomDetail = () => {
           <hr className="my-[20px]" />
           <div>
             <h3 className="font-bold text-[20px] mb-[12px]">Tiện nghi</h3>
-            <div className="grid grid-cols-2">
-              {chiTietPhong?.bep && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Bếp </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.mayGiat && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Máy Giặt </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.banLa && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Bàn Là </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.tivi && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Tivi </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.dieuHoa && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Điều Hoà </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.wifi && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Wifi </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.doXe && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Bãi đỗ xe </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.hoBoi && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Hồ bơi </span>
-                  </div>
-                </div>
-              )}
-              {chiTietPhong?.banUi && (
-                <div className="mb-[15px]">
-                  <div>
-                    <LinkOutlined />
-                    <span> Bàn Ủi </span>
-                  </div>
-                </div>
-              )}
-            </div>
+            <div className="flex my-[30px]">{RenderComforts(chiTietPhong, "mx-1")}</div>
             <button className="border-black border-solid border-[1px] p-[12px] rounded-[8px]">
               Hiển thị tất cả 24 tiện nghi
             </button>
