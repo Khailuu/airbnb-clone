@@ -8,6 +8,7 @@ import { store } from "./store/index.js";
 import { ReactToastifyProvider } from "./contexts/ReactToastifyProvider.jsx";
 import { ReactQueryProvider } from "./contexts/ReactQueryProvider.jsx";
 import { RefetchProvider } from "./contexts/RefetchProvider.jsx";
+import './utils/i18n.js'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ReactToastifyProvider>

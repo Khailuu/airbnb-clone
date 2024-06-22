@@ -5,8 +5,10 @@ import { PATH } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../store/quanLyPhong/slice";
 import { RenderComforts } from '../../utils/RenderComforts'
+import { useTranslation } from "react-i18next";
 
 export const HomeTemplate = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate();
   const { data: lstPhong } = useGetPhong();
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ export const HomeTemplate = () => {
   return (
     <div className="mb-[40px]">
       <h2 className="text-rose-500 text-[32px] font-bold mb-[30px]">
-        Những địa điểm được yêu thích
+        {t("diaDiemYeuThich")}
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
         {lstPhong?.slice(0, visibleCount).map((phong) => {
@@ -76,18 +78,18 @@ export const HomeTemplate = () => {
                 <div className="p-3">
                   <h2 className="font-bold">{tenPhong}</h2>
                   <div className="pt-4 pb-2">
-                    <span className="span-gray">{khach} khách</span>
-                    <span className="span-gray">{phongNgu} phòng ngủ</span>
-                    <span className="span-gray">{giuong} giường</span>
-                    <span className="span-gray">{phongTam} phòng tắm</span>
+                    <span className="span-gray">{khach} {t('khach')}</span>
+                    <span className="span-gray">{phongNgu} {t("phongNgu")}</span>
+                    <span className="span-gray">{giuong} {t("giuong")}</span>
+                    <span className="span-gray">{phongTam} {t("phongTam")}</span>
                     <span className="span-gray bg-yellow-300  ">
-                      {giaTien}$/đêm
+                      {giaTien}$/{t("dem")}
                     </span>
                     <NavLink
                       to={`${PATH.details}/${id}`}
                       className="span-gray text-gray-50 bg-rose-500 hover:text-white"
                     >
-                      Chi tiết
+                      {t("chiTiet")}
                     </NavLink>
                   </div>
                   <div className="flex">{RenderComforts(phong, "mx-1")}</div>
@@ -134,7 +136,7 @@ export const HomeTemplate = () => {
             className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
             onClick={handleSeeMore}
           >
-            Xem thêm
+            {t("xemThem")}
           </button>
         )}
         {seeMoreClicked && (
@@ -142,7 +144,7 @@ export const HomeTemplate = () => {
             className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
             onClick={handleHide}
           >
-            Ẩn bớt
+            {t("anBot")}
           </button>
         )}
       </div>

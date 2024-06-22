@@ -4,6 +4,8 @@ import { NavBar } from "./Navbar/NavBar";
 import { NavLink } from "react-router-dom";
 import { PATH } from "../../constant";
 import { IconAirbnb } from "../IconAirbnb";
+import { LanguageSwitcher } from "./Navbar/LanguageSwitcher";
+
 export const Header = () => {
   return (
     <div style={{ top: 0 }} className="sticky bg-white z-10 shadow-sm">
@@ -14,7 +16,10 @@ export const Header = () => {
               <IconAirbnb />
             </NavLink>
             <NavBar />
-            <UserMenu />
+            <div className="flex items-center gap-4">
+              <UserMenu />
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </div>

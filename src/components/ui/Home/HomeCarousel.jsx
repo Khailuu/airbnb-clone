@@ -9,10 +9,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
-import { lstIcon } from "./lstIcon"; // Import the lstIcon array
+import { lstIcon } from "./lstIcon";
 import { RenderComforts } from "../../../utils/RenderComforts";
+import { useTranslation } from "react-i18next";
 
 export const HomeCarousel = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: listViTriPhanTrang, refetch: refetchViTri } =
     useGetViTriPhanTran();
@@ -101,18 +103,26 @@ export const HomeCarousel = () => {
               <div className="p-3">
                 <h2 className="font-bold">{tenPhong}</h2>
                 <div className="pt-4 pb-2">
-                  <span className="span-gray">{khach} khách</span>
-                  <span className="span-gray">{phongNgu} phòng ngủ</span>
-                  <span className="span-gray">{giuong} giường</span>
-                  <span className="span-gray">{phongTam} phòng tắm</span>
+                  <span className="span-gray">
+                    {khach} {t("khach")}
+                  </span>
+                  <span className="span-gray">
+                    {phongNgu} {t("phongNgu")}
+                  </span>
+                  <span className="span-gray">
+                    {giuong} {t("giuong")}
+                  </span>
+                  <span className="span-gray">
+                    {phongTam} {t("phongTam")}
+                  </span>
                   <span className="span-gray bg-yellow-300  ">
-                    {giaTien}$/đêm
+                    {giaTien}$/{t("dem")}
                   </span>
                   <NavLink
                     to={`${PATH.details}/${id}`}
                     className="span-gray text-gray-50 bg-rose-500 hover:text-white"
                   >
-                    Chi tiết
+                    {t("chiTiet")}
                   </NavLink>
                 </div>
                 <div className="flex">{RenderComforts(phong, "mx-1")}</div>
@@ -153,9 +163,7 @@ export const HomeCarousel = () => {
         );
       });
     }
-    return (
-      <div className="text-[24px] text-rose-500">Hệ thống đang cập nhật...</div>
-    );
+    return <div className="text-[24px] text-rose-500">{t("viTriCapNhat")}</div>;
   };
 
   const settings = {
@@ -218,7 +226,7 @@ export const HomeCarousel = () => {
                 navigate(`${PATH.roomlist}/${viTri.id}`);
               }}
             >
-              Xem thêm
+              {t("xemThem")}
             </button>
           </div>
         )}
@@ -232,12 +240,12 @@ export const HomeCarousel = () => {
         {lstIcon.map((icon, i) => (
           <div className="flex flex-col aligns-center" key={i}>
             <img className="mx-auto !w-[20px] " src={icon.hinhAnh} alt="icon" />
-            <p className="text-[12px] text-center mt-[8px]">{icon.text}</p>
+            <p className="text-[12px] text-center mt-[8px]">{t(icon.text)}</p>
           </div>
         ))}
       </Slider>
       <h2 className="text-rose-500 text-[32px] font-bold mb-[30px]">
-        Khám phá những điểm nổi tiếng
+        {t("diaDiemNoiTieng")}
       </h2>
       <Tabs
         onChange={(key) => {

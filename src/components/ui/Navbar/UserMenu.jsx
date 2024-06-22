@@ -8,11 +8,13 @@ import { LOCAL_LIKE_CART, LOCAL_USER_LOGIN_KEY, PATH } from "../../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
+import { useTranslation } from "react-i18next";
 
 export const UserMenu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
@@ -21,9 +23,9 @@ export const UserMenu = () => {
 
   const handleDangXuat = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
-    localStorage.removeItem(LOCAL_LIKE_CART)
+    localStorage.removeItem(LOCAL_LIKE_CART);
     dispatch(quanLyNguoiDungAction.updateUserLogin(null));
-    dispatch(quanLyPhongActions.deleteCart(null))
+    dispatch(quanLyPhongActions.deleteCart(null));
     navigate(PATH.login);
   };
 
@@ -45,10 +47,10 @@ export const UserMenu = () => {
       return (
         <div className="flex flex-col">
           <NavLink to={"/login"}>
-            <Button className="mb-[10px] w-full">Đăng Nhập</Button>
+            <Button className="mb-[10px] w-full">{t("login")}</Button>
           </NavLink>
           <NavLink to={"/register"}>
-            <Button>Đăng Ký</Button>
+            <Button>{t("register")}</Button>
           </NavLink>
         </div>
       );
@@ -59,11 +61,13 @@ export const UserMenu = () => {
           <>
             <div className="flex flex-col">
               <NavLink to={"/userinfo"}>
-                <Button className="w-full mb-[15px]">Thông tin cá nhân</Button>
+                <Button className="w-full mb-[15px]">
+                  {t("personal_info")}
+                </Button>
               </NavLink>
               <NavLink to={PATH.likeroom}>
                 <Button className="w-full mb-[15px]">
-                  Danh sách phòng yêu thích
+                  {t("favorite_rooms")}
                 </Button>
               </NavLink>
               <Button
@@ -71,7 +75,7 @@ export const UserMenu = () => {
                   handleDangXuat();
                 }}
               >
-                Đăng xuất
+                {t("logout")}
               </Button>
             </div>
           </>
@@ -82,22 +86,24 @@ export const UserMenu = () => {
           <>
             <div className="flex flex-col">
               <NavLink to={"/userinfo"}>
-                <Button className="w-full mb-[15px]">Thông tin cá nhân</Button>
+                <Button className="w-full mb-[15px]">
+                  {t("personal_info")}
+                </Button>
               </NavLink>
               <NavLink to={PATH.likeroom}>
                 <Button className="w-full mb-[15px]">
-                  Danh sách phòng yêu thích
+                  {t("favorite_rooms")}
                 </Button>
               </NavLink>
               <NavLink to={PATH.quanlynguoidung}>
-                <Button className="w-full mb-[15px]">Dành cho admin</Button>
+                <Button className="w-full mb-[15px]">{t("admin")}</Button>
               </NavLink>
               <Button
                 onClick={() => {
                   handleDangXuat();
                 }}
               >
-                Đăng xuất
+                {t("logout")}
               </Button>
             </div>
           </>
@@ -110,7 +116,7 @@ export const UserMenu = () => {
     <div className="relative">
       <div className="flex flex-row items-center gap-1">
         <div className="text-gray-500 hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-          Trở thành chủ nhà <GlobalOutlined />
+          {t("become_host")} <GlobalOutlined />
         </div>
         <Popover
           content={renderUser()}

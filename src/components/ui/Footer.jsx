@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { PATH } from "../../constant";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div className="w-full">
       <footer className="px-4 divide-y bg-gray-100 text-gray-800">
@@ -23,7 +25,7 @@ export const Footer = () => {
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">
               <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">
-                Giới thiệu
+                {t("Giới thiệu")}
               </h3>
               <ul className="space-y-1">
                 <li>
@@ -31,7 +33,7 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
-                    Phương thức hoạt động
+                    {t("Phương thức hoạt động")}
                   </a>
                 </li>
                 <li>
@@ -39,7 +41,7 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
-                    Lý tưởng
+                    {t("Lý tưởng")}
                   </a>
                 </li>
                 <li>
@@ -47,7 +49,7 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
-                    Nhà đầu tư
+                    {t("Nhà đầu tư")}
                   </a>
                 </li>
                 <li>
@@ -55,14 +57,14 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
-                    Cơ hội nghề nghiệp
+                    {t("Cơ hội nghề nghiệp")}
                   </a>
                 </li>
               </ul>
             </div>
             <div className="space-y-3">
               <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">
-                Dịch vụ
+                {t("Dịch vụ")}
               </h3>
               <ul className="space-y-1">
                 <li>
@@ -71,7 +73,7 @@ export const Footer = () => {
                     className="hover:text-red-500 duration-300"
                     href="https://www.facebook.com/"
                   >
-                    Tổ chức tour
+                    {t("Tổ chức tour")}
                   </a>
                 </li>
                 <li>
@@ -80,7 +82,7 @@ export const Footer = () => {
                     className="hover:text-red-500 duration-300"
                     href="https://www.facebook.com/"
                   >
-                    Trở thành đối tác
+                    {t("Trở thành đối tác")}
                   </a>
                 </li>
                 <li>
@@ -89,13 +91,13 @@ export const Footer = () => {
                     className="hover:text-red-500 duration-300"
                     href="https://www.facebook.com/"
                   >
-                    Cộng đồng
+                    {t("Cộng đồng")}
                   </a>
                 </li>
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className=" uppercase text-rose-500 text-[25px]">Hỗ trợ</h3>
+              <h3 className=" uppercase text-rose-500 text-[25px]">{t("Hỗ trợ")}</h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -103,7 +105,7 @@ export const Footer = () => {
                     className="hover:text-red-500 duration-300"
                     href="https://www.facebook.com/"
                   >
-                    Trung tâm trợ giúp
+                    {t("Trung tâm trợ giúp")}
                   </a>
                 </li>
                 <li>
@@ -112,7 +114,7 @@ export const Footer = () => {
                     className="hover:text-red-500 duration-300"
                     href="https://www.facebook.com/"
                   >
-                    Tùy chọn hủy
+                    {t("Tùy chọn hủy")}
                   </a>
                 </li>
                 <li>
@@ -121,7 +123,7 @@ export const Footer = () => {
                     href="https://www.facebook.com/"
                     className="hover:text-red-500 duration-300"
                   >
-                    Biện pháp mùa dịch
+                   {t(" Biện pháp mùa dịch")}
                   </a>
                 </li>
               </ul>
