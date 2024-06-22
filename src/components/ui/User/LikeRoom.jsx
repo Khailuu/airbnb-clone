@@ -2,23 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
-import {
-  AirIcon,
-  IronIcon,
-  KichenIcon,
-  ParkIcon,
-  PoolIcon,
-  RefrigeratorIcon,
-  TiviIcon,
-  WashIcon,
-  WifiIcon,
-} from "../../../utils/IconSVG";
+import { RenderComforts } from "../../../utils/RenderComforts";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
+import { Button, message, Popconfirm } from "antd";
+import { toast } from "react-toastify";
 
 export const LikeRoom = () => {
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const confirm = (item) => {
+    dispatch(quanLyPhongActions.addLikeCart(item));
+    toast.success("Bỏ thích thành công");
+  };
 
   if (!likeCart || likeCart.length === 0) {
     return (
@@ -82,15 +79,27 @@ export const LikeRoom = () => {
                   </Link>
                 </div>
                 <div className="flex justify-between">
-                  <div className="flex">{renderComforts(item, "mx-1")}</div>
-                  <button
+                  <div className="flex">{RenderComforts(item, "mx-1")}</div>
+                  <Popconfirm
+                    description="Bạn có chắc chắn muốn bỏ thích ?"
+                    onConfirm={() => {
+                      confirm(item);
+                    }}
+                    okText="Đống ý"
+                    cancelText="Huỷ bỏ"
+                  >
+                    <Button className="w-[100px] rounded-[8px] bg-rose-500 text-white hover:bg-rose-600 transition-all ease-in-out">
+                      Bỏ thích
+                    </Button>
+                  </Popconfirm>
+                  {/* <button
                     className="w-[100px] rounded-[8px] bg-rose-500 p-[10px] text-white hover:bg-rose-600 transition-all ease-in-out"
                     onClick={() => {
                       dispatch(quanLyPhongActions.addLikeCart(item));
                     }}
                   >
                     Bỏ thích
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </section>
@@ -99,68 +108,4 @@ export const LikeRoom = () => {
       </div>
     </div>
   );
-};
-
-export let itemsHome = [
-  {
-    key: "tivi",
-    icon: <TiviIcon />,
-    name: "Tivi 32in",
-  },
-  {
-    key: "dieuHoa",
-    icon: <AirIcon />,
-    name: "Điều hòa",
-  },
-  {
-    key: "mayGiat",
-    icon: <RefrigeratorIcon />,
-    name: "Máy giặt miễn phí",
-  },
-  {
-    key: "doXe",
-    icon: <ParkIcon />,
-    name: "Bãi đỗ xe",
-  },
-  {
-    key: "banLa",
-    icon: <IronIcon />,
-    name: "Bàn là",
-  },
-  {
-    key: "wifi",
-    icon: <WifiIcon />,
-    name: "Wifi",
-  },
-  {
-    key: "bep",
-    icon: <KichenIcon />,
-    name: "Bếp",
-  },
-  {
-    key: "banUi",
-    icon: <WashIcon />,
-    name: "Bàn ủi",
-  },
-  {
-    key: "hoBoi",
-    icon: <PoolIcon />,
-    name: "Hồ bơi",
-  },
-];
-
-export const renderComforts = (data, element, note) => {
-  let keyArray = [];
-  for (const key in data) {
-    if (data[key] === true) {
-      keyArray.push(key);
-    }
-  }
-  let homeComforts = itemsHome.filter((item) => keyArray.includes(item.key));
-  return homeComforts.map((item, i) => (
-    <p key={i} className={element}>
-      {item.icon}
-      {note === "isRoom" && <span>{item.name}</span>}
-    </p>
-  ));
 };

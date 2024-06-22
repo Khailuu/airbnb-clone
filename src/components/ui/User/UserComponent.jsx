@@ -11,6 +11,12 @@ import { useGetPhong } from "../../../hooks/api/quanLyPhongApi/useGetPhong";
 import { CloseIcon } from "../../../utils/IconSVG";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { RenderComforts } from "../../../utils/RenderComforts";
+import { message, Popconfirm } from "antd";
+const confirm = (e) => {
+  console.log(e);
+  message.success("Click on Yes");
+};
 
 export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
@@ -75,26 +81,31 @@ export const UserComponent = () => {
             </p>
             <p className="text-gray-500">Ngày trả phòng: {room.ngayDi}</p>
             <hr className="w-[100%] mt-[10px]" />
-            <p className="mt-[10px] text-[14px] text-gray-500">
-              {room?.mayGiat ? "Máy giặt " : ""}
-              {room?.bep ? "- Bếp " : ""}
-              {room?.dieuHoa ? "- Điều hoà " : ""}
-              {room?.doXe ? "- Bãi đỗ xe " : ""}
-              {room?.hoBoi ? "- Hồ bơi " : ""}
-              {room?.tivi ? "- Tivi " : ""}
-              {room?.wifi ? "- Wifi " : ""}
-              {room?.banLa ? "- Bàn là " : ""}
-              {room?.banUi ? "- Bàn ủi " : ""}
-            </p>
+            <div className="flex mt-[10px]">{RenderComforts(room, "mx-1")}</div>
             <div className="mt-4 flex justify-between items-center w-full">
               <p>Giá tiền: ${room.giaTien}</p>
-              <Button
+              {/* <Button
                 loading={deletingRoomId === room.idDelete}
                 onClick={() => deleteRoom(room.idDelete || room.id)}
                 className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
               >
                 Huỷ Phòng
-              </Button>
+              </Button> */}
+              <Popconfirm
+                description="Bạn có chắc chắn muốn huỷ phòng?"
+                onConfirm={() => {
+                  deleteRoom(room.idDelete || room.id);
+                }}
+                okText="Đồng ý"
+                cancelText="Huỷ bỏ"
+              >
+                <Button
+                  loading={deletingRoomId === room.idDelete}
+                  className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
+                >
+                  Huỷ Phòng
+                </Button>
+              </Popconfirm>
             </div>
           </div>
         </div>

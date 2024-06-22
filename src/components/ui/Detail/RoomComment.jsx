@@ -33,6 +33,7 @@ export const RoomComment = () => {
       mutation.mutate(values, {
         onSuccess: () => {
           formik.resetForm();
+          toast.success('Thêm bình luận thành công')
           refetch();
         },
       });
