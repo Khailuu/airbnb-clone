@@ -8,16 +8,17 @@ import { useSelector } from "react-redux";
 import { useDeleteBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/useDeleteBinhLuan";
 import { toast } from "react-toastify";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 export const RoomComment = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
-
+  const { t } = useTranslation();
   const { id: maPhong } = useParams();
   const { data: binhLuan, refetch } = useGetBinhLuanTheoMaPhong(maPhong);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const mutation = usePostBinhLuan();
-  const mutaionDelete = useDeleteBinhLuan()
+  const mutaionDelete = useDeleteBinhLuan();
   const strDate = `${currDate} ${currTime}`;
 
   const formik = useFormik({
@@ -33,7 +34,7 @@ export const RoomComment = () => {
       mutation.mutate(values, {
         onSuccess: () => {
           formik.resetForm();
-          toast.success('Thêm bình luận thành công')
+          toast.success("Thêm bình luận thành công");
           refetch();
         },
       });
@@ -44,23 +45,24 @@ export const RoomComment = () => {
     refetch();
   }, [maPhong, refetch]);
 
-
-
   const renderIcon = (id) => {
     if (userLogin?.user.role === "ADMIN") {
       return (
         <div className="flex my-[20px]">
-          <DeleteOutlined style={{ color: "red" }} onClick={() => {
-            mutaionDelete.mutate(id, {
-              onSuccess: () => {
-                refetch()
-                toast.success("Xoá bình luận thanh công!")
-              },
-              onError: (err) => {
-                toast.error(err?.message)
-              }
-            })
-          }}/>
+          <DeleteOutlined
+            style={{ color: "red" }}
+            onClick={() => {
+              mutaionDelete.mutate(id, {
+                onSuccess: () => {
+                  refetch();
+                  toast.success("Xoá bình luận thanh công!");
+                },
+                onError: (err) => {
+                  toast.error(err?.message);
+                },
+              });
+            }}
+          />
         </div>
       );
     }
@@ -70,10 +72,7 @@ export const RoomComment = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
         {binhLuan?.map((v) => (
-          <div
-            key={v.id}
-            className="border-[1px] rounded-[8px] p-[20px]"
-          >
+          <div key={v.id} className="border-[1px] rounded-[8px] p-[20px]">
             <div className="flex mb-[30px]">
               <img
                 className="rounded-full w-[60px] h-[60px]"
@@ -112,8 +111,9 @@ export const RoomComment = () => {
         ))}
       </div>
       <h2 className="mt-[30px] text-rose-500 text-[25px] font-bold mb-[30px]">
-        Hãy để lại bình luận của bạn để chúng tôi có thể hoàn thiện tốt hơn cho
-        lần phục vụ tiếp theo:
+        {t(
+          "Hãy để lại bình luận của bạn để chúng tôi có thể hoàn thiện tốt hơn cho lần phục vụ tiếp theo:"
+        )}
       </h2>
       <form onSubmit={formik.handleSubmit}>
         <textarea
@@ -135,14 +135,14 @@ export const RoomComment = () => {
           name="saoBinhLuan"
           value={formik.values.saoBinhLuan}
         />
-        <span> : Số sao</span>
+        <span> : {t("Số sao")}</span>
         <Button
           htmlType="submit"
           className="bg-rose-500 rounded-[6px] text-white"
           style={{ display: "block" }}
           loading={mutation.isPending}
         >
-          Thêm Bình Luận
+          {t("Thêm Bình Luận")}
         </Button>
       </form>
     </div>

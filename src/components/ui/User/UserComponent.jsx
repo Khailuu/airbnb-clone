@@ -74,9 +74,9 @@ export const UserComponent = () => {
                 navigate(`${PATH.details}/${room?.id}`);
               }}
             >
-              {room.tenPhong}
+              {t(room.tenPhong)}
             </h3>
-            <p className="text-gray-500">{room?.soLuongKhach} khách</p>
+            <p className="text-gray-500">{room?.soLuongKhach} {t("khach")}</p>
             <hr className="w-[10%] mt-[10px]" />
             <p className="text-gray-500 mt-4 mb-1">
               {t("Ngày nhận phòng")}: {room.ngayDen}

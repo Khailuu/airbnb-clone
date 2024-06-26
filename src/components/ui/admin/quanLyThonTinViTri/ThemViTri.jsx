@@ -1,16 +1,16 @@
-import React from 'react';
-import { usePostViTri } from '../../../../hooks/api/quanLyViTriApi/usePostViTri';
-import { useState } from 'react';
-import { Button, Form, Input, Radio } from 'antd';
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { PATH } from '../../../../constant';
-import { toast } from 'react-toastify';
+import React from "react";
+import { usePostViTri } from "../../../../hooks/api/quanLyViTriApi/usePostViTri";
+import { useState } from "react";
+import { Button, Form, Input, Radio } from "antd";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../../../constant";
+import { toast } from "react-toastify";
 
 export const ThemViTri = () => {
   const mutation = usePostViTri();
   const navigate = useNavigate();
-  const [componentSize, setComponentSize] = useState('default');
+  const [componentSize, setComponentSize] = useState("default");
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
@@ -19,21 +19,21 @@ export const ThemViTri = () => {
   const formik = useFormik({
     initialValues: {
       id: 0,
-      tenViTri: '',
-      tinhThanh: '',
-      quocGia: '',
-      hinhAnh: '',
+      tenViTri: "",
+      tinhThanh: "",
+      quocGia: "",
+      hinhAnh: "",
     },
     onSubmit: (values) => {
       mutation.mutate(values, {
         onSuccess: () => {
-          toast.success('Thêm Vị Trí Thành Công');
+          toast.success("Thêm Vị Trí Thành Công");
           formik.resetForm();
-          triggerRefetch();
+          // triggerRefetch();
           navigate(PATH.quanlythongtinvitri);
         },
         onError: () => {
-          toast.error('Thêm Vị Trí Thất Bại!');
+          toast.error("Thêm Vị Trí Thất Bại!");
         },
       });
     },
@@ -49,7 +49,7 @@ export const ThemViTri = () => {
         wrapperCol={{
           span: 14,
         }}
-        layout='horizontal'
+        layout="horizontal"
         initialValues={{
           size: componentSize,
         }}
@@ -59,27 +59,29 @@ export const ThemViTri = () => {
           maxWidth: 600,
         }}
       >
-        <Form.Item label='Form Size' name='size'>
+        <Form.Item label="Form Size" name="size">
           <Radio.Group>
-            <Radio.Button value='small'>Small</Radio.Button>
-            <Radio.Button value='default'>Default</Radio.Button>
-            <Radio.Button value='large'>Large</Radio.Button>
+            <Radio.Button value="small">Small</Radio.Button>
+            <Radio.Button value="default">Default</Radio.Button>
+            <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label='Tên Vị Trí'>
-          <Input name='tenViTri' onChange={formik.handleChange} />
+        <Form.Item label="Tên Vị Trí">
+          <Input name="tenViTri" onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label='Tỉnh Thành'>
-          <Input name='tinhThanh' onChange={formik.handleChange} />
+        <Form.Item label="Tỉnh Thành">
+          <Input name="tinhThanh" onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label='Quốc Gia'>
-          <Input name='quocGia' onChange={formik.handleChange} />
+        <Form.Item label="Quốc Gia">
+          <Input name="quocGia" onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label='Hình Ảnh'>
-          <Input name='hinhAnh' onChange={formik.handleChange} />
+        <Form.Item label="Hình Ảnh">
+          <Input name="hinhAnh" onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label='Hành Động'>
-          <Button htmlType='submit'>Thêm Vị Trí</Button>
+        <Form.Item label="Hành Động">
+          <Button htmlType="submit" loading={mutation.isPending}>
+            Thêm Vị Trí
+          </Button>
         </Form.Item>
       </Form>
     </div>

@@ -8,15 +8,15 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: "vi",
-    debug: true,
+    fallbackLng: "en",
+    debug: false,
     interpolation: {
       escapeValue: false,
     },
     detection: {
       order: ["queryString", "cookie"],
       cache: ["cookie"],
-    },
+  },
   });
 
 export default i18n;

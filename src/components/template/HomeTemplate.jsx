@@ -76,7 +76,7 @@ export const HomeTemplate = () => {
                   alt="mainImage"
                 />
                 <div className="p-3">
-                  <h2 className="font-bold">{tenPhong}</h2>
+                  <h2 className="font-bold">{t(tenPhong)}</h2>
                   <div className="pt-4 pb-2">
                     <span className="span-gray">{khach} {t('khach')}</span>
                     <span className="span-gray">{phongNgu} {t("phongNgu")}</span>

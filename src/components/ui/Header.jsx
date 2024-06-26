@@ -18,11 +18,13 @@ export const Header = () => {
             <NavBar />
             <div className="flex items-center gap-4">
               <UserMenu />
-              <LanguageSwitcher />
+              <div className="iphone-6:absolute iphone-6:top-[70px] sm:static iphone-6-plus:absolute iphone-6-plus::top-[70px]">
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+    </div>
     </div>
   );
 };

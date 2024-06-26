@@ -4,10 +4,12 @@ import { toast } from 'react-toastify';
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 import queryString from 'query-string';
 import { PATH } from '../../../constant';
+import { useTranslation } from 'react-i18next';
 
 export const PaymentComfirm = () => {
   const navigate = useNavigate();
   const mutation = usePostDatPhong();
+  const { t } = useTranslation()
 
   useEffect(() => {
     const return_code = "1"
@@ -37,7 +39,7 @@ export const PaymentComfirm = () => {
 
   return (
     <div className='flex items-center justify-center'>
-      <h2 className='text-rose-500 text-[40px]'>Đang xử lý thanh toán...</h2>
+      <h2 className='text-rose-500 text-[40px]'>{t("Đang xử lý thanh toán...")}</h2>
     </div>
   );
 };

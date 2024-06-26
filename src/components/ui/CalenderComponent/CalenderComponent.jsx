@@ -10,8 +10,10 @@ import { getUserLogin } from "../../../utils/getUserLogin";
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
 import "../../../assets/style.css";
 import { Button, Form } from "antd";
+import { useTranslation } from "react-i18next";
 
 export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
+  const { t } = useTranslation();
   const { data: phongDat } = useGetDatPhong();
   const maPhongParse = parseInt(maPhong);
   const [ngayNhanPhong, setNgayNhanPhong] = useState("");
@@ -113,7 +115,8 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         className="date-range w-full"
       />
       <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
-        <Form.Item label="Số lượng khách">
+        <p>{t("Số lượng khách")}</p>
+        <Form.Item>
           <input
             type="number"
             onChange={formik.handleChange}
@@ -124,13 +127,15 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
             max={2}
           />
         </Form.Item>
-        {isOverlap && <p className="text-red-500 mb-[20px]">Hết phòng!</p>}
+        {isOverlap && (
+          <p className="text-red-500 mb-[20px]">{t("Hết phòng!")}</p>
+        )}
         <Button
           htmlType="submit"
           className="w-full bg-rose-500 text-white transition-all ease-in-out"
           disabled={isOverlap || isLoading}
         >
-          {isLoading ? "Đang xử lý..." : "Đặt phòng"}
+          {isLoading ? `${"Đang xử lý..."}` : `${t("Đặt phòng")}`}
         </Button>
       </Form>
     </div>

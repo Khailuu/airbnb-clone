@@ -12,7 +12,7 @@ export const HomeAnyWhere = () => {
         <div>
           <img
             className="rounded-[12px]"
-            style={{ height: 240, width: 480 }}
+            style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
             src="https://media.cnn.com/api/v1/images/stellar/prod/191011110307-02-australia-beautiful-places.jpg?q=w_2187,h_1230,x_0,y_0,c_fill/h_447"
           />
@@ -21,7 +21,7 @@ export const HomeAnyWhere = () => {
         <div>
           <img
             className="rounded-[12px]"
-            style={{ height: 240, width: 480 }}
+            style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
             src="https://vcdn1-dulich.vnecdn.net/2019/03/05/Phap-1-1551759006.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=WMZ8Cos1Tq-6Ad3YFrcJAg"
           />
@@ -30,7 +30,7 @@ export const HomeAnyWhere = () => {
         <div>
           <img
             className="rounded-[12px]"
-            style={{ height: 240, width: 480 }}
+            style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8HAbpDefQC8eNT4guUEpdoMAU46IWEEuMOg&s"
           />
@@ -40,7 +40,7 @@ export const HomeAnyWhere = () => {
         <div>
           <img
             className="rounded-[12px]"
-            style={{ height: 240, width: 480 }}
+            style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
             src="https://vj-prod-website-cms.s3.ap-southeast-1.amazonaws.com/shutterstock603577589huge-1676023759244.jpg"
           />
