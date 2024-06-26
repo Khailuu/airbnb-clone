@@ -9,9 +9,11 @@ import { quanLyViTriService } from "../../../services/QuanLyViTriService";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { RenderComforts } from "../../../utils/RenderComforts";
+import { useTranslation } from "react-i18next";
 
 
 export const RoomList = () => {
+  const { t } = useTranslation()
   const { id: maViTri } = useParams();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const { data: viTriKV, refetch: refetchViTri } = useGetViTriTheoId(maViTri);
@@ -104,18 +106,18 @@ export const RoomList = () => {
                     <div className="p-3">
                       <h2 className="font-bold">{tenPhong}</h2>
                       <div className="pt-4 pb-2">
-                        <span className="span-gray">{khach} khách</span>
-                        <span className="span-gray">{phongNgu} phòng ngủ</span>
-                        <span className="span-gray">{giuong} giường</span>
-                        <span className="span-gray">{phongTam} phòng tắm</span>
+                        <span className="span-gray">{khach} {t("khách")}</span>
+                        <span className="span-gray">{phongNgu} {t("phongNgu")}</span>
+                        <span className="span-gray">{giuong} {t("giuong")}</span>
+                        <span className="span-gray">{phongTam} {t("phongTam")}</span>
                         <span className="span-gray bg-yellow-300  ">
-                          {giaTien}$/đêm
+                          {giaTien}$/{t("dem")}
                         </span>
                         <NavLink
                           to={`${PATH.details}/${id}`}
                           className="span-gray text-gray-50 bg-rose-500 hover:text-white"
                         >
-                          Chi tiết
+                          {t("chiTiet")}
                         </NavLink>
                       </div>
                       <div className="flex">
@@ -174,7 +176,7 @@ export const RoomList = () => {
           className="w-[500px]"
         />
         <div className="text-[30px] text-rose-500">
-          Vị trí đang được cập nhật...
+          {t("Vị trí đang được cập nhật")}...
         </div>
       </div>
     );
@@ -183,7 +185,7 @@ export const RoomList = () => {
   return (
     <div className="my-[40px]">
       <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
-        Chỗ ở tại khu vực bản đồ đã chọn: {viTriKV?.tenViTri} -{" "}
+        {t("Chỗ ở tại khu vực bản đồ đã chọn")}: {viTriKV?.tenViTri} -{" "}
         {viTriKV?.tinhThanh} - {viTriKV?.quocGia}{" "}
       </h2>
       {renderRoomList()}

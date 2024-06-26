@@ -18,11 +18,11 @@ export const LanguageSwitcher = () => {
       style={{ width: 60 }}
       onChange={changeLanguage}
     >
-      <Option value="en">
-        <Flag code="us" />
-      </Option>
       <Option value="vi">
         <Flag code="vn" />
+      </Option>
+      <Option value="en">
+        <Flag code="us" />
       </Option>
     </Select>
   );

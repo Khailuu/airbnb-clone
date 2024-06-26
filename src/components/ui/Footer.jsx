@@ -25,7 +25,7 @@ export const Footer = () => {
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">
               <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">
-                {t("Giới thiệu")}
+                {t("GIỚI THIỆU")}
               </h3>
               <ul className="space-y-1">
                 <li>
@@ -64,7 +64,7 @@ export const Footer = () => {
             </div>
             <div className="space-y-3">
               <h3 className=" tracking-wide uppercase text-rose-500 text-[25px]">
-                {t("Dịch vụ")}
+                {t("DỊCH VỤ")}
               </h3>
               <ul className="space-y-1">
                 <li>
@@ -97,7 +97,7 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className=" uppercase text-rose-500 text-[25px]">{t("Hỗ trợ")}</h3>
+              <h3 className=" uppercase text-rose-500 text-[25px]">{t("HỖ TRỢ")}</h3>
               <ul className="space-y-1">
                 <li>
                   <a

@@ -6,11 +6,13 @@ import { RenderComforts } from "../../../utils/RenderComforts";
 import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
 import { Button, message, Popconfirm } from "antd";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export const LikeRoom = () => {
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const confirm = (item) => {
     dispatch(quanLyPhongActions.addLikeCart(item));
@@ -26,7 +28,7 @@ export const LikeRoom = () => {
           alt=""
         />
         <p className="mb-[20px] text-rose-500 text-[40px]">
-          Chưa có lựa chọn yêu thích nào !
+          {t("Chưa có lựa chọn yêu thích nào !")}
         </p>
       </div>
     );
@@ -35,7 +37,7 @@ export const LikeRoom = () => {
   return (
     <div className="container mx-auto my-[40px]">
       <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
-        Danh sách phòng yêu thích
+        {t("Danh sách phòng yêu thích")}
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
         {likeCart.map((item, i) => {
@@ -64,18 +66,26 @@ export const LikeRoom = () => {
                   alt="mainImage"
                 />
                 <div className="pt-4 pb-2">
-                  <span className="span-gray">{khach} khách</span>
-                  <span className="span-gray">{phongNgu} phòng ngủ</span>
-                  <span className="span-gray">{giuong} giường</span>
-                  <span className="span-gray">{phongTam} phòng tắm</span>
+                  <span className="span-gray">
+                    {khach} {t("khach")}
+                  </span>
+                  <span className="span-gray">
+                    {phongNgu} {t("phongNgu")}
+                  </span>
+                  <span className="span-gray">
+                    {giuong} {t("giuong")}
+                  </span>
+                  <span className="span-gray">
+                    {phongTam} {t("phongTam")}
+                  </span>
                   <span className="span-gray bg-yellow-300">
-                    {giaTien}$/đêm
+                    {giaTien}$/{t("dem")}
                   </span>
                   <Link
                     to={`${PATH.details}/${id}`}
                     className="span-gray text-gray-50 bg-red-500"
                   >
-                    Chi tiết
+                    {t("chiTiet")}
                   </Link>
                 </div>
                 <div className="flex justify-between">
@@ -89,7 +99,7 @@ export const LikeRoom = () => {
                     cancelText="Huỷ bỏ"
                   >
                     <Button className="w-[100px] rounded-[8px] bg-rose-500 text-white hover:bg-rose-600 transition-all ease-in-out">
-                      Bỏ thích
+                      {t("Bỏ thích")}
                     </Button>
                   </Popconfirm>
                   {/* <button

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { RenderComforts } from "../../../utils/RenderComforts";
 import { message, Popconfirm } from "antd";
+import { useTranslation } from "react-i18next";
 const confirm = (e) => {
   console.log(e);
   message.success("Click on Yes");
@@ -22,6 +23,7 @@ export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const [deletingRoomId, setDeletingRoomId] = useState(null);
   const navigate = useNavigate();
+  const { t } = useTranslation()
 
   const deleteMutation = useDeletePhongDaDat();
 
@@ -77,20 +79,13 @@ export const UserComponent = () => {
             <p className="text-gray-500">{room?.soLuongKhach} khách</p>
             <hr className="w-[10%] mt-[10px]" />
             <p className="text-gray-500 mt-4 mb-1">
-              Ngày nhận phòng: {room.ngayDen}
+              {t("Ngày nhận phòng")}: {room.ngayDen}
             </p>
-            <p className="text-gray-500">Ngày trả phòng: {room.ngayDi}</p>
+            <p className="text-gray-500">{t("Ngày trả phòng")}: {room.ngayDi}</p>
             <hr className="w-[100%] mt-[10px]" />
             <div className="flex mt-[10px]">{RenderComforts(room, "mx-1")}</div>
             <div className="mt-4 flex justify-between items-center w-full">
-              <p>Giá tiền: ${room.giaTien}</p>
-              {/* <Button
-                loading={deletingRoomId === room.idDelete}
-                onClick={() => deleteRoom(room.idDelete || room.id)}
-                className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
-              >
-                Huỷ Phòng
-              </Button> */}
+              <p>{t("Giá tiền")}: ${room.giaTien}</p>
               <Popconfirm
                 description="Bạn có chắc chắn muốn huỷ phòng?"
                 onConfirm={() => {
@@ -103,7 +98,7 @@ export const UserComponent = () => {
                   loading={deletingRoomId === room.idDelete}
                   className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
                 >
-                  Huỷ Phòng
+                  {t("Huỷ Phòng")}
                 </Button>
               </Popconfirm>
             </div>
@@ -112,7 +107,7 @@ export const UserComponent = () => {
       ));
     }
     if (newData?.length === 0) {
-      return <div className="text-rose-500">Lịch sử đặt phòng trống!</div>;
+      return <div className="text-rose-500">{t("Lịch sử đặt phòng trống!")}</div>;
     }
   };
 
@@ -126,9 +121,9 @@ export const UserComponent = () => {
             </div>
             <div className="md:mt-[10px] lg:mt-[10px] xl:mt-[10px]">
               <div className="ml-5">
-                <h2 className="">Xác minh danh tính</h2>
+                <h2 className="">{t("Xác minh danh tính")}</h2>
                 <button className="my-[20px] border p-2 rounded-lg">
-                  Nhận Huy Hiệu
+                  {t("Nhận Huy Hiệu")}
                 </button>
               </div>
               <hr className="ml-5 mb-[15px] w-[]" />
@@ -136,26 +131,26 @@ export const UserComponent = () => {
                 <CheckCircleOutlined
                   style={{ color: "green", fontSize: 30, marginLeft: 20 }}
                 />
-                <p className="ml-2">{userLogin?.user.name}: đã xác minh</p>
+                <p className="ml-2">{userLogin?.user.name}: {t("Đã xác minh")}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="xs:col-span-3 xl-col-span-2 md:col-span-3 lg:col-span-2 sm:col-span-3 col-span-3">
           <h2 className="text-2xl mb-2 text-rose-500 font-bold">
-            Xin chào, {userLogin?.user.name}
+            {t("Xin chào")}, {userLogin?.user.name}
           </h2>
-          <p className="text-gray-500">Bắt đầu tham gia vào 2024</p>
+          <p className="text-gray-500">{t("Bắt đầu tham gia vào 2024")}</p>
           <div className="my-8">
             <NavLink
               to={`${PATH.editprofile}/${userLogin?.user.id}`}
               style={{ textDecoration: "underline" }}
               className="hover:text-rose-500 transition-all"
             >
-              Chỉnh sửa thông tin
+              {t("Chỉnh sửa thông tin")}
             </NavLink>
           </div>
-          <h2 className="text-2xl">Phòng đã thuê:</h2>
+          <h2 className="text-2xl">{t("Phòng đã thuê")}:</h2>
           {renderBookedRooms()}
         </div>
       </div>
