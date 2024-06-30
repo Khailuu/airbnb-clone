@@ -1,8 +1,6 @@
-import React from 'react'
-import { PaymentComponent } from '../components/ui/pyment/PaymentComponent'
+import React from "react";
+import { PaymentComponent } from "../components/ui/pyment/PaymentComponent";
 
 export const Payment = () => {
-  return (
-    <PaymentComponent />
-  )
-}
+  return <PaymentComponent />;
+};

@@ -19,7 +19,6 @@ export const HomeCarousel = () => {
   const { data: listViTriPhanTrang, refetch: refetchViTri } =
     useGetViTriPhanTran();
   const [maViTri, setMaViTri] = useState(1);
-  const [visibleCount, setVisibleCount] = useState(2);
   const { data: phongByViTri, refetch } = useGetPhongTheoMaViTri(maViTri);
   const dispatch = useDispatch();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
@@ -36,8 +35,11 @@ export const HomeCarousel = () => {
   }, [phongByViTri, likeCart]);
 
   useEffect(() => {
-    refetch();
+    refetchViTri();
   }, [maViTri]);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     const passiveSupported = (() => {
@@ -77,7 +79,7 @@ export const HomeCarousel = () => {
 
   const renderRoomList = () => {
     if (phongByViTri?.length > 0) {
-      return phongByViTri?.slice(0, visibleCount).map((phong) => {
+      return phongByViTri?.slice(0, 2).map((phong) => {
         let {
           id,
           hinhAnh,

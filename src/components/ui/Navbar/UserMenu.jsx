@@ -30,7 +30,7 @@ export const UserMenu = () => {
     localStorage.removeItem(LOCAL_USER_LOGIN_KEY);
     localStorage.removeItem(LOCAL_LIKE_CART);
     dispatch(quanLyNguoiDungAction.updateUserLogin(null));
-    dispatch(quanLyPhongActions.deleteCart(null));
+    dispatch(quanLyPhongActions.deleteCart([]));
     navigate(PATH.login);
   };
 

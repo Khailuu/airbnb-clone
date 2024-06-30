@@ -57,7 +57,6 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
     setIsOverlap(overlap);
   }, [state, phongDat]);
 
-  const mutation = usePostDatPhong();
   const formik = useFormik({
     initialValues: {
       maPhong: maPhongParse,

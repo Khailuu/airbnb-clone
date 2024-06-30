@@ -16,7 +16,6 @@ export const { reducer: quanLyPhongReducer, actions: quanLyPhongActions } =
         const index = state.likeCart.findIndex((like) => {
           return like.id === action.payload.id;
         });
-        console.log(index);
         if (index !== -1) {
           state.likeCart.splice(index, 1);
           localStorage.setItem(LOCAL_LIKE_CART, JSON.stringify(state.likeCart));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useGetPhong } from "../../../../hooks/api/quanLyPhongApi/useGetPhong";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -11,6 +11,10 @@ export const QuanLyThongTinPhong = () => {
   const { data: lstPhong, refetch } = useGetPhong();
   const mutation = useDeletePhong();
   const navigate = useNavigate()
+
+  useEffect(() => {
+    refetch()
+  }, [])
 
 
   const handleDelete = (id) => {

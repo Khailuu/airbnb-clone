@@ -4,13 +4,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../store/quanLyPhong/slice";
-import { RenderComforts } from '../../utils/RenderComforts'
+import { RenderComforts } from "../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
 
 export const HomeTemplate = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: lstPhong } = useGetPhong();
+  const { data: lstPhong, refetch } = useGetPhong();
   const dispatch = useDispatch();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
 
@@ -27,6 +27,10 @@ export const HomeTemplate = () => {
       setFavoriteStatus(initialStatus || {});
     }
   }, [lstPhong, likeCart]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const toggleFavorite = (phong) => {
     setFavoriteStatus((prevStatus) => ({
@@ -78,10 +82,18 @@ export const HomeTemplate = () => {
                 <div className="p-3">
                   <h2 className="font-bold">{t(tenPhong)}</h2>
                   <div className="pt-4 pb-2">
-                    <span className="span-gray">{khach} {t('khach')}</span>
-                    <span className="span-gray">{phongNgu} {t("phongNgu")}</span>
-                    <span className="span-gray">{giuong} {t("giuong")}</span>
-                    <span className="span-gray">{phongTam} {t("phongTam")}</span>
+                    <span className="span-gray">
+                      {khach} {t("khach")}
+                    </span>
+                    <span className="span-gray">
+                      {phongNgu} {t("phongNgu")}
+                    </span>
+                    <span className="span-gray">
+                      {giuong} {t("giuong")}
+                    </span>
+                    <span className="span-gray">
+                      {phongTam} {t("phongTam")}
+                    </span>
                     <span className="span-gray bg-yellow-300  ">
                       {giaTien}$/{t("dem")}
                     </span>

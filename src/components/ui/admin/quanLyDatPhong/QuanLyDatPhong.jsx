@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
@@ -12,6 +12,10 @@ export const QuanLyDatPhong = () => {
   const { data: lstDatPhong, refetch } = useGetDatPhong();
   const mutationDeleteND = useDeletePhongDaDat();
   const navigate = useNavigate()
+
+  useEffect(() => {
+    refetch()
+  }, [])
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xoá người dùng này không?")) {
