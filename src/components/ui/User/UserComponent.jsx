@@ -40,6 +40,7 @@ export const UserComponent = () => {
   });
 
   useEffect(() => {
+    refetch()
     if (userLogin?.user.avatar === "") {
       toast.error("Vui lòng cập nhật avatar để xác thực tài khoản");
     }
