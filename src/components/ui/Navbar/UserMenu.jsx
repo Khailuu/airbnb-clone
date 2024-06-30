@@ -1,4 +1,4 @@
-import { Avatar } from "antd";
+import { Avatar, Popconfirm } from "antd";
 import React, { useState } from "react";
 import { GlobalOutlined, UserOutlined } from "@ant-design/icons";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -15,6 +15,11 @@ export const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const confirm = () => {
+    dispatch(quanLyPhongActions.deleteCart([]));
+    handleDangXuat();
+  };
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
@@ -70,13 +75,22 @@ export const UserMenu = () => {
                   {t("favorite_rooms")}
                 </Button>
               </NavLink>
-              <Button
-                onClick={() => {
-                  handleDangXuat();
+              <Popconfirm
+                description="Khi đăng xuất dữ liệu phòng yêu thích sẽ bị xoá!"
+                onConfirm={() => {
+                  confirm();
                 }}
+                okText={t("Đồng ý")}
+                cancelText={t("Huỷ bỏ")}
               >
-                {t("logout")}
-              </Button>
+                <Button
+                // onClick={() => {
+                //   handleDangXuat();
+                // }}
+                >
+                  {t("logout")}
+                </Button>
+              </Popconfirm>
             </div>
           </>
         );
@@ -98,13 +112,24 @@ export const UserMenu = () => {
               <NavLink to={PATH.quanlynguoidung}>
                 <Button className="w-full mb-[15px]">{t("admin")}</Button>
               </NavLink>
-              <Button
-                onClick={() => {
-                  handleDangXuat();
+              <Popconfirm
+                description={t(
+                  "Khi đăng xuất dữ liệu phòng yêu thích sẽ bị xoá!"
+                )}
+                onConfirm={() => {
+                  confirm();
                 }}
+                okText={t("Đồng ý")}
+                cancelText={t("Huỷ bỏ")}
               >
-                {t("logout")}
-              </Button>
+                <Button
+                // onClick={() => {
+                //   handleDangXuat();
+                // }}
+                >
+                  {t("logout")}
+                </Button>
+              </Popconfirm>
             </div>
           </>
         );

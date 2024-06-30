@@ -4,9 +4,10 @@ import { quanLyUserServices } from "../../../services/QuanLyUser";
 import { toast } from "react-toastify";
 import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
 import { Button, Modal } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const Avatar = () => {
+  const { t } = useTranslation();
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const dispatch = useDispatch();
   const [imgURL, setImgURL] = useState(userLogin?.user.avatar);
@@ -31,8 +32,7 @@ export const Avatar = () => {
         const newAvatarURL = res.data.content.avatar;
         dispatch(quanLyNguoiDungAction.updateUserAvatar(newAvatarURL));
         setImgURL(newAvatarURL);
-        toast.success("Avatar đã được cập nhật.");
-
+        toast.success(`${t("Avatar đã được cập nhật.")}`);
       })
       .catch((err) => {
         console.error(err);
@@ -70,17 +70,17 @@ export const Avatar = () => {
           Upload Avatar
         </Button>
         <Modal
-          title="Basic Modal"
+          title={t("Chọn ảnh đại diện")}
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
         >
           <input
-          className="my-2"
-          type="file"
-          onChange={onChange}
-          accept="image/png, image/gif, image/jpeg"
-        />
+            className="my-2"
+            type="file"
+            onChange={onChange}
+            accept="image/png, image/gif, image/jpeg"
+          />
         </Modal>
         <br />
       </form>

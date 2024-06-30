@@ -46,12 +46,12 @@ export const EditViTri = () => {
     onSubmit: (values) => {
         mutation.mutate({id: viTri?.id, payload: values}, {
             onSuccess: () => {
-                toast.success("Thêm Vị Trí Thành Công")
+                toast.success("Update Vị Trí Thành Công")
                 formik.resetForm()
                 navigate(PATH.quanlythongtinvitri)
             },
             onError: () => {
-                toast.error("Thêm Vị Trí Thất Bại!")
+                toast.error("Update Vị Trí Thất Bại!")
             }
         })
     }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetBinhLuanTheoMaPhong } from "../../../hooks/api/quanLyBinhLuanApi/useGetBinhLuanTheoMaPhong";
 import { usePostBinhLuan } from "../../../hooks/api/quanLyBinhLuanApi/usePostBinhLuan";
@@ -15,6 +15,8 @@ export const RoomComment = () => {
   const { t } = useTranslation();
   const { id: maPhong } = useParams();
   const { data: binhLuan, refetch } = useGetBinhLuanTheoMaPhong(maPhong);
+  const [visibleCount, setVisibleCount] = useState(8);
+  const [seeMoreClicked, setSeeMoreClicked] = useState(false);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const mutation = usePostBinhLuan();
@@ -40,6 +42,16 @@ export const RoomComment = () => {
       });
     },
   });
+
+  const handleSeeMore = () => {
+    setVisibleCount(binhLuan.length);
+    setSeeMoreClicked(true);
+  };
+
+  const handleHide = () => {
+    setVisibleCount(10);
+    setSeeMoreClicked(false);
+  };
 
   useEffect(() => {
     refetch();
@@ -71,7 +83,7 @@ export const RoomComment = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
-        {binhLuan?.map((v) => (
+        {binhLuan?.slice(0, visibleCount).map((v) => (
           <div key={v.id} className="border-[1px] rounded-[8px] p-[20px]">
             <div className="flex mb-[30px]">
               <img
@@ -110,6 +122,24 @@ export const RoomComment = () => {
           </div>
         ))}
       </div>
+      <div className="flex justify-center my-[50px]">
+        {binhLuan?.length > 8 && !seeMoreClicked && (
+          <button
+            className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
+            onClick={handleSeeMore}
+          >
+            {t("xemThem")}
+          </button>
+        )}
+        {seeMoreClicked && (
+          <button
+            className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
+            onClick={handleHide}
+          >
+            {t("anBot")}
+          </button>
+        )}
+      </div>
       <h2 className="mt-[30px] text-rose-500 text-[25px] font-bold mb-[30px]">
         {t(
           "Hãy để lại bình luận của bạn để chúng tôi có thể hoàn thiện tốt hơn cho lần phục vụ tiếp theo:"
@@ -123,7 +153,7 @@ export const RoomComment = () => {
           name="noiDung"
           id=""
           cols="30"
-          rows="10"
+          rows="7"
           value={formik.values.noiDung}
         ></textarea>
         <input

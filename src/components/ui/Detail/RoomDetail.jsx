@@ -5,7 +5,6 @@ import {
   CopyOutlined,
   FilterOutlined,
   HomeOutlined,
-  LinkOutlined,
   StarOutlined,
 } from "@ant-design/icons";
 import { RoomComment } from "./RoomComment";

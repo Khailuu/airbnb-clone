@@ -10,5 +10,6 @@ export const quanLyPhongService = {
   getPhongThueTheoId: (id) => api.get(`/${id}`),
   deletePhong: (id) => api.delete(`/${id}`),
   addPhong: (payload) => api.post("", payload),
-  updatePhong: (id, payload) => api.put(`/phong/${id}`, payload),
+  updatePhong: (id, payload) => api.put(`${id}`, payload),
+
 };

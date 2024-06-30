@@ -9,10 +9,12 @@ import { quanLyNguoiDungActionThunks } from "../../store/quanLyNguoiDung";
 import { toast } from "react-toastify";
 import { PATH } from "../../constant";
 import { IconAirbnb } from "../IconAirbnb";
+import { useTranslation } from "react-i18next";
 
 export const LoginTemplate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -30,7 +32,7 @@ export const LoginTemplate = () => {
     dispatch(quanLyNguoiDungActionThunks.loginThunk(values))
       .unwrap()
       .then(() => {
-        toast.success("Login Success!");
+        toast.success(`${t("Login Success!")}`);
         if (role === "ADMIN") {
           navigate(PATH.quanlynguoidung);
         }
@@ -84,7 +86,11 @@ export const LoginTemplate = () => {
         <Button
           loading={isFetchingLogin}
           htmlType="submit"
-          style={{ backgroundColor: "rgb(244 63 94)", border: "none", transition: "all .3s" }}
+          style={{
+            backgroundColor: "rgb(244 63 94)",
+            border: "none",
+            transition: "all .3s",
+          }}
           size="large"
           className="!text-white w-[100%] !hover:bg-rose-700"
         >
@@ -92,7 +98,13 @@ export const LoginTemplate = () => {
         </Button>
       </div>
       <div className="mt-[15px] text-center">
-        <NavLink className="hover:text-rose-500" to={PATH.register} style={{ textDecoration: "underline", transition: "all .3s" }}>Bạn chưa có tài khoản ?</NavLink>
+        <NavLink
+          className="hover:text-rose-500"
+          to={PATH.register}
+          style={{ textDecoration: "underline", transition: "all .3s" }}
+        >
+          Bạn chưa có tài khoản ?
+        </NavLink>
       </div>
     </form>
   );

@@ -23,7 +23,7 @@ export const UserComponent = () => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDung);
   const [deletingRoomId, setDeletingRoomId] = useState(null);
   const navigate = useNavigate();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const deleteMutation = useDeletePhongDaDat();
 
@@ -76,27 +76,33 @@ export const UserComponent = () => {
             >
               {t(room.tenPhong)}
             </h3>
-            <p className="text-gray-500">{room?.soLuongKhach} {t("khach")}</p>
+            <p className="text-gray-500">
+              {room?.soLuongKhach} {t("khach")}
+            </p>
             <hr className="w-[10%] mt-[10px]" />
             <p className="text-gray-500 mt-4 mb-1">
               {t("Ngày nhận phòng")}: {room.ngayDen}
             </p>
-            <p className="text-gray-500">{t("Ngày trả phòng")}: {room.ngayDi}</p>
+            <p className="text-gray-500">
+              {t("Ngày trả phòng")}: {room.ngayDi}
+            </p>
             <hr className="w-[100%] mt-[10px]" />
             <div className="flex mt-[10px]">{RenderComforts(room, "mx-1")}</div>
             <div className="mt-4 flex justify-between items-center w-full">
-              <p>{t("Giá tiền")}: ${room.giaTien}</p>
+              <p>
+                {t("Giá tiền")}: ${room.giaTien}
+              </p>
               <Popconfirm
-                description="Bạn có chắc chắn muốn huỷ phòng?"
+                description={t("Bạn có chắc chắn muốn huỷ phòng?")}
                 onConfirm={() => {
                   deleteRoom(room.idDelete || room.id);
                 }}
-                okText="Đồng ý"
-                cancelText="Huỷ bỏ"
+                okText={t("Đồng ý")}
+                cancelText={t("Huỷ bỏ")}
               >
                 <Button
                   loading={deletingRoomId === room.idDelete}
-                  className="bg-rose-500 text-white !hover:bg-rose-900 rounded-lg"
+                  className="bg-rose-500 text-white w-[100px] !hover:bg-rose-900 rounded-lg"
                 >
                   {t("Huỷ Phòng")}
                 </Button>
@@ -107,7 +113,9 @@ export const UserComponent = () => {
       ));
     }
     if (newData?.length === 0) {
-      return <div className="text-rose-500">{t("Lịch sử đặt phòng trống!")}</div>;
+      return (
+        <div className="text-rose-500">{t("Lịch sử đặt phòng trống!")}</div>
+      );
     }
   };
 
@@ -131,7 +139,9 @@ export const UserComponent = () => {
                 <CheckCircleOutlined
                   style={{ color: "green", fontSize: 30, marginLeft: 20 }}
                 />
-                <p className="ml-2">{userLogin?.user.name}: {t("Đã xác minh")}</p>
+                <p className="ml-2">
+                  {userLogin?.user.name}: {t("Đã xác minh")}
+                </p>
               </div>
             </div>
           </div>

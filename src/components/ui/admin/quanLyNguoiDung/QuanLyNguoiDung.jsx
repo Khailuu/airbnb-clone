@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useGetNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useGetNguoiDung";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -11,7 +11,11 @@ import { NavLink } from "react-router-dom";
 export const QuanLyNguoiDung = () => {
   const { data: lstNguoiDung, refetch } = useGetNguoiDung();
   const mutationDeleteND = useDeleteNguoiDung();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xoá người dùng này không?")) {
@@ -77,14 +81,22 @@ export const QuanLyNguoiDung = () => {
         return (
           <div key={nguoiDung.id}>
             {nguoiDung.role === "ADMIN" ? (
-              <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH.editNguoiDung}/${nguoiDung.id}`)
-              }} style={{ color: "blue" }} />
+              <EditOutlined
+                className="mr-[15px]"
+                onClick={() => {
+                  navigate(`${PATH.editNguoiDung}/${nguoiDung.id}`);
+                }}
+                style={{ color: "blue" }}
+              />
             ) : (
               <>
-                <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH.editNguoiDung}/${nguoiDung.id}`)
-              }} style={{ color: "blue" }} />
+                <EditOutlined
+                  className="mr-[15px]"
+                  onClick={() => {
+                    navigate(`${PATH.editNguoiDung}/${nguoiDung.id}`);
+                  }}
+                  style={{ color: "blue" }}
+                />
                 <DeleteOutlined
                   onClick={() => handleDelete(nguoiDung.id)}
                   className="mr-[15px]"
@@ -98,10 +110,8 @@ export const QuanLyNguoiDung = () => {
     },
   ];
 
-
   return (
-
-     <div>
+    <div>
       <NavLink to={PATH.themnguoidung}>
         <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
           Thêm Người Dùng
@@ -109,7 +119,5 @@ export const QuanLyNguoiDung = () => {
       </NavLink>
       <Table columns={columns} dataSource={lstNguoiDung} rowKey="id" />
     </div>
-
-    
   );
 };

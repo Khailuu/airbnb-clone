@@ -3,15 +3,16 @@ import { Button, Form, Input, Radio, DatePicker } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { quanLyUserServices } from "../../../../services/QuanLyUser";
-import dayjs from 'dayjs'; // Import dayjs
-import advancedFormat from 'dayjs/plugin/advancedFormat'; // Import plugin for custom format
+import dayjs from "dayjs"; // Import dayjs
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import plugin for custom format
 import { useEditNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useEditNguoiDung";
 import { PATH } from "../../../../constant";
-import 'dayjs/locale/vi'; // Import Vietnamese locale for dayjs
-import localeData from 'dayjs/plugin/localeData'; // Import plugin for locale data
+import "dayjs/locale/vi"; // Import Vietnamese locale for dayjs
+import localeData from "dayjs/plugin/localeData"; // Import plugin for locale data
+import { toast } from "react-toastify";
 
 dayjs.extend(advancedFormat); // Extend dayjs with advanced formatting
-dayjs.locale('vi'); // Set default locale to Vietnamese
+dayjs.locale("vi"); // Set default locale to Vietnamese
 dayjs.extend(localeData);
 
 export const EditNguoiDung = () => {
@@ -22,7 +23,8 @@ export const EditNguoiDung = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    quanLyUserServices.getNguoiDungTheoId(parseId)
+    quanLyUserServices
+      .getNguoiDungTheoId(parseId)
       .then((res) => {
         setNguoiDung(res.data?.content);
       })
@@ -40,20 +42,24 @@ export const EditNguoiDung = () => {
     enableReinitialize: true,
     initialValues: {
       id: nguoiDung?.id || 0,
-       name: nguoiDung?.name || '',
-      email: nguoiDung?.email || '',
-      phone: nguoiDung?.phone || '',
-      birthday: nguoiDung?.birthday ,
+      name: nguoiDung?.name || "",
+      email: nguoiDung?.email || "",
+      phone: nguoiDung?.phone || "",
+      birthday: nguoiDung?.birthday,
       gender: nguoiDung?.gender || true,
-      role: nguoiDung?.role || ''
+      role: nguoiDung?.role || "",
     },
-    onSubmit: values => {
-      mutation.mutate({ id: nguoiDung?.id, payload: values }, {
-        onSuccess: () => {
-          navigate(PATH.quanlynguoidung);
+    onSubmit: (values) => {
+      mutation.mutate(
+        { id: nguoiDung?.id, payload: values },
+        {
+          onSuccess: () => {
+            toast.success("Cập nhật người dùng thành công");
+            navigate(PATH.quanlynguoidung);
+          },
         }
-      });
-    }
+      );
+    },
   });
 
   const handleChangeDatePicker = (date, dateString) => {
@@ -79,35 +85,66 @@ export const EditNguoiDung = () => {
         </Radio.Group>
       </Form.Item>
       <Form.Item label="Id">
-        <Input name="id" disabled value={formik.values.id} onChange={formik.handleChange} />
+        <Input
+          name="id"
+          disabled
+          value={formik.values.id}
+          onChange={formik.handleChange}
+        />
       </Form.Item>
       <Form.Item label="Name">
-        <Input name="name" value={formik.values.name} onChange={formik.handleChange} />
+        <Input
+          name="name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
       </Form.Item>
       <Form.Item label="Email">
-        <Input name="email" value={formik.values.email} onChange={formik.handleChange} />
+        <Input
+          name="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
       </Form.Item>
       <Form.Item label="Phone">
-        <Input name="phone" value={formik.values.phone} onChange={formik.handleChange} />
+        <Input
+          name="phone"
+          value={formik.values.phone}
+          onChange={formik.handleChange}
+        />
       </Form.Item>
       <Form.Item label="Birthday">
-        <DatePicker 
-          value={formik.values.birthday ? dayjs(formik.values.birthday, 'DD/MM/YYYY') : null} 
-          format='DD/MM/YYYY'
-          onChange={handleChangeDatePicker} 
+        <DatePicker
+          value={
+            formik.values.birthday
+              ? dayjs(formik.values.birthday, "DD/MM/YYYY")
+              : null
+          }
+          format="DD/MM/YYYY"
+          onChange={handleChangeDatePicker}
         />
       </Form.Item>
       <Form.Item label="Gender">
-        <Radio.Group name="gender" value={formik.values.gender} onChange={formik.handleChange}>
+        <Radio.Group
+          name="gender"
+          value={formik.values.gender}
+          onChange={formik.handleChange}
+        >
           <Radio value={true}>Male</Radio>
           <Radio value={false}>Female</Radio>
         </Radio.Group>
       </Form.Item>
       <Form.Item label="Role">
-        <Input name="role" value={formik.values.role} onChange={formik.handleChange} />
+        <Input
+          name="role"
+          value={formik.values.role}
+          onChange={formik.handleChange}
+        />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">Cập Nhật</Button>
+        <Button type="primary" htmlType="submit" loading={mutation.isPending}>
+          Cập Nhật
+        </Button>
       </Form.Item>
     </Form>
   );

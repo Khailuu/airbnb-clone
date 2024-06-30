@@ -9,9 +9,12 @@ import { useDeleteViTri } from "../../../../hooks/api/quanLyViTriApi/useDeleteVi
 
 export const QuanLyThongTinViTri = () => {
   const { data: lstViTri, refetch } = useGetViTri();
-  const mutationDeleteVT = useDeleteViTri()
-  const navigate = useNavigate()
+  const mutationDeleteVT = useDeleteViTri();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xoá vị trí này không?")) {
@@ -59,7 +62,7 @@ export const QuanLyThongTinViTri = () => {
       dataIndex: "hinhAnh",
       filterSearch: true,
       render: (_, viTri) => {
-        return <img key={viTri?.id} src={viTri.hinhAnh} alt="hinhAnhViTri" />
+        return <img key={viTri?.id} src={viTri.hinhAnh} alt="hinhAnhViTri" />;
       },
       width: "10%",
     },
@@ -70,27 +73,32 @@ export const QuanLyThongTinViTri = () => {
       render: (_, viTri) => {
         return (
           <div key={viTri?.id}>
-            <EditOutlined className="mr-[15px]" onClick={() => {
-                navigate(`${PATH.editvitri}/${viTri?.id}`)
-              }} style={{ color: "blue" }} />
-                <DeleteOutlined
-                  onClick={() => handleDelete(viTri?.id)}
-                  className="mr-[15px]"
-                  style={{ color: "red" }}
-                />
+            <EditOutlined
+              className="mr-[15px]"
+              onClick={() => {
+                navigate(`${PATH.editvitri}/${viTri?.id}`);
+              }}
+              style={{ color: "blue" }}
+            />
+            <DeleteOutlined
+              onClick={() => handleDelete(viTri?.id)}
+              className="mr-[15px]"
+              style={{ color: "red" }}
+            />
           </div>
         );
       },
     },
   ];
 
-
   return (
     <div>
       <NavLink to={PATH.themvitri}>
-        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">Thêm Vị Trí</button>
+        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
+          Thêm Vị Trí
+        </button>
       </NavLink>
-      <Table columns={columns} dataSource={lstViTri}  />
-    </div>    
+      <Table columns={columns} dataSource={lstViTri} />
+    </div>
   );
 };

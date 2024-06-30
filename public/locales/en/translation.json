@@ -107,5 +107,15 @@
   "Thêm Bình Luận": "Add Comment",
   "Đang xử lý thanh toán...": "Processing payment...",
   "Đơn hàng của bạn đã được thanh toán thành công!": "Your order has been successfully paid!",
-  "Quay lại trang chủ": "Back to HOME!"
+  "Quay lại trang chủ": "Back to HOME!",
+  "Chọn ảnh đại diện": "Choose Avatar",
+  "Đồng ý": "Yes",
+  "Huỷ bỏ": "No",
+  "Avatar đã được cập nhật.": "The avatar has been updated.",
+  "Khi đăng xuất dữ liệu phòng yêu thích sẽ bị xoá!": "When you log out, your favorite room data will be deleted!",
+  "Huỷ Phòng": "Cancel",
+  "Bạn có chắc chắn muốn huỷ phòng?": "Are you sure you want to cancel the room?",
+  "Đặt phòng thành công!": "Booking Success",
+  "Login Success!": "Login Success!",
+  "Đăng ký thành công!": "Register Success!"
 }

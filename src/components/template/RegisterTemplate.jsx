@@ -10,8 +10,10 @@ import { IconAirbnb } from "../IconAirbnb";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../schemas/register.shcema";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 export const RegisterTemplate = () => {
+  const { t } = useTranslation()
   const {
     handleSubmit,
     control,
@@ -37,11 +39,11 @@ export const RegisterTemplate = () => {
     dispatch(quanLyNguoiDungActionThunks.registerThunk(payload))
       .unwrap()
       .then(() => {
-        toast.success("Đăng ký thành công!");
+        toast.success(`${t("Đăng ký thành công!")}`);
         navigate(PATH.login);
       })
       .catch((err) => {
-        toast.error(err.response.data.content);
+        toast.error(err.response?.data?.content);
       });
   };
 

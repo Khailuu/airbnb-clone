@@ -19,7 +19,7 @@ export const PaymentComfirm = () => {
       if (bookingData) {
         mutation.mutate(bookingData, {
           onSuccess: () => {
-            toast.success("Đặt phòng thành công!");
+            toast.success(`${t("Đặt phòng thành công!")}`);
             navigate(PATH.payment);
           },
           onError: (error) => {

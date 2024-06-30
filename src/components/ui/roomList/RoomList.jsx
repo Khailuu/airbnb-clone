@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
 import { useGetViTriTheoId } from "../../../hooks/api/quanLyViTriApi/useGetViTriTheoId";
 import { PATH } from "../../../constant";
@@ -11,10 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RenderComforts } from "../../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
 
-
 export const RoomList = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { id: maViTri } = useParams();
+  const navigate = useNavigate();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const { data: viTriKV, refetch: refetchViTri } = useGetViTriTheoId(maViTri);
   const [currentPosition, setCurrentPosition] = useState(false);
@@ -106,10 +106,18 @@ export const RoomList = () => {
                     <div className="p-3">
                       <h2 className="font-bold">{t(tenPhong)}</h2>
                       <div className="pt-4 pb-2">
-                        <span className="span-gray">{khach} {t("khách")}</span>
-                        <span className="span-gray">{phongNgu} {t("phongNgu")}</span>
-                        <span className="span-gray">{giuong} {t("giuong")}</span>
-                        <span className="span-gray">{phongTam} {t("phongTam")}</span>
+                        <span className="span-gray">
+                          {khach} {t("khách")}
+                        </span>
+                        <span className="span-gray">
+                          {phongNgu} {t("phongNgu")}
+                        </span>
+                        <span className="span-gray">
+                          {giuong} {t("giuong")}
+                        </span>
+                        <span className="span-gray">
+                          {phongTam} {t("phongTam")}
+                        </span>
                         <span className="span-gray bg-yellow-300  ">
                           {giaTien}$/{t("dem")}
                         </span>

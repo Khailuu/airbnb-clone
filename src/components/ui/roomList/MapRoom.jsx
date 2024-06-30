@@ -3,20 +3,19 @@ import GoogleMapReact from "google-map-react";
 import { Popover } from "antd";
 import { randomNumber } from "../../../utils/randomNumber";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const MapRoom = ({ roomList, currentPosition }) => {
+  const { t } = useTranslation();
   const MyMark = ({ item }) => {
     const content = (
       <div className="flex flex-col w-80 md:w-96">
-        <Link
-          className="hover:cursor-pointer text-base font-semibold text-blue-400 hover:text-blue-700 duration-300 "
-        >
-          {item.tenPhong}
+        <Link className="hover:cursor-pointer text-base font-semibold text-blue-400 hover:text-blue-700 duration-300 ">
+          {t(item.tenPhong)}
         </Link>
         <img className="mx-auto" src={item.hinhAnh} alt="img_new" />
       </div>
     );
-    
 
     return (
       <Popover content={content}>
@@ -40,19 +39,25 @@ export const MapRoom = ({ roomList, currentPosition }) => {
     );
   };
   let { lat, lng } = currentPosition.center;
-  return <div style={{ height: "100%", width: "100%" }}>
-  {lat?<GoogleMapReact center={[lat, lng]} defaultZoom={12}>
-    {roomList?.map((item, i) => {
-      return (
-        <MyMark
-          key={i}
-          lat={lat + randomNumber(10) * 0.009}
-          lng={lng + randomNumber(10) * 0.009}
-          item={item}
-          center={[lat,lng]}
-        />
-      );
-    })}
-  </GoogleMapReact>:""}
-</div>;
+  return (
+    <div style={{ height: "100%", width: "100%" }}>
+      {lat ? (
+        <GoogleMapReact center={[lat, lng]} defaultZoom={12}>
+          {roomList?.map((item, i) => {
+            return (
+              <MyMark
+                key={i}
+                lat={lat + randomNumber(10) * 0.009}
+                lng={lng + randomNumber(10) * 0.009}
+                item={item}
+                center={[lat, lng]}
+              />
+            );
+          })}
+        </GoogleMapReact>
+      ) : (
+        ""
+      )}
+    </div>
+  );
 };
