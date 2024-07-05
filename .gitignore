@@ -26,8 +26,15 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+# Ignore environment files
 .env
-/tests/
-/tests-examples/
-jest.config.cjs 
+
+# Ignore test directories and files
+tests/
+tests-examples/
+
+# Ignore Jest configuration file
+jest.config.cjs
+
+# Ignore Babel configuration file
 babel.config.cjs
