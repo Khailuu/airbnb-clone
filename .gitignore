@@ -26,3 +26,8 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.env
+/tests/
+/tests-examples/
+jest.config.cjs 
+babel.config.cjs
