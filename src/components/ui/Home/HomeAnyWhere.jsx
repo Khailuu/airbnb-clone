@@ -14,7 +14,7 @@ export const HomeAnyWhere = () => {
             className="rounded-[12px]"
             style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
-            src="https://media.cnn.com/api/v1/images/stellar/prod/191011110307-02-australia-beautiful-places.jpg?q=w_2187,h_1230,x_0,y_0,c_fill/h_447"
+            src="https://a0.muscache.com/im/pictures/miso/Hosting-694055224756906854/original/76f85a0c-b3e2-4f1d-9aa9-d7838f2393c6.jpeg?im_w=2560&im_q=highq"
           />
           <h3 className="mt-[12px] font-bold">{t("toanBoNha")}</h3>
         </div>
@@ -23,7 +23,7 @@ export const HomeAnyWhere = () => {
             className="rounded-[12px]"
             style={{ objectFit: "center", height: 240, width: 480 }}
             alt="example"
-            src="https://vcdn1-dulich.vnecdn.net/2019/03/05/Phap-1-1551759006.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=WMZ8Cos1Tq-6Ad3YFrcJAg"
+            src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE2MjI1MjI0NDQ0MzYzMjM4Mg%3D%3D/original/ae3426d1-fba4-44d4-bed2-690426f25f7a.jpeg?im_w=2560&im_q=highq"
           />
           <h3 className="mt-[12px] font-bold">{t("choODocDao")}</h3>
         </div>

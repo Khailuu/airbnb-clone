@@ -30,6 +30,8 @@ export const RoomDetail = () => {
         </h2>
         <div className="grid grid-cols-3">
           <img
+            rel="preload"
+            fetchpriority="high"
             src={chiTietPhong?.hinhAnh}
             alt="hinhChiTiet"
             className="col-span-3 w-full rounded-3xl"

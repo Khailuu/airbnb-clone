@@ -17,12 +17,13 @@ export const LanguageSwitcher = () => {
       defaultValue={i18n.language}
       style={{ width: 60 }}
       onChange={changeLanguage}
+      aria-label="flag"
     >
       <Option value="en">
-        <Flag code="us" />
+        <Flag code="us" alt="flag" aria-label="Flag england" />
       </Option>
       <Option value="vi">
-        <Flag code="vn" />
+        <Flag code="vn" alt="flag" aria-label="Flag VietNam" />
       </Option>
     </Select>
   );

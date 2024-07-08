@@ -99,7 +99,7 @@ export const HomeTemplate = () => {
                     </span>
                     <NavLink
                       to={`${PATH.details}/${id}`}
-                      className="span-gray text-gray-50 bg-rose-500 hover:text-white"
+                      className="span-gray text-gray-50 bg-rose-600 hover:text-white"
                     >
                       {t("chiTiet")}
                     </NavLink>
@@ -115,6 +115,7 @@ export const HomeTemplate = () => {
                 }}
               >
                 <button
+                  aria-label="Icon heart"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent card click event
                     toggleFavorite(phong);

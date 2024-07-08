@@ -122,7 +122,7 @@ export const HomeCarousel = () => {
                   </span>
                   <NavLink
                     to={`${PATH.details}/${id}`}
-                    className="span-gray text-gray-50 bg-rose-500 hover:text-white"
+                    className="span-gray text-gray-50 bg-rose-600 hover:text-white"
                   >
                     {t("chiTiet")}
                   </NavLink>
@@ -138,6 +138,7 @@ export const HomeCarousel = () => {
               }}
             >
               <button
+                aria-label="Icon heart"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent card click event
                   toggleFavorite(phong);
@@ -211,7 +212,7 @@ export const HomeCarousel = () => {
           alt="hinhAnhViTri"
         />
         <div>
-          <p className="text-rose-400 my-3 font-bold">{viTri.tenViTri}</p>
+          <p className="text-rose-600 my-3 font-bold">{viTri.tenViTri}</p>
         </div>
       </div>
     ),

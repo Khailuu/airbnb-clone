@@ -4,7 +4,7 @@ import "./style.css";
 import { useGetViTri } from "../../../hooks/api/quanLyViTriApi/useGetViTri";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export const NavBar = () => {
   const { data: listViTri } = useGetViTri();
@@ -28,12 +28,13 @@ export const NavBar = () => {
 
   return (
     <AutoComplete
+      aria-label="Search location"
       onSelect={onSelect}
       size="large"
       className="iphone-6:!w-[150px] iphone-6-plus:!w-[150px] md:!w-[250px]"
       allowClear
       options={dataSearch}
-      placeholder={t('enter_destination')}
+      placeholder={t("enter_destination")}
       filterOption={(inputValue, option) =>
         option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }

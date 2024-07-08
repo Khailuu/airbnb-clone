@@ -30,6 +30,7 @@ export const Footer = () => {
               <ul className="space-y-1">
                 <li>
                   <a
+                    href="https://www.facebook.com/"
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
@@ -38,6 +39,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
+                    href="https://www.facebook.com/"
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
@@ -46,6 +48,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
+                    href="https://www.facebook.com/"
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
@@ -54,6 +57,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
+                    href="https://www.facebook.com/"
                     rel="noopener noreferrer"
                     className="hover:text-red-500 duration-300"
                   >
@@ -97,7 +101,9 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <h3 className=" uppercase text-rose-500 text-[25px]">{t("HỖ TRỢ")}</h3>
+              <h3 className=" uppercase text-rose-500 text-[25px]">
+                {t("HỖ TRỢ")}
+              </h3>
               <ul className="space-y-1">
                 <li>
                   <a
@@ -123,7 +129,7 @@ export const Footer = () => {
                     href="https://www.facebook.com/"
                     className="hover:text-red-500 duration-300"
                   >
-                   {t(" Biện pháp mùa dịch")}
+                    {t(" Biện pháp mùa dịch")}
                   </a>
                 </li>
               </ul>
@@ -132,25 +138,31 @@ export const Footer = () => {
               <div className="uppercase text-rose-500 text-[25px]">
                 Social media
               </div>
-              <div className="flex justify-start space-x-3">
+              <div className="flex justify-start flex-col space-x-3">
                 <a
                   rel="noopener noreferrer"
                   href="https://www.facebook.com/"
                   title="Facebook"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                ></a>
+                  className="p-1 hover:text-red-500 duration-300"
+                >
+                  Facebook
+                </a>
                 <a
                   rel="noopener noreferrer"
                   href="https://www.facebook.com/"
                   title="Twitter"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                ></a>
+                  className="p-1 !ml-0 hover:text-red-500 duration-300"
+                >
+                  Twitter
+                </a>
                 <a
                   rel="noopener noreferrer"
                   href="https://www.facebook.com/"
                   title="Instagram"
-                  className="flex items-center p-1 hover:text-red-500 duration-300"
-                ></a>
+                  className="p-1 !ml-0 hover:text-red-500 duration-300"
+                >
+                  Instagram
+                </a>
               </div>
             </div>
           </div>
