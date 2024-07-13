@@ -55,7 +55,6 @@ export const LikeRoom = () => {
           return (
             <section key={i} className="shadow-lg rounded  duration-300">
               <div className="p-3">
-                <h2 className="text-lg font-bold text-rose-400">{tenPhong}</h2>
                 <img
                   style={{ width: "100%", height: "auto" }}
                   className="hover:cursor-pointer"
@@ -65,6 +64,9 @@ export const LikeRoom = () => {
                   src={hinhAnh}
                   alt="mainImage"
                 />
+                <h2 className="text-lg font-bold mt-[10px] text-[14px]">
+                  {tenPhong}
+                </h2>
                 <div className="pt-4 pb-2">
                   <span className="span-gray">
                     {khach} {t("khach")}

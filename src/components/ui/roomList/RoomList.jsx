@@ -10,6 +10,7 @@ import { quanLyPhongActions } from "../../../store/quanLyPhong/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { RenderComforts } from "../../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "antd";
 
 export const RoomList = () => {
   const { t } = useTranslation();
@@ -68,7 +69,27 @@ export const RoomList = () => {
   }, [maViTri]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="my-[40px]">
+        <Skeleton paragraph={{ rows: 0 }} />
+        <div className="grid grid-cols-5 gap-[30px]">
+          <div className="xl:col-span-3 lg:col-span-3 col-span-5">
+            {[...Array(3)].map((_, index) => {
+              return (
+                <div style={{ position: "relative" }} key={index}>
+                  <div className="p-3">
+                    <Skeleton.Image className="!w-full !h-[250px]" active />
+                    <div className="p-3">
+                      <Skeleton className="font-bold"></Skeleton>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (isError) {

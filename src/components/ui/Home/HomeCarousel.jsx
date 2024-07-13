@@ -3,7 +3,7 @@ import { useGetViTriPhanTran } from "../../../hooks/api/quanLyViTriApi/useGetViT
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Tabs } from "antd";
+import { Skeleton, Tabs } from "antd";
 import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
 import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
@@ -19,7 +19,11 @@ export const HomeCarousel = () => {
   const { data: listViTriPhanTrang, refetch: refetchViTri } =
     useGetViTriPhanTran();
   const [maViTri, setMaViTri] = useState(1);
-  const { data: phongByViTri, refetch } = useGetPhongTheoMaViTri(maViTri);
+  const {
+    data: phongByViTri,
+    refetch,
+    isLoading,
+  } = useGetPhongTheoMaViTri(maViTri);
   const dispatch = useDispatch();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const [favoriteStatus, setFavoriteStatus] = useState({});
@@ -77,6 +81,25 @@ export const HomeCarousel = () => {
     dispatch(quanLyPhongActions.addLikeCart(phong));
   };
 
+  // if (isLoading) {
+  //   return (
+  //     <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
+  //       {[...Array(2)].map((_, index) => {
+  //         return (
+  //           <div style={{ position: "relative" }} key={index}>
+  //             <div className="p-3">
+  //               <Skeleton.Image className="!w-full !h-[250px]" active />
+  //               <div className="p-3">
+  //                 <Skeleton className="font-bold"></Skeleton>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
+  //   );
+  // }
+
   const renderRoomList = () => {
     if (phongByViTri?.length > 0) {
       return phongByViTri?.slice(0, 2).map((phong) => {
@@ -95,6 +118,7 @@ export const HomeCarousel = () => {
             <div className="p-3">
               <img
                 style={{ width: "100%", height: "auto" }}
+                rel="preload"
                 className="hover:cursor-pointer rounded-[15px]"
                 onClick={() => {
                   navigate(`${PATH.details}/${id}`);

@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../store/quanLyPhong/slice";
 import { RenderComforts } from "../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "antd";
 
 export const HomeTemplate = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: lstPhong, refetch } = useGetPhong();
+  const { data: lstPhong, refetch, isLoading } = useGetPhong();
   const dispatch = useDispatch();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
 
@@ -50,6 +51,25 @@ export const HomeTemplate = () => {
     setSeeMoreClicked(false);
   };
 
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
+        {[...Array(10)].map((_, index) => {
+          return (
+            <div style={{ position: "relative" }} key={index}>
+              <div className="p-3">
+                <Skeleton.Image className="!w-full !h-[250px]" active />
+                <div className="p-3">
+                  <Skeleton className="font-bold"></Skeleton>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <div className="mb-[40px]">
       <h2 className="text-rose-500 text-[32px] font-bold mb-[30px]">
@@ -76,6 +96,7 @@ export const HomeTemplate = () => {
                   onClick={() => {
                     navigate(`${PATH.details}/${id}`);
                   }}
+                  rel="preload"
                   src={hinhAnh}
                   alt="mainImage"
                 />
