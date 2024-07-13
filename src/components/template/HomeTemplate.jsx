@@ -96,7 +96,6 @@ export const HomeTemplate = () => {
                   onClick={() => {
                     navigate(`${PATH.details}/${id}`);
                   }}
-                  rel="preload"
                   src={hinhAnh}
                   alt="mainImage"
                 />
