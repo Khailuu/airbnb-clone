@@ -10,3 +10,9 @@ Currently, two official plugins are available:
 
 Ngô Mạnh Hùng: Admin
 Lưu Đức Khải: User
+  "routes": [
+    {
+      "src": "/robots.txt",
+      "dest": "/robots.txt"
+    }
+  ]
