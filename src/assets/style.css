@@ -1,5 +1,5 @@
 .rdrMonth, .rdrWeekDays, .rdrDays {
-    width: 100%;
+    width: 100% !important;
 }
 
 :where(.css-dev-only-do-not-override-17seli4).ant-form-item {
