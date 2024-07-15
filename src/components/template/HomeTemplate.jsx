@@ -51,24 +51,7 @@ export const HomeTemplate = () => {
     setSeeMoreClicked(false);
   };
 
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
-        {[...Array(10)].map((_, index) => {
-          return (
-            <div style={{ position: "relative" }} key={index}>
-              <div className="p-3">
-                <Skeleton.Image className="!w-full !h-[250px]" active />
-                <div className="p-3">
-                  <Skeleton className="font-bold"></Skeleton>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
+  
 
   return (
     <div className="mb-[40px]">

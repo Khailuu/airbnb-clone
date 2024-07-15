@@ -81,25 +81,6 @@ export const HomeCarousel = () => {
     dispatch(quanLyPhongActions.addLikeCart(phong));
   };
 
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-5 gap-10">
-        {[...Array(2)].map((_, index) => {
-          return (
-            <div style={{ position: "relative" }} key={index}>
-              <div className="p-3">
-                <Skeleton.Image className="!w-full !h-[250px]" active />
-                <div className="p-3">
-                  <Skeleton className="font-bold"></Skeleton>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
   const renderRoomList = () => {
     if (phongByViTri?.length > 0) {
       return phongByViTri?.slice(0, 2).map((phong) => {
