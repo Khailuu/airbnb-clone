@@ -112,6 +112,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
         moveRangeOnFirstSelection={false}
         ranges={state}
         className="date-range w-full"
+        minDate={new Date()}
       />
       <Form layout="vertical" onSubmitCapture={handleFormSubmit}>
         <p>{t("Số lượng khách")}</p>

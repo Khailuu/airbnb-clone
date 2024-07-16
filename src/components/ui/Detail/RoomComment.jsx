@@ -84,26 +84,28 @@ export const RoomComment = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
         {binhLuan?.slice(0, visibleCount).map((v) => (
           <div key={v.id} className="border-[1px] rounded-[8px] p-[20px]">
-            <div className="flex mb-[30px]">
-              <img
-                className="rounded-full w-[60px] h-[60px]"
-                src={v.avatar}
-                alt="logo"
-                onError={({ currentTarget }) => {
-                  currentTarget.src = "https://picsum.photos/60/60";
-                }}
-              />
-              <div className="ml-[15px]">
-                <p className="mb-[8px]">{v.tenNguoiBinhLuan}</p>
-                <p className="text-gray-500">{v.ngayBinhLuan}</p>
+            <div className="flex items-center  mb-[30px] justify-between">
+              <div className="flex">
+                <img
+                  className="rounded-full w-[60px] h-[60px] iphone-6:w-[40px] iphone-6:h-[40px] iphone-6-plus:w-[40px] iphone-6-plus:h-[40px]"
+                  src={v.avatar}
+                  alt="logo"
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = "https://picsum.photos/60/60";
+                  }}
+                />
+                <div className="ml-[15px]">
+                  <p className="mb-[8px] iphone-6:text-[14px] iphone-6-plus:text-[14px]">
+                    {v.tenNguoiBinhLuan}
+                  </p>
+                  <p className="text-gray-500 iphone-6:text-[10px] iphone-6-plus:text-[10px]">
+                    {v.ngayBinhLuan}
+                  </p>
+                </div>
               </div>
-            </div>
-            {renderIcon(v?.id)}
-            <div className="flex justify-between">
-              <h3 className="w-[500px]">{v.noiDung}</h3>
               <div className="flex items-center">
                 <span>{v.saoBinhLuan} / 5</span>
                 <FaStar
@@ -112,6 +114,10 @@ export const RoomComment = () => {
                   size={20}
                 />
               </div>
+            </div>
+            {renderIcon(v?.id)}
+            <div className="flex justify-between">
+              <h3 className="">{v.noiDung}</h3>
             </div>
           </div>
         ))}
@@ -150,7 +156,7 @@ export const RoomComment = () => {
           rows="7"
           value={formik.values.noiDung}
         ></textarea>
-        <div className="flex mb-[20px]">
+        <div className="flex mb-[20px] items-center">
           <span className="mr-[10px]">{t("Số sao")}: </span>
           <StarRating
             value={formik.values.saoBinhLuan}
