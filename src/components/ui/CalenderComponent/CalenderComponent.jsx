@@ -27,7 +27,7 @@ export const CalenderComponent = ({ chiTietPhong, maPhong }) => {
   ]);
 
   const [isOverlap, setIsOverlap] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Thêm trạng thái loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSelect = (ranges) => {
     setState([ranges.selection]);

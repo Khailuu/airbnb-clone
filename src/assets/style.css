@@ -62,3 +62,23 @@ button {
 .custom-spin .ant-spin-dot-item {
   background-color: #f43f5e !important;
 }
+
+.Toastify__toast {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.Toastify__toast-body {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.Toastify__progress-bar {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+button[aria-label="close"] {
+  width: 20px !important;
+}

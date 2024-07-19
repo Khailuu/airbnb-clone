@@ -14,9 +14,6 @@ export const usePostDatPhong = () => {
                 throw err; // Ensure errors are propagated
             }
         },
-        onSuccess: () => {
-            toast.success("Thêm Thành Công!");
-        },
         onError: (error) => {
             console.log(error);
             toast.error("Thêm Thất Bại!");
