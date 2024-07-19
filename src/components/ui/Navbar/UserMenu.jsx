@@ -83,13 +83,7 @@ export const UserMenu = () => {
                 okText={t("Đồng ý")}
                 cancelText={t("Huỷ bỏ")}
               >
-                <Button
-                // onClick={() => {
-                //   handleDangXuat();
-                // }}
-                >
-                  {t("logout")}
-                </Button>
+                <Button className="w-full">{t("logout")}</Button>
               </Popconfirm>
             </div>
           </>
@@ -122,13 +116,7 @@ export const UserMenu = () => {
                 okText={t("Đồng ý")}
                 cancelText={t("Huỷ bỏ")}
               >
-                <Button
-                // onClick={() => {
-                //   handleDangXuat();
-                // }}
-                >
-                  {t("logout")}
-                </Button>
+                <Button className="w-full">{t("logout")}</Button>
               </Popconfirm>
             </div>
           </>

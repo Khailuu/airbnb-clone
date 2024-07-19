@@ -9,8 +9,10 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { quanLyNguoiDungAction } from "../../../store/quanLyNguoiDung/slice";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 export const EditProfile = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const parseId = parseInt(id);
   const [user, setUser] = useState(null);
@@ -77,8 +79,7 @@ export const EditProfile = () => {
     setDisable(false);
     if (formik.values.role === "ADMIN") {
       setDisableRole(false);
-    }
-    else if (formik.values.role === "USER") {
+    } else if (formik.values.role === "USER") {
       setDisableRole(true);
     }
     setIsEditing(true);
@@ -94,7 +95,7 @@ export const EditProfile = () => {
   return (
     <div className="container mx-auto my-[40px]">
       <h2 className="text-rose-500 text-[25px] font-bold mb-[30px]">
-        Cập nhật thông tin:
+        {t("Cập nhật thông tin:")}
       </h2>
       <Form
         labelCol={{ span: 4 }}
@@ -175,24 +176,22 @@ export const EditProfile = () => {
         </Form.Item>
         <Form.Item>
           <Button
-            className={`bg-rose-500 text-white rounded-[6px] ${
+            className={`bg-rose-500 text-white rounded-[6px] !hover:bg-rose-600 ${
               !isEditing ? "hidden" : ""
             }`}
-            type="primary"
             htmlType="submit"
             onClick={() => setDisable(false)}
             loading={mutation.isPending}
           >
-            Cập Nhật
+            {t("Cập nhật")}
           </Button>
           <Button
-            className={`bg-rose-500 text-white rounded-[6px] ${
+            className={`bg-rose-500 text-white rounded-[6px] !hover:bg-rose-600 ${
               isEditing ? "hidden" : ""
             }`}
-            type="primary"
             onClick={handleBtnChinhSua}
           >
-            Chỉnh sửa
+            {t("Chỉnh sửa")}
           </Button>
         </Form.Item>
       </Form>

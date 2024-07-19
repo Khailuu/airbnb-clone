@@ -3,7 +3,7 @@ import { useGetViTriPhanTran } from "../../../hooks/api/quanLyViTriApi/useGetViT
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Skeleton, Tabs } from "antd";
+import { Skeleton, Spin, Tabs } from "antd";
 import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
 import { NavLink, useNavigate } from "react-router-dom";
 import { PATH } from "../../../constant";
@@ -27,7 +27,12 @@ export const HomeCarousel = () => {
   const dispatch = useDispatch();
   const { likeCart } = useSelector((state) => state.quanLyPhong);
   const [favoriteStatus, setFavoriteStatus] = useState({});
-
+  const contentStyle = {
+    padding: 50,
+    background: "rgba(0, 0, 0, 0.05)",
+    borderRadius: 4,
+  };
+  const content = <div style={contentStyle} />;
   useEffect(() => {
     if (likeCart) {
       const initialStatus = phongByViTri?.reduce((acc, phong) => {
@@ -170,7 +175,16 @@ export const HomeCarousel = () => {
         );
       });
     }
-    return <div className="text-[24px] text-rose-500">{t("viTriCapNhat")}</div>;
+    return (
+      <div className="text-[24px] text-rose-500">
+        <Spin
+          className="custom-spin"
+          tip="Loading"
+          size="large"
+          style={{ colorPrimary: "#f43f5e !important" }}
+        ></Spin>
+      </div>
+    );
   };
 
   const settings = {
@@ -228,7 +242,7 @@ export const HomeCarousel = () => {
         {phongByViTri?.length > 0 && (
           <div className="text-center">
             <button
-              className="px-4 py-2 w-[100px] bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
+              className="px-4 py-2 w-[120px] bg-rose-500 text-white rounded hover:bg-rose-600 transition-all ease-in-out"
               onClick={() => {
                 navigate(`${PATH.roomlist}/${viTri.id}`);
               }}

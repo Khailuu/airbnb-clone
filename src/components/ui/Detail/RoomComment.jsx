@@ -165,7 +165,7 @@ export const RoomComment = () => {
         </div>
         <Button
           htmlType="submit"
-          className="bg-rose-500 rounded-[6px] text-white"
+          className="bg-rose-500 rounded-[6px] p-0 !w-[160px] text-white"
           style={{ display: "block" }}
           loading={mutation.isPending}
         >
