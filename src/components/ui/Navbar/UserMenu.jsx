@@ -1,4 +1,4 @@
-import { Avatar, Popconfirm } from "antd";
+import { Popconfirm } from "antd";
 import React, { useState } from "react";
 import { GlobalOutlined, UserOutlined } from "@ant-design/icons";
 import { AiOutlineMenu } from "react-icons/ai";

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { usePostDatPhong } from "../../../hooks/api/quanLyDatPhongApi/usePostDatPhong";
-import queryString from "query-string";
 import { PATH } from "../../../constant";
 import { useTranslation } from "react-i18next";
 import { Spin } from "antd";
