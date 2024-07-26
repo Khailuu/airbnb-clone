@@ -113,7 +113,7 @@ export const QuanLyNguoiDung = () => {
   return (
     <div>
       <NavLink to={PATH.themnguoidung}>
-        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
+        <button className="border-[1px] !w-[160px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
           Thêm Người Dùng
         </button>
       </NavLink>

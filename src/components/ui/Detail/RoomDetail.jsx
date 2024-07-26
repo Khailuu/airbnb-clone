@@ -108,7 +108,7 @@ export const RoomDetail = () => {
             <div className="flex my-[30px]">
               {RenderComforts(chiTietPhong, "mx-1")}
             </div>
-            <button className="border-black border-solid border-[1px] p-[12px] rounded-[8px]">
+            <button className="border-black border-solid border-[1px] p-[12px] !w-[180px] rounded-[8px]">
               {t("Hiển thị tất cả 24 tiện nghi")}
             </button>
           </div>

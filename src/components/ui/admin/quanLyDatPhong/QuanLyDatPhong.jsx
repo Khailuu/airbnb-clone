@@ -11,11 +11,11 @@ import { NavLink } from "react-router-dom";
 export const QuanLyDatPhong = () => {
   const { data: lstDatPhong, refetch } = useGetDatPhong();
   const mutationDeleteND = useDeletePhongDaDat();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    refetch()
-  }, [])
+    refetch();
+  }, []);
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xoá người dùng này không?")) {
@@ -76,10 +76,10 @@ export const QuanLyDatPhong = () => {
       render: (_, phong) => {
         return (
           <div key={phong.id}>
-           <EditOutlined
+            <EditOutlined
               className="mr-[15px]"
               onClick={() => {
-               navigate(`${PATH.editdatphong}/${phong.id}`)
+                navigate(`${PATH.editdatphong}/${phong.id}`);
               }}
               style={{ color: "blue" }}
             />
@@ -94,11 +94,10 @@ export const QuanLyDatPhong = () => {
     },
   ];
 
-
   return (
     <div>
-    <NavLink to={PATH.themdatphong}>
-        <button className="border-[1px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
+      <NavLink to={PATH.themdatphong}>
+        <button className="border-[1px] !w-[160px] border-black py-[8px] px-[12px] rounded-[5px] mb-[20px]">
           Thêm Đặt Phòng
         </button>
       </NavLink>
