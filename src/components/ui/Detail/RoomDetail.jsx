@@ -11,12 +11,16 @@ import { RoomComment } from "./RoomComment";
 import { CalenderComponent } from "../CalenderComponent/CalenderComponent";
 import { RenderComforts } from "../../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
+import { useGetPhongTheoMaViTri } from "../../../hooks/api/quanLyPhongApi/useGetPhongTheoViTri";
+import { Recommend } from "./Recommend";
 
 export const RoomDetail = () => {
   const { t } = useTranslation();
   const { id: maPhong } = useParams();
-
   const { data: chiTietPhong, refetch } = useGetPhongTheoId(maPhong);
+
+  const maViTri = chiTietPhong?.maViTri;
+  const roomId = chiTietPhong?.id;
 
   useEffect(() => {
     refetch();
@@ -118,6 +122,7 @@ export const RoomDetail = () => {
         </div>
       </div>
       <hr className="mt-[20px] mb-[30px]" />
+      <Recommend maViTri={maViTri} roomId={roomId} />
       <RoomComment />
     </div>
   );

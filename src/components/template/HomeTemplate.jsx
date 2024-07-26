@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { quanLyPhongActions } from "../../store/quanLyPhong/slice";
 import { RenderComforts } from "../../utils/RenderComforts";
 import { useTranslation } from "react-i18next";
-import { Skeleton } from "antd";
+import { Skeleton, Spin } from "antd";
 
 export const HomeTemplate = () => {
   const { t } = useTranslation();
@@ -51,7 +51,17 @@ export const HomeTemplate = () => {
     setSeeMoreClicked(false);
   };
 
-  
+  if (isLoading)
+    return (
+      <div className="text-[24px] text-rose-500">
+        <Spin
+          className="custom-spin"
+          tip="Loading"
+          size="large"
+          style={{ colorPrimary: "#f43f5e !important" }}
+        ></Spin>
+      </div>
+    );
 
   return (
     <div className="mb-[40px]">

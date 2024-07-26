@@ -17,7 +17,7 @@ export const RoomComment = () => {
   const { t } = useTranslation();
   const { id: maPhong } = useParams();
   const { data: binhLuan, refetch } = useGetBinhLuanTheoMaPhong(maPhong);
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(4);
   const [seeMoreClicked, setSeeMoreClicked] = useState(false);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
@@ -84,6 +84,9 @@ export const RoomComment = () => {
 
   return (
     <div>
+      <h2 className="mt-[30px] text-rose-500 text-[25px] font-bold mb-[30px]">
+        {t("Reviews")}
+      </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
         {binhLuan?.slice(0, visibleCount).map((v) => (
           <div key={v.id} className="border-[1px] rounded-[8px] p-[20px]">
