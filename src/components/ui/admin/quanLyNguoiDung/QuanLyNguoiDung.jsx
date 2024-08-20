@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useGetNguoiDung } from "../../../../hooks/api/quanLyNguoiDungApi/useGetNguoiDung";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../../../constant";
 import { NavLink } from "react-router-dom";
+import { Input } from 'antd';
+const { Search } = Input;
 
 export const QuanLyNguoiDung = () => {
   const { data: lstNguoiDung, refetch } = useGetNguoiDung();
@@ -110,6 +112,20 @@ export const QuanLyNguoiDung = () => {
     },
   ];
 
+  const [filteredName, setFilterdName] = useState([]);
+
+  const onKeyUp = (e) => {
+    const input = e?.target.value.toLowerCase();
+    console.log(input);
+    const filtered = lstNguoiDung?.filter((user) =>
+      user.name.toLowerCase().includes(input)
+    );
+    setFilterdName(filtered || []);
+  };
+
+  console.log(filteredName)
+  const data = filteredName.length > 0 ? filteredName : lstNguoiDung;
+
   return (
     <div>
       <NavLink to={PATH.themnguoidung}>
@@ -117,7 +133,15 @@ export const QuanLyNguoiDung = () => {
           Thêm Người Dùng
         </button>
       </NavLink>
-      <Table columns={columns} dataSource={lstNguoiDung} rowKey="id" />
+      <Search
+        placeholder="input search text"
+        allowClear
+        enterButton="Search"
+        size="large"
+        onKeyUp={onKeyUp}
+        className="mb-[20px]"
+      />
+      <Table columns={columns} dataSource={data} rowKey="id" />
     </div>
   );
 };

@@ -106,7 +106,16 @@ export const AdminTemplate = () => {
             </Button>
           </div>
         </Header>
-        <Outlet />
+        <div
+            style={{
+              padding: 24,
+              minHeight: 360,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Outlet />
+          </div>
         <Footer
           style={{
             textAlign: "center",
